@@ -3,6 +3,14 @@ body, ul#tabs, ul#tabs li, ul#tabs li span, ul#tabs li span a {
   padding: 0;
 }
 
+ul#tabs, ul#tabs a, ul#tabs a:visited, ul#tabs a:hover {
+  color: #444;
+}
+
+ul#tabs a {
+  text-decoration: none;
+}
+
 ul#tabs {
   font-size: 24px;
   height: 59px;
@@ -17,7 +25,7 @@ ul#tabs li {
   float: left;
 }
 
-ul#tabs li span.tab {
+ul#tabs li .tab {
   padding: 5px 15px 0px 15px;
   float: left;
 	-webkit-border-top-left-radius: 8px;
@@ -30,10 +38,15 @@ ul#tabs li span.tab {
 	border-top-right-radius: 8px;
 }
 
-ul#tabs li span.tab {
+ul#tabs li .tab {
   background-color: #aaa;
 }
 
-ul#tabs li.active span.tab {
+ul#tabs li.active .tab {
   background-color: white;
 }
+
+ul#tabs li a:hover {
+  background-color: #ddd;
+}
+

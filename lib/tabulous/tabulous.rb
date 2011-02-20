@@ -102,13 +102,12 @@ module Tabulous
       klass << ' disabled'
     end
     html << %Q{<li class="#{klass}">}
-    html << '<span class="tab">'
     if options[:active]
-      html << tab.text
+      html << %Q{<span class="tab">#{tab.text}</span>}
     else
-      html << %Q{<a href="#{tab.path}">#{tab.text}</a>}
+      html << %Q{<a href="#{tab.path}" class="tab">#{tab.text}</a>}
     end
-    html << '</span></li>'
+    html << '</li>'
     html
   end
 
