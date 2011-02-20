@@ -1,8 +1,5 @@
 module Tabulous
 
-  mattr_accessor :render_unauthorized_tabs
-  @@render_unauthorized_tabs = false
-
   mattr_accessor :always_render_subtabs
   @@always_render_subtabs = false
   
@@ -17,7 +14,12 @@ module Tabulous
     @@tabs = []
     last_tab = nil
     ary.each do |tab_args|
-      tab = Tab.new(*tab_args)
+      begin
+        tab = Tab.new(*tab_args)
+      rescue ArgumentError
+        # TODO: friendlier error message
+        raise "Wrong number of columns in your tabulous initializer."
+      end
       if tab.subtab?
         tab.add_parent(last_tab)
       else
@@ -59,12 +61,19 @@ module Tabulous
     selected_tab_name = selected_tab(view).name
     html = '<ul id="tabs">'
     for tab in main_tabs
-      next if !tab.authorized?(view)
+      next if !tab.visible?(view)
+      klass = ''
       if tab.name == selected_tab_name
-        html << '<li class="active">'
+        klass << 'active'
       else
-        html << '<li>'
+        klass << 'inactive'
       end
+      if tab.enabled?(view)
+        klass << ' enabled'
+      else
+        klass << ' disabled'
+      end
+      html << %Q{<li class="#{klass}">}
       html << '<span class="tab">'
       # TODO: add an option where the tab remains clickable
       #if tab.name == selected_tab_name
@@ -85,13 +94,20 @@ module Tabulous
     html = ''
     html << '<div id="subnav"><ul id="subtabs">'
     for subtab in tab.subtabs
-      next if !subtab.authorized?(view)
+      next if !subtab.visible?(view)
+      klass = ''
       subselected = selected?(controller, action, subtab.name)
       if subselected
-        html << '<li class="active">'
+        klass << 'active'
       else
-        html << '<li>'
+        klass << 'inactive'
       end
+      if subtab.enabled?(view)
+        klass << ' enabled'
+      else
+        klass << ' disabled'
+      end
+      html << %Q{<li class="#{klass}">}
       html << '<span class="tab">'
       if subselected
         html << subtab.text
@@ -115,10 +131,10 @@ module Tabulous
   
   class Tab
     
-    attr_reader :name, :text, :path, :authorized, :parent
+    attr_reader :name, :text, :path, :parent
     attr_accessor :subtabs
     
-    def initialize(name, path, authorized)
+    def initialize(name, path, visible, enabled)
       @name = name
       name = name.to_s
       if name.ends_with? '_tab'
@@ -132,7 +148,8 @@ module Tabulous
       parts.pop
       @text = parts.join(' ').titleize
       @path = path
-      @authorized = authorized
+      @visible = visible
+      @enabled = enabled
       @subtabs = []
     end
     
@@ -145,11 +162,19 @@ module Tabulous
       @kind == :subtab
     end
     
-    def authorized?(view)
-      if @authorized.is_a? Proc
-        view.instance_eval &@authorized
+    def visible?(view)
+      if @visible.is_a? Proc
+        view.instance_eval &@visible
       else
-        !!@authorized
+        !!@visible
+      end
+    end
+    
+    def enabled?(view)
+      if @enabled.is_a? Proc
+        view.instance_eval &@enabled
+      else
+        !!@enabled
       end
     end
     
