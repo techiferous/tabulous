@@ -20,8 +20,8 @@ module Tabulous
   mattr_accessor :always_render_subtabs
   @@always_render_subtabs = false
 
-  mattr_accessor :active_tab_linkable
-  @@active_tab_linkable = false
+  mattr_accessor :active_tab_clickable
+  @@active_tab_clickable = false
 
   mattr_accessor :css
   @@css = Css.new
