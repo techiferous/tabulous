@@ -20,6 +20,7 @@ namespace :co do
     
     # indention should be called indentation
     def output_formatted_table(indention, headings, inside_lines)
+
       num_columns = headings.size
       column_sizes = {}
       for column in (0..num_columns-1)
@@ -59,6 +60,7 @@ namespace :co do
       output header_divider
     end
 
+    require 'active_support/core_ext/string/starts_ends_with'
     captain_obvious_files = File.join(Rails.root.to_s, '**', '*.co.rb')
     Dir[captain_obvious_files].each do |filename|
       inside = false
@@ -73,7 +75,6 @@ namespace :co do
           headings = []
           indention = nil
         end
-        
 
         if inside
           stripped_line = line.strip
