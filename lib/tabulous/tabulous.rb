@@ -62,26 +62,10 @@ module Tabulous
     html = '<ul id="tabs">'
     for tab in main_tabs
       next if !tab.visible?(view)
-      klass = ''
-      if tab.name == selected_tab_name
-        klass << 'active'
-      else
-        klass << 'inactive'
-      end
-      if tab.enabled?(view)
-        klass << ' enabled'
-      else
-        klass << ' disabled'
-      end
-      html << %Q{<li class="#{klass}">}
-      html << '<span class="tab">'
-      # TODO: add an option where the tab remains clickable
-      #if tab.name == selected_tab_name
-      #  html << tab.text
-      #else
-        html << %Q{<a href="#{tab.path}">#{tab.text}</a>}
-      #end
-      html << '</span></li>'
+      html << render_tab(tab,
+                         view,
+                         :active => (tab.name == selected_tab_name),
+                         :enabled => tab.enabled?(view))
     end
     html << '</ul>'
     view.raw(html)
@@ -95,31 +79,39 @@ module Tabulous
     html << '<div id="subnav"><ul id="subtabs">'
     for subtab in tab.subtabs
       next if !subtab.visible?(view)
-      klass = ''
-      subselected = selected?(controller, action, subtab.name)
-      if subselected
-        klass << 'active'
-      else
-        klass << 'inactive'
-      end
-      if subtab.enabled?(view)
-        klass << ' enabled'
-      else
-        klass << ' disabled'
-      end
-      html << %Q{<li class="#{klass}">}
-      html << '<span class="tab">'
-      if subselected
-        html << subtab.text
-      else
-        html << %Q{<a href="#{subtab.path}">#{subtab.text}</a>}
-      end
-      html << '</span></li>'
+      html << render_tab(subtab,
+                         view,
+                         :active => selected?(controller, action, subtab.name),
+                         :enabled => subtab.enabled?(view))
     end
     html << '</ul></div>'
     view.raw(html)
   end
-  
+
+  def self.render_tab(tab, view, options)
+    html = ''
+    klass = ''
+    if options[:active]
+      klass << 'active'
+    else
+      klass << 'inactive'
+    end
+    if options[:enabled]
+      klass << ' enabled'
+    else
+      klass << ' disabled'
+    end
+    html << %Q{<li class="#{klass}">}
+    html << '<span class="tab">'
+    if options[:active]
+      html << tab.text
+    else
+      html << %Q{<a href="#{tab.path}">#{tab.text}</a>}
+    end
+    html << '</span></li>'
+    html
+  end
+
   def self.selected?(controller, action, tab_name)
     if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
       # TODO: better error message or perhaps don't render tabs
