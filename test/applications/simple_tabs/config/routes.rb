@@ -1,4 +1,11 @@
 SimpleTabs::Application.routes.draw do
+
+  root :to => "galaxies#index"
+
+  resources :galaxies
+  resources :stars
+  resources :planets
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
