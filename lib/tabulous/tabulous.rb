@@ -20,8 +20,8 @@ module Tabulous
   mattr_accessor :always_render_subtabs
   @@always_render_subtabs = false
 
-  mattr_accessor :selected_tab_linkable
-  @@selected_tab_linkable = false
+  mattr_accessor :active_tab_linkable
+  @@active_tab_linkable = false
 
   mattr_accessor :css
   @@css = Css.new
@@ -62,11 +62,11 @@ module Tabulous
     @@tabs.select { |t| !t.subtab? }
   end
   
-  def self.selected_tab(view)
+  def self.active_tab(view)
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
     for tab in @@tabs
-      if selected?(controller, action, tab.name)
+      if active?(controller, action, tab.name)
         if tab.subtab?
           return tab.parent
         else
@@ -140,13 +140,13 @@ ul#tabs li a:hover {
   def self.render_tabs(view)
     html = ''
     html << embed_styles
-    selected_tab_name = selected_tab(view).name
+    active_tab_name = active_tab(view).name
     html << '<ul id="tabs">'
     for tab in main_tabs
       next if !tab.visible?(view)
       html << render_tab(tab,
                          view,
-                         :active => (tab.name == selected_tab_name),
+                         :active => (tab.name == active_tab_name),
                          :enabled => tab.enabled?(view))
     end
     html << '</ul>'
@@ -156,14 +156,14 @@ ul#tabs li a:hover {
   def self.render_subtabs(view)
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
-    tab = selected_tab(view)
+    tab = active_tab(view)
     html = ''
     html << '<div id="subnav"><ul id="subtabs">'
     for subtab in tab.subtabs
       next if !subtab.visible?(view)
       html << render_tab(subtab,
                          view,
-                         :active => selected?(controller, action, subtab.name),
+                         :active => active?(controller, action, subtab.name),
                          :enabled => subtab.enabled?(view))
     end
     html << '</ul></div>'
@@ -193,7 +193,7 @@ ul#tabs li a:hover {
     html
   end
 
-  def self.selected?(controller, action, tab_name)
+  def self.active?(controller, action, tab_name)
     if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
       # TODO: better error message or perhaps don't render tabs
       raise "No tab is defined for controller '#{controller}' action '#{action}'"
