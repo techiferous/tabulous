@@ -56,10 +56,71 @@ module Tabulous
     end
     nil
   end
-  
+
+  def self.embed_styles
+    %Q{
+<style type="text/css">
+body, ul#tabs, ul#tabs li, ul#tabs li span, ul#tabs li span a {
+  margin: 0;
+  padding: 0;
+}
+
+ul#tabs, ul#tabs a, ul#tabs a:visited, ul#tabs a:hover {
+  color: #444;
+}
+
+ul#tabs a {
+  text-decoration: none;
+}
+
+ul#tabs {
+  font-size: 24px;
+  height: 59px;
+  list-style-type: none;
+  background-color: #ccc;
+  padding: 0 0 0 50px;
+}
+
+ul#tabs li {
+  padding-top: 25px;
+  padding-right: 5px;
+  float: left;
+}
+
+ul#tabs li .tab {
+  padding: 5px 15px 0px 15px;
+  float: left;
+	-webkit-border-top-left-radius: 8px;
+	-khtml-border-radius-topleft: 8px;	
+	-moz-border-radius-topleft: 8px;
+	border-top-left-radius: 8px;
+	-webkit-border-top-right-radius: 8px;
+	-khtml-border-radius-topright: 8px;	
+	-moz-border-radius-topright: 8px;
+	border-top-right-radius: 8px;
+}
+
+ul#tabs li .tab {
+  background-color: #aaa;
+}
+
+ul#tabs li.active .tab {
+  background-color: white;
+  padding-bottom: 16px;
+}
+
+ul#tabs li a:hover {
+  background-color: #ddd;
+}
+</style>
+    }
+  end
+
   def self.render_tabs(view)
+    html = ''
+    html << embed_styles
     selected_tab_name = selected_tab(view).name
-    html = '<ul id="tabs">'
+    html << '<ul id="tabs">'
     for tab in main_tabs
       next if !tab.visible?(view)
       html << render_tab(tab,
