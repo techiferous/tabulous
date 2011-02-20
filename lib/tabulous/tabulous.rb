@@ -134,7 +134,7 @@ module Tabulous
     attr_reader :name, :text, :path, :parent
     attr_accessor :subtabs
     
-    def initialize(name, path, visible, enabled)
+    def initialize(name, text, path, visible, enabled)
       @name = name
       name = name.to_s
       if name.ends_with? '_tab'
@@ -144,9 +144,7 @@ module Tabulous
       else
         raise "tab name error"
       end
-      parts = name.split('_')
-      parts.pop
-      @text = parts.join(' ').titleize
+      @text = text
       @path = path
       @visible = visible
       @enabled = enabled
