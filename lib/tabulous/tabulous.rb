@@ -1,11 +1,31 @@
 module Tabulous
 
+  class Css
+    attr_accessor :scaffolding
+    attr_accessor :background_color
+    attr_accessor :text_color
+    attr_accessor :active_tab_color
+    attr_accessor :hover_tab_color
+    attr_accessor :inactive_tab_color
+    def initialize
+      @scaffolding = false
+      @background_color = '#ccc'
+      @text_color = '#444'
+      @active_tab_color = 'white'
+      @hover_tab_color = '#ddd'
+      @inactive_tab_color = '#aaa'
+    end
+  end
+  
   mattr_accessor :always_render_subtabs
   @@always_render_subtabs = false
-  
+
   mattr_accessor :selected_tab_linkable
   @@selected_tab_linkable = false
-  
+
+  mattr_accessor :css
+  @@css = Css.new
+
   def self.setup
     yield self
   end
@@ -58,6 +78,7 @@ module Tabulous
   end
 
   def self.embed_styles
+    return '' unless @@css.scaffolding
     %Q{
 <style type="text/css">
 body, ul#tabs, ul#tabs li, ul#tabs li span, ul#tabs li span a {
@@ -66,7 +87,7 @@ body, ul#tabs, ul#tabs li, ul#tabs li span, ul#tabs li span a {
 }
 
 ul#tabs, ul#tabs a, ul#tabs a:visited, ul#tabs a:hover {
-  color: #444;
+  color: #{@@css.text_color};
 }
 
 ul#tabs a {
@@ -77,7 +98,7 @@ ul#tabs {
   font-size: 24px;
   height: 59px;
   list-style-type: none;
-  background-color: #ccc;
+  background-color: #{@@css.background_color};
   padding: 0 0 0 50px;
 }
 
@@ -101,16 +122,16 @@ ul#tabs li .tab {
 }
 
 ul#tabs li .tab {
-  background-color: #aaa;
+  background-color: #{@@css.inactive_tab_color};
 }
 
 ul#tabs li.active .tab {
-  background-color: white;
+  background-color: #{@@css.active_tab_color};
   padding-bottom: 16px;
 }
 
 ul#tabs li a:hover {
-  background-color: #ddd;
+  background-color: #{@@css.hover_tab_color};
 }
 </style>
     }
@@ -229,7 +250,7 @@ ul#tabs li a:hover {
     end
     
   end
-  
+
   module Helpers
     
     def tabs
