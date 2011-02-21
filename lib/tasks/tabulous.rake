@@ -1,5 +1,5 @@
-namespace :co do
-  desc "Prettify captain obvious files"
+namespace :tab do
+  desc "Prettify the tabulous initializer"
   task :format do
     
     $out = []
@@ -61,42 +61,40 @@ namespace :co do
     end
 
     require 'active_support/core_ext/string/starts_ends_with'
-    captain_obvious_files = File.join(Rails.root.to_s, '**', '*.co.rb')
-    Dir[captain_obvious_files].each do |filename|
-      inside = false
-      inside_lines = []
-      headings = []
-      indention = nil
-      File.open(filename, 'r').each do |line|
-        if inside && end_line?(line)
-          output_formatted_table(indention, headings, inside_lines)
-          inside = false
-          inside_lines = []
-          headings = []
-          indention = nil
-        end
+    filename = File.join(Rails.root.to_s, 'config', 'initializers', 'tabulous.rb')
+    inside = false
+    inside_lines = []
+    headings = []
+    indention = nil
+    File.open(filename, 'r').each do |line|
+      if inside && end_line?(line)
+        output_formatted_table(indention, headings, inside_lines)
+        inside = false
+        inside_lines = []
+        headings = []
+        indention = nil
+      end
 
-        if inside
-          stripped_line = line.strip
-          if indention.nil? && line =~ /^(\s*)#--/
-            indention = $1
-          elsif headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
-            headings = stripped_line.split(%r{(#|\|)}).map(&:strip)
-            headings.reject!{|x| x.empty? || x == '#' || x == '|'}
-          elsif stripped_line.starts_with?('[')
-            if stripped_line =~ /^\[(.+)\],(\s*|\s*#.*)$/
-              cells = $1
-              end_of_line_comment = $2
-              inside_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
-            end
+      if inside
+        stripped_line = line.strip
+        if indention.nil? && line =~ /^(\s*)#--/
+          indention = $1
+        elsif headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
+          headings = stripped_line.split(%r{(#|\|)}).map(&:strip)
+          headings.reject!{|x| x.empty? || x == '#' || x == '|'}
+        elsif stripped_line.starts_with?('[')
+          if stripped_line =~ /^\[(.+)\],(\s*|\s*#.*)$/
+            cells = $1
+            end_of_line_comment = $2
+            inside_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
           end
-        else
-          output line
         end
+      else
+        output line
+      end
 
-        if !inside && start_line?(line)
-          inside = true
-        end
+      if !inside && start_line?(line)
+        inside = true
       end
 
       File.open(filename, 'w') do |f|
