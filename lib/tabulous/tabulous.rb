@@ -172,17 +172,8 @@ ul#tabs li a:hover {
 
   def self.render_tab(options)
     html = ''
-    klass = ''
-    if options[:active]
-      klass << 'active'
-    else
-      klass << 'inactive'
-    end
-    if options[:enabled]
-      klass << ' enabled'
-    else
-      klass << ' disabled'
-    end
+    klass = (options[:active] ? 'active' : 'inactive')
+    klass << (options[:enabled] ? ' enabled' : ' disabled')
     html << %Q{<li class="#{klass}">}
     if options[:active]
       html << %Q{<span class="tab">#{options[:text]}</span>}
