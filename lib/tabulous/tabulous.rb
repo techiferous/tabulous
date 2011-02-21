@@ -144,8 +144,8 @@ ul#tabs li a:hover {
     html << '<ul id="tabs">'
     for tab in main_tabs
       next if !tab.visible?(view)
-      html << render_tab(tab,
-                         view,
+      html << render_tab(:text => tab.text,
+                         :path => tab.path,
                          :active => (tab.name == active_tab_name),
                          :enabled => tab.enabled?(view))
     end
@@ -161,8 +161,8 @@ ul#tabs li a:hover {
     html << '<div id="subnav"><ul id="subtabs">'
     for subtab in tab.subtabs
       next if !subtab.visible?(view)
-      html << render_tab(subtab,
-                         view,
+      html << render_tab(:text => subtab.text,
+                         :path => subtab.path,
                          :active => active?(controller, action, subtab.name),
                          :enabled => subtab.enabled?(view))
     end
@@ -170,7 +170,7 @@ ul#tabs li a:hover {
     view.raw(html)
   end
 
-  def self.render_tab(tab, view, options)
+  def self.render_tab(options)
     html = ''
     klass = ''
     if options[:active]
@@ -185,9 +185,9 @@ ul#tabs li a:hover {
     end
     html << %Q{<li class="#{klass}">}
     if options[:active]
-      html << %Q{<span class="tab">#{tab.text}</span>}
+      html << %Q{<span class="tab">#{options[:text]}</span>}
     else
-      html << %Q{<a href="#{tab.path}" class="tab">#{tab.text}</a>}
+      html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
     end
     html << '</li>'
     html
