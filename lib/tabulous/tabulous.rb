@@ -26,6 +26,9 @@ module Tabulous
   mattr_accessor :css
   @@css = Css.new
 
+  mattr_accessor :html5
+  @@html5 = false
+
   def self.setup
     yield self
   end
@@ -81,20 +84,20 @@ module Tabulous
     return '' unless @@css.scaffolding
     %Q{
 <style type="text/css">
-body, ul#tabs, ul#tabs li, ul#tabs li span, ul#tabs li span a {
+body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a {
   margin: 0;
   padding: 0;
 }
 
-ul#tabs, ul#tabs a, ul#tabs a:visited, ul#tabs a:hover {
+#tabs, #tabs a, #tabs a:visited, #tabs a:hover {
   color: #{@@css.text_color};
 }
 
-ul#tabs a {
+#tabs a {
   text-decoration: none;
 }
 
-ul#tabs {
+#tabs ul {
   font-size: 24px;
   height: 59px;
   list-style-type: none;
@@ -102,13 +105,13 @@ ul#tabs {
   padding: 0 0 0 50px;
 }
 
-ul#tabs li {
+#tabs ul li {
   padding-top: 25px;
   padding-right: 5px;
   float: left;
 }
 
-ul#tabs li .tab {
+#tabs ul li .tab {
   padding: 5px 15px 0px 15px;
   float: left;
 	-webkit-border-top-left-radius: 8px;
@@ -121,16 +124,16 @@ ul#tabs li .tab {
 	border-top-right-radius: 8px;
 }
 
-ul#tabs li .tab {
+#tabs ul li .tab {
   background-color: #{@@css.inactive_tab_color};
 }
 
-ul#tabs li.active .tab {
+#tabs ul li.active .tab {
   background-color: #{@@css.active_tab_color};
   padding-bottom: 16px;
 }
 
-ul#tabs li a:hover {
+#tabs ul li a:hover {
   background-color: #{@@css.hover_tab_color};
 }
 </style>
@@ -141,7 +144,8 @@ ul#tabs li a:hover {
     html = ''
     html << embed_styles
     active_tab_name = active_tab(view).name
-    html << '<ul id="tabs">'
+    html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
+    html << '<ul>'
     for tab in main_tabs
       next if !tab.visible?(view)
       html << render_tab(:text => tab.text,
@@ -150,6 +154,7 @@ ul#tabs li a:hover {
                          :enabled => tab.enabled?(view))
     end
     html << '</ul>'
+    html << (@@html5 ? '</nav>' : '</div>')
     view.raw(html)
   end
   
@@ -158,7 +163,8 @@ ul#tabs li a:hover {
     action = view.action_name.to_sym
     tab = active_tab(view)
     html = ''
-    html << '<div id="subnav"><ul id="subtabs">'
+    html << (@@html5 ? '<nav id="subtabs">' : '<div id="subtabs">')
+    html << '<ul>'
     for subtab in tab.subtabs
       next if !subtab.visible?(view)
       html << render_tab(:text => subtab.text,
@@ -166,7 +172,8 @@ ul#tabs li a:hover {
                          :active => active?(controller, action, subtab.name),
                          :enabled => subtab.enabled?(view))
     end
-    html << '</ul></div>'
+    html << '</ul>'
+    html << (@@html5 ? '</nav>' : '</div>')
     view.raw(html)
   end
 

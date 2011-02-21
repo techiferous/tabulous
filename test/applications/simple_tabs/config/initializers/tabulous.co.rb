@@ -23,6 +23,8 @@ Tabulous.setup do |config|
     #    CONTROLLER    |    ACTION          |    TAB              #
     #-------------------------------------------------------------#
   ]
+  
+  #config.html5 = true
 
   config.css.scaffolding = true
   config.css.background_color = '#cec'
