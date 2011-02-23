@@ -1,6 +1,6 @@
 Subtabs::Application.routes.draw do
 
-  root :to => "galaxies#index"
+  root :to => "home#index"
 
   resources :galaxies
   resources :stars
