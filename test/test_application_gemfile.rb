@@ -5,8 +5,10 @@ def shared_test_application_gems(bundler)
     gem 'rails', '>= 3.0.0'
     gem 'sqlite3-ruby', :require => 'sqlite3'
     gem 'tabulous', :path => "../../.."
-    gem 'capybara'
-    gem 'launchy'
-    gem 'redgreen'
+    group :test do
+      gem 'capybara'
+      gem 'launchy'
+      gem 'redgreen'
+    end
   end
 end
