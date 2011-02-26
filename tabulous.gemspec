@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "capybara", ">= 0.4.1.2"
   s.add_development_dependency "colored", ">= 1.2.0"
   s.add_development_dependency "redgreen"
+  s.add_development_dependency "launchy"
 
   s.files        = `git ls-files`.split("\n")
   s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
