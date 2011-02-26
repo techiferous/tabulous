@@ -3,17 +3,36 @@
 require 'rubygems'
 require 'bundler'
 Bundler::GemHelper.install_tasks
-
+require 'colored'
 require 'rake'
 require 'rake/rdoctask'
-
 require 'rake/testtask'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+namespace :test do
+  Dir['test/applications/*'].each do |filename|
+    if File.directory?(filename)
+      name = filename.split('/').last
+      desc "run tests for the test application #{name}"
+      Rake::TestTask.new(name) do |t|
+        t.libs << 'lib'
+        t.libs << 'test'
+        t.pattern = "test/applications/#{name}/**/*_test.rb"
+        t.verbose = false
+      end
+    end
+  end
+end
+
+task :test do
+  # we cannot load more than one Rails app at a time so we run the rake tasks
+  # from the shell so that each has its own process
+  Dir['test/applications/*'].each do |filename|
+    if File.directory?(filename)
+      name = filename.split('/').last
+      puts "Running tests for test application \"#{name}\"".magenta
+      puts %x{rake test:#{name}}
+    end
+  end
 end
 
 task :default => :test
