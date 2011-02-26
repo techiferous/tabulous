@@ -1,6 +1,8 @@
 Subtabs::Application.routes.draw do
 
   root :to => "home#index"
+  match 'hidden/always_visible' => 'misc#always_visible'
+  match 'hidden/always_hidden' => 'misc#always_hidden'
 
   namespace :galaxies do
     resources :elliptical_galaxies

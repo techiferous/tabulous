@@ -226,6 +226,10 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
   end
 
   def self.active?(controller, action, tab_name)
+    if @@actions[controller].nil?
+      # TODO: better error message or perhaps don't render tabs
+      raise "No tabs are defined for controller '#{controller}'"
+    end
     if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
       # TODO: better error message or perhaps don't render tabs
       raise "No tab is defined for controller '#{controller}' action '#{action}'"
