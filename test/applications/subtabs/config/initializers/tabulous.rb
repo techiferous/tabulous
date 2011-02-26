@@ -27,5 +27,10 @@ Tabulous.setup do |config|
   ]
   
   config.css.scaffolding = true
+  config.css.background_color = '#cec'
+  config.css.text_color = '#464'
+  config.css.active_tab_color = '#fff'
+  config.css.hover_tab_color = '#dfd'
+  config.css.inactive_tab_color = '#aca'
 
 end
