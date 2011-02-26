@@ -1,4 +1,4 @@
-<%= form_for(@lenticular_galaxy) do |f| %>
+<%= form_for([:galaxies, @lenticular_galaxy]) do |f| %>
   <% if @lenticular_galaxy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@lenticular_galaxy.errors.count, "error") %> prohibited this lenticular_galaxy from being saved:</h2>

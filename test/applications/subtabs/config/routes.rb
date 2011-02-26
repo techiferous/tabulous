@@ -2,9 +2,11 @@ Subtabs::Application.routes.draw do
 
   root :to => "home#index"
 
-  resources :elliptical_galaxies
-  resources :spiral_galaxies
-  resources :lenticular_galaxies
+  namespace :galaxies do
+    resources :elliptical_galaxies
+    resources :spiral_galaxies
+    resources :lenticular_galaxies
+  end
   resources :stars
   resources :exoplanets
   resources :rogue_planets

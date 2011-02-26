@@ -1,21 +1,21 @@
 Tabulous.setup do |config|
 
   config.tabs = [
-    #----------------------------------------------------------------------------------------------------------------------------------#
-    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                      |    VISIBLE?    |    ENABLED?    #
-    #----------------------------------------------------------------------------------------------------------------------------------#
-    [    :home_tab                      ,    'Explanation'            ,    '/'                       ,    true        ,    true        ],
-    [    :galaxies_tab                  ,    'Galaxies'               ,    '/elliptical_galaxies'    ,    true        ,    true        ],
-    [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'    ,    '/elliptical_galaxies'    ,    true        ,    true        ],
-    [    :spiral_galaxies_subtab        ,    'Spiral Galaxies'        ,    '/spiral_galaxies'        ,    true        ,    true        ],
-    [    :lenticular_galaxies_subtab    ,    'Lenticular Galaxies'    ,    '/lenticular_galaxies'    ,    true        ,    true        ],
-    [    :planets_tab                   ,    'Planets'                ,    '/exoplanets'             ,    true        ,    true        ],
-    [    :exoplanets_subtab             ,    'Exoplanets'             ,    '/exoplanets'             ,    true        ,    true        ],
-    [    :rogue_planets_subtab          ,    'Rogue Planets'          ,    '/rogue_planets'          ,    true        ,    true        ],
-    [    :stars_tab                     ,    'Stars'                  ,    '/stars'                  ,    true        ,    true        ],
-    #----------------------------------------------------------------------------------------------------------------------------------#
-    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                      |    VISIBLE?    |    ENABLED?    #
-    #----------------------------------------------------------------------------------------------------------------------------------#
+    #-------------------------------------------------------------------------------------------------------------------------------------------#
+    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?    |    ENABLED?    #
+    #-------------------------------------------------------------------------------------------------------------------------------------------#
+    [    :home_tab                      ,    'Explanation'            ,    '/'                                ,    true        ,    true        ],
+    [    :galaxies_tab                  ,    'Galaxies'               ,    '/galaxies/elliptical_galaxies'    ,    true        ,    true        ],
+    [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'    ,    '/galaxies/elliptical_galaxies'    ,    true        ,    true        ],
+    [    :spiral_galaxies_subtab        ,    'Spiral Galaxies'        ,    '/galaxies/spiral_galaxies'        ,    true        ,    true        ],
+    [    :lenticular_galaxies_subtab    ,    'Lenticular Galaxies'    ,    '/galaxies/lenticular_galaxies'    ,    true        ,    true        ],
+    [    :planets_tab                   ,    'Planets'                ,    '/exoplanets'                      ,    true        ,    true        ],
+    [    :exoplanets_subtab             ,    'Exoplanets'             ,    '/exoplanets'                      ,    true        ,    true        ],
+    [    :rogue_planets_subtab          ,    'Rogue Planets'          ,    '/rogue_planets'                   ,    true        ,    true        ],
+    [    :stars_tab                     ,    'Stars'                  ,    '/stars'                           ,    true        ,    true        ],
+    #-------------------------------------------------------------------------------------------------------------------------------------------#
+    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?    |    ENABLED?    #
+    #-------------------------------------------------------------------------------------------------------------------------------------------#
   ]
 
   config.actions = [
