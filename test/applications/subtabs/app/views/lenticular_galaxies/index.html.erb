@@ -1,0 +1,23 @@
+<h1>Listing lenticular_galaxies</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @lenticular_galaxies.each do |lenticular_galaxy| %>
+  <tr>
+    <td><%= lenticular_galaxy.name %></td>
+    <td><%= link_to 'Show', lenticular_galaxy %></td>
+    <td><%= link_to 'Edit', edit_lenticular_galaxy_path(lenticular_galaxy) %></td>
+    <td><%= link_to 'Destroy', lenticular_galaxy, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Lenticular galaxy', new_lenticular_galaxy_path %>

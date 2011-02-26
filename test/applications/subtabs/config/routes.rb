@@ -3,8 +3,13 @@ Subtabs::Application.routes.draw do
   root :to => "home#index"
 
   resources :galaxies
+  resources :elliptical_galaxies
+  resources :spiral_galaxies
+  resources :lenticular_galaxies
   resources :stars
   resources :planets
+  resources :exoplanets
+  resources :rogue_planets
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
