@@ -84,7 +84,8 @@ module Tabulous
     return '' unless @@css.scaffolding
     %Q{
 <style type="text/css">
-body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a {
+body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
+#subtabs, #subtabs ul, #subtabs ul li, #subtabs ul li span, #subtabs ul li span a {
   margin: 0;
   padding: 0;
 }
@@ -136,6 +137,39 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a {
 #tabs ul li a:hover {
   background-color: #{@@css.hover_tab_color};
 }
+
+#subtabs ul {
+  margin-top: 15px;
+}
+
+#subtabs, #subtabs a, #subtabs a:visited {
+  color: #{@@css.text_color};
+}
+
+#subtabs li.active {
+  font-weight: bold;
+}
+
+#subtabs a {
+  text-decoration: none;
+}
+
+#subtabs ul {
+  font-size: 16px;
+  height: 30px;
+  list-style-type: none;
+  padding: 0 0 0 50px;
+}
+
+#subtabs ul li {
+  padding: 10px;
+  float: left;
+}
+
+#subtabs ul li a:hover {
+  text-decoration: underline;
+}
+
 </style>
     }
   end
