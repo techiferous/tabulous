@@ -7,6 +7,6 @@ module Tabulous
     end
   end
 
-  class FormattingError < TabulousError; end
+  class ColumnError < TabulousError; end
 
 end
