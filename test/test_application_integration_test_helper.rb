@@ -44,5 +44,27 @@ module ActionController
       end
     end
 
+    def assert_tab_disabled(text)
+      begin
+        message = "expected tab with text '#{text}' to be disabled"
+        # would be better to check for the disabled class but don't know how to do that
+        page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/span[. = "#{text}"]})
+        assert_block(message) { false }
+      rescue Capybara::ElementNotFound:
+        assert_block(message) { true }
+      end
+    end
+
+    def assert_tab_enabled(text)
+      begin
+        message = "expected tab with text '#{text}' to be enabled"
+        # would be better to check for the disabled class but don't know how to do that
+        page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/span[. = "#{text}"]})
+        assert_block(message) { true }
+      rescue Capybara::ElementNotFound:
+        assert_block(message) { false }
+      end
+    end
+
   end
 end

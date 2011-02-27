@@ -49,4 +49,11 @@ class SubtabsTest < ActionController::IntegrationTest
     assert_tab_not_present 'Stars'
   end
  
+  test "disabled tabs" do
+    visit '/'
+    assert_tab_disabled 'Disabled'
+    click_link 'Stars'
+    assert_tab_enabled 'Disabled'
+  end
+ 
 end
