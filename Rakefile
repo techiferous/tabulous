@@ -39,7 +39,7 @@ task :test do
       puts %x{rake test:#{name}}
     end
   end
-  # TODO: also call test:units here...
+  Rake::Task['test:units'].invoke
 end
 
 task :default => :test
