@@ -323,5 +323,3 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
   end
 
 end
-
-ActiveSupport.on_load(:action_view) { include Tabulous::Helpers }
