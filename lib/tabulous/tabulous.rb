@@ -216,7 +216,7 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     klass = (options[:active] ? 'active' : 'inactive')
     klass << (options[:enabled] ? ' enabled' : ' disabled')
     html << %Q{<li class="#{klass}">}
-    if options[:active]
+    if options[:active] || options[:enabled] == false
       html << %Q{<span class="tab">#{options[:text]}</span>}
     else
       html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
@@ -271,7 +271,7 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     
     def visible?(view)
       if @visible.is_a? Proc
-        view.instance_eval &@visible
+        !!view.instance_eval(&@visible)
       else
         !!@visible
       end
@@ -279,7 +279,7 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     
     def enabled?(view)
       if @enabled.is_a? Proc
-        view.instance_eval &@enabled
+        !!view.instance_eval(&@enabled)
       else
         !!@enabled
       end

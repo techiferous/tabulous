@@ -16,7 +16,7 @@ Tabulous.setup do |config|
     [    :hidden_tab                    ,    'Hidden'                 ,    '/hidden/always_visible'           ,    lambda { request.path =~ /(hidden|galaxies)/ }    ,    true        ],
     [    :always_visible_subtab         ,    'Always Visible'         ,    '/hidden/always_visible'           ,    true                                              ,    true        ],
     [    :always_hidden_subtab          ,    'Always Hidden'          ,    '/hidden/always_hidden'            ,    false                                             ,    true        ],
-    [    :disabled_tab                    ,    'Disabled'                 ,    '/disabled/always_enabled'           ,   true    ,          lambda { request.path =~ /(hidden|stars)/ }   ],
+    [    :disabled_tab                    ,    'Disabled'                 ,    '/disabled/always_enabled'           ,   true    ,          lambda { request.path =~ /(disabled|stars)/ }   ],
     [    :always_enabled_subtab         ,    'Always Enabled'         ,    '/disabled/always_enabled'           ,    true                                              ,    true        ],
     [    :always_disabled_subtab          ,    'Always Disabled'          ,    '/disabled/always_disabled'            ,    true                                            ,    false        ],
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
