@@ -52,6 +52,13 @@ class TabulousFormatterTest < Test::Unit::TestCase
     assert_same_text expected, actual
   end
 
+  def test_random_vertical_whitespace
+    input = IO.readlines('test/test_initializers/random_vertical_whitespace')
+    expected = IO.readlines('test/test_initializers/expected')
+    actual = TabulousFormatter.format(input)
+    assert_same_text expected, actual
+  end
+
   def test_trailing_comments
     input = IO.readlines('test/test_initializers/trailing_comments')
     expected = input
