@@ -2,6 +2,7 @@ require 'capybara/rails'
 
 module ActionController
   class IntegrationTest
+
     include Capybara
 
     def assert_tab_not_present(text)
@@ -66,6 +67,10 @@ module ActionController
       message = "expected subtab with text '#{text}' to be enabled"
       result = page.all('#subtabs li.enabled', :text => text)
       assert_block(message) { !result.empty? }
+    end
+
+    def use_initializer(i)
+      eval i
     end
 
   end
