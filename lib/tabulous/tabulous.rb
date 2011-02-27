@@ -11,8 +11,10 @@ module Tabulous
       begin
         tab = Tab.new(*tab_args)
       rescue ArgumentError
-        # TODO: friendlier error message
-        raise "Wrong number of columns in your tabulous initializer."
+        raise FormattingError,
+              "Your config.tabs table is improperly formatted.  You probably have " +
+              "the wrong number of columns.  Or, in other words, one of the arrays " +
+              "in the config.tabs array has the wrong number of elements."
       end
       if tab.subtab?
         tab.add_parent(last_tab)
@@ -25,6 +27,14 @@ module Tabulous
   
   def self.actions=(ary)
     @@actions = {}
+    ary.each do |a|
+      if a.size != 3
+        raise FormattingError,
+              "Your config.actions table is improperly formatted.  You probably have " +
+              "the wrong number of columns.  Or, in other words, one of the arrays " +
+              "in the config.actions array has the wrong number of elements."
+      end
+    end
     ary.each do |controller, action, tab|
       @@actions[controller] ||= {}
       @@actions[controller][action] ||= []
