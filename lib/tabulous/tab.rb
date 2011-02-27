@@ -13,7 +13,8 @@ module Tabulous
       elsif name.ends_with? '_subtab'
         @kind = :subtab
       else
-        raise "tab name error"
+        raise TabNameError,
+              "Incorrect tab name: '#{name}'.  Tab names must end with _tab or _subtab."
       end
       @text = text
       @path = path
