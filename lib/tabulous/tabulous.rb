@@ -189,8 +189,8 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     html << '<ul>'
     for tab in main_tabs
       next if !tab.visible?(view)
-      html << render_tab(:text => tab.text,
-                         :path => tab.path,
+      html << render_tab(:text => tab.text(view),
+                         :path => tab.path(view),
                          :active => (tab.name == active_tab_name),
                          :enabled => tab.enabled?(view))
     end
@@ -208,8 +208,8 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     html << '<ul>'
     for subtab in tab.subtabs
       next if !subtab.visible?(view)
-      html << render_tab(:text => subtab.text,
-                         :path => subtab.path,
+      html << render_tab(:text => subtab.text(view),
+                         :path => subtab.path(view),
                          :active => active?(controller, action, subtab.name),
                          :enabled => subtab.enabled?(view))
     end
@@ -247,7 +247,7 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
   
   class Tab
     
-    attr_reader :name, :text, :path, :parent
+    attr_reader :name, :parent
     attr_accessor :subtabs
     
     def initialize(name, text, path, visible, enabled)
@@ -274,6 +274,22 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
     
     def subtab?
       @kind == :subtab
+    end
+    
+    def text(view)
+      if @text.is_a? Proc
+        view.instance_eval(&@text)
+      else
+        @text
+      end
+    end
+    
+    def path(view)
+      if @path.is_a? Proc
+        view.instance_eval(&@path)
+      else
+        @path
+      end
     end
     
     def visible?(view)

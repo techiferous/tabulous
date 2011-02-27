@@ -1,27 +1,27 @@
 Tabulous.setup do |config|
 
   config.tabs = [
-    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?                                          |    ENABLED?                                         #
-    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-    [    :home_tab                      ,    'Explanation'            ,    '/'                                ,    true                                              ,    true                                             ],
-    [    :galaxies_tab                  ,    'Galaxies'               ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
-    [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'    ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
-    [    :spiral_galaxies_subtab        ,    'Spiral Galaxies'        ,    '/galaxies/spiral_galaxies'        ,    true                                              ,    true                                             ],
-    [    :lenticular_galaxies_subtab    ,    'Lenticular Galaxies'    ,    '/galaxies/lenticular_galaxies'    ,    true                                              ,    true                                             ],
-    [    :planets_tab                   ,    'Planets'                ,    '/exoplanets'                      ,    true                                              ,    true                                             ],
-    [    :exoplanets_subtab             ,    'Exoplanets'             ,    '/exoplanets'                      ,    true                                              ,    true                                             ],
-    [    :rogue_planets_subtab          ,    'Rogue Planets'          ,    '/rogue_planets'                   ,    true                                              ,    true                                             ],
-    [    :stars_tab                     ,    'Stars'                  ,    '/stars'                           ,    true                                              ,    true                                             ],
-    [    :hidden_tab                    ,    'Hidden'                 ,    '/hidden/always_visible'           ,    lambda { request.path =~ /(hidden|galaxies)/ }    ,    true                                             ],
-    [    :always_visible_subtab         ,    'Always Visible'         ,    '/hidden/always_visible'           ,    true                                              ,    true                                             ],
-    [    :always_hidden_subtab          ,    'Always Hidden'          ,    '/hidden/always_hidden'            ,    false                                             ,    true                                             ],
-    [    :disabled_tab                  ,    'Disabled'               ,    '/disabled/always_enabled'         ,    true                                              ,    lambda { request.path =~ /(disabled|stars)/ }    ],
-    [    :always_enabled_subtab         ,    'Always Enabled'         ,    '/disabled/always_enabled'         ,    true                                              ,    true                                             ],
-    [    :always_disabled_subtab        ,    'Always Disabled'        ,    '/disabled/always_disabled'        ,    true                                              ,    false                                            ],
-    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
-    #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?                                          |    ENABLED?                                         #
-    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+    #    TAB NAME                       |    DISPLAY TEXT                                               |    PATH                               |    VISIBLE?                                          |    ENABLED?                                         #
+    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+    [    :home_tab                      ,    'Explanation'                                              ,    '/'                                ,    true                                              ,    true                                             ],
+    [    :galaxies_tab                  ,    'Galaxies'                                                 ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
+    [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'                                      ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
+    [    :spiral_galaxies_subtab        ,    'Spiral Galaxies'                                          ,    '/galaxies/spiral_galaxies'        ,    true                                              ,    true                                             ],
+    [    :lenticular_galaxies_subtab    ,    'Lenticular Galaxies'                                      ,    '/galaxies/lenticular_galaxies'    ,    true                                              ,    true                                             ],
+    [    :planets_tab                   ,    'Planets'                                                  ,    '/exoplanets'                      ,    true                                              ,    true                                             ],
+    [    :exoplanets_subtab             ,    'Exoplanets'                                               ,    '/exoplanets'                      ,    true                                              ,    true                                             ],
+    [    :rogue_planets_subtab          ,    'Rogue Planets'                                            ,    '/rogue_planets'                   ,    true                                              ,    true                                             ],
+    [    :stars_tab                     ,    lambda { request.path =~ /stars/ ? 'Stars!' : 'Stars' }    ,    lambda { stars_path }              ,    true                                              ,    true                                             ],
+    [    :hidden_tab                    ,    'Hidden'                                                   ,    '/hidden/always_visible'           ,    lambda { request.path =~ /(hidden|galaxies)/ }    ,    true                                             ],
+    [    :always_visible_subtab         ,    'Always Visible'                                           ,    '/hidden/always_visible'           ,    true                                              ,    true                                             ],
+    [    :always_hidden_subtab          ,    'Always Hidden'                                            ,    '/hidden/always_hidden'            ,    false                                             ,    true                                             ],
+    [    :disabled_tab                  ,    'Disabled'                                                 ,    '/disabled/always_enabled'         ,    true                                              ,    lambda { request.path =~ /(disabled|stars)/ }    ],
+    [    :always_enabled_subtab         ,    'Always Enabled'                                           ,    '/disabled/always_enabled'         ,    true                                              ,    true                                             ],
+    [    :always_disabled_subtab        ,    'Always Disabled'                                          ,    '/disabled/always_disabled'        ,    true                                              ,    false                                            ],
+    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+    #    TAB NAME                       |    DISPLAY TEXT                                               |    PATH                               |    VISIBLE?                                          |    ENABLED?                                         #
+    #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
   ]
 
   config.actions = [
@@ -43,7 +43,7 @@ Tabulous.setup do |config|
     #    CONTROLLER              |    ACTION              |    TAB                            #
     #-----------------------------------------------------------------------------------------#
   ]
-  
+
   config.css.scaffolding = true
   config.css.background_color = '#cec'
   config.css.text_color = '#464'
