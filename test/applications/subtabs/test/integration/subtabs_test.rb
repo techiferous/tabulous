@@ -35,6 +35,7 @@ class SubtabsTest < ActionController::IntegrationTest
   end
  
   test "subtab visibility" do
+    visit '/'
     click_link 'Galaxies'
     click_link 'Hidden'
     assert_subtab_present 'Always Visible'
@@ -42,6 +43,7 @@ class SubtabsTest < ActionController::IntegrationTest
   end
  
   test "changing tab text" do
+    visit '/'
     click_link 'Stars'
     assert_tab_present 'Stars!'
     assert_tab_not_present 'Stars'
