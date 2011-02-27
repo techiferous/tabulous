@@ -32,15 +32,22 @@ class TabulousFormatterTest < Test::Unit::TestCase
   end
 
   def test_text_in_text_out
-    expected = IO.readlines('test/test_initializers/text')
-    input = expected
+    input = IO.readlines('test/test_initializers/text')
+    expected = input
     actual = TabulousFormatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_well_formatted_in_well_formatted_out
+    input = IO.readlines('test/test_initializers/expected')
+    expected = input
+    actual = TabulousFormatter.format(input)
+    assert_same_text expected, actual
+  end
+
+  def test_random_horizontal_whitespace
+    input = IO.readlines('test/test_initializers/random_horizontal_whitespace')
     expected = IO.readlines('test/test_initializers/expected')
-    input = expected
     actual = TabulousFormatter.format(input)
     assert_same_text expected, actual
   end

@@ -21,6 +21,8 @@ class TabulousFormatter
       if inside
         stripped_line = line.strip
         if indentation.nil? && line =~ /^(\s*)#--/
+          # note: the first #------ header sets the indentation level
+          # note #2: only the insides are formatted, not the config = line
           indentation = $1
         elsif headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
           headings = stripped_line.split(%r{(#|\|)}).map(&:strip)
