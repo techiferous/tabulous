@@ -41,4 +41,10 @@ class SubtabsTest < ActionController::IntegrationTest
     assert_subtab_not_present 'Always Hidden'
   end
  
+  test "changing tab text" do
+    click_link 'Stars'
+    assert_tab_present 'Stars!'
+    assert_tab_not_present 'Stars'
+  end
+ 
 end
