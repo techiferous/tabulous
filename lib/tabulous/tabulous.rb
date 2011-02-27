@@ -62,6 +62,7 @@ module Tabulous
   end
 
   def self.render_tabs(view)
+    return unless tab_defined?(view)
     html = ''
     html << embed_styles
     active_tab_name = active_tab(view).name
@@ -80,6 +81,7 @@ module Tabulous
   end
   
   def self.render_subtabs(view)
+    return unless tab_defined?(view)
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
     tab = active_tab(view)
@@ -114,16 +116,36 @@ module Tabulous
   end
 
   def self.active?(controller, action, tab_name)
-    if @@actions[controller].nil?
-      # TODO: better error message or perhaps don't render tabs
-      raise "No tabs are defined for controller '#{controller}'"
-    end
-    if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
-      # TODO: better error message or perhaps don't render tabs
-      raise "No tab is defined for controller '#{controller}' action '#{action}'"
-    end
     (@@actions[controller][action] && @@actions[controller][action].include?(tab_name)) ||
      (@@actions[controller][:all_actions] && @@actions[controller][:all_actions].include?(tab_name))
+  end
+
+  def self.tab_defined?(view)
+    controller = view.controller_name.to_sym
+    action = view.action_name.to_sym
+    if @@actions[controller].nil?
+      if @@raise_error_if_no_tab_found
+        raise NoTabFoundError,
+              "No tabs are defined for the controller '#{controller}'.  " +
+              "You can define a tab for this controller in config/initializers/tabulous.rb " +
+              "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
+              "by setting config.raise_error_if_no_tab_found to false."
+      else
+        return false
+      end
+    end
+    if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
+      if @@raise_error_if_no_tab_found
+        raise NoTabFoundError,
+              "No tab is defined for the action '#{action}' in the controller '#{controller}'.  " +
+              "You can define a tab for this action in config/initializers/tabulous.rb " +
+              "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
+              "by setting config.raise_error_if_no_tab_found to false."
+      else
+        return false
+      end
+    end
+    true
   end
 
 end

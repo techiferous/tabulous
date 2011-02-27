@@ -8,5 +8,6 @@ module Tabulous
   end
 
   class ColumnError < TabulousError; end
+  class NoTabFoundError < TabulousError; end
 
 end

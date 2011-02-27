@@ -25,6 +25,9 @@ module Tabulous
   mattr_accessor :active_tab_clickable
   @@active_tab_clickable = false
 
+  mattr_accessor :raise_error_if_no_tab_found
+  @@raise_error_if_no_tab_found = true
+
   mattr_accessor :css
   @@css = Css.new
 
