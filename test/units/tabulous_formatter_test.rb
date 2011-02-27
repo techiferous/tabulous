@@ -11,4 +11,16 @@ class TabulousFormatterTest < Test::Unit::TestCase
     end
   end
 
+  def test_empty_in_empty_out
+    input = IO.readlines('test/test_initializers/empty')
+    result = TabulousFormatter.format(input)
+    assert_equal [], result
+  end
+
+  def test_text_in_text_out
+    input = IO.readlines('test/test_initializers/text')
+    result = TabulousFormatter.format(input)
+    assert_equal input, result
+  end
+
 end
