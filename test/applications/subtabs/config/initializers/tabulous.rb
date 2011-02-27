@@ -50,5 +50,6 @@ Tabulous.setup do |config|
   config.css.active_tab_color = '#fff'
   config.css.hover_tab_color = '#dfd'
   config.css.inactive_tab_color = '#aca'
+  config.css.inactive_text_color = '#8a8'
 
 end

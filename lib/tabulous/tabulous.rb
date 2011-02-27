@@ -7,6 +7,7 @@ module Tabulous
     attr_accessor :active_tab_color
     attr_accessor :hover_tab_color
     attr_accessor :inactive_tab_color
+    attr_accessor :inactive_text_color
     def initialize
       @scaffolding = false
       @background_color = '#ccc'
@@ -14,6 +15,7 @@ module Tabulous
       @active_tab_color = 'white'
       @hover_tab_color = '#ddd'
       @inactive_tab_color = '#aaa'
+      @inactive_text_color = '#888'
     end
   end
   
@@ -92,6 +94,11 @@ body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
 
 #tabs, #tabs a, #tabs a:visited, #tabs a:hover {
   color: #{@@css.text_color};
+}
+
+#tabs li.disabled, #tabs li.disabled a, #tabs li.disabled a:visited, #tabs li.disabled a:hover,
+#subtabs li.disabled, #subtabs li.disabled a, #subtabs li.disabled a:visited, #subtabs li.disabled a:hover {
+  color: #{@@css.inactive_text_color};
 }
 
 #tabs a {
