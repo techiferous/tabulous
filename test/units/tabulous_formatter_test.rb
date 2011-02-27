@@ -3,6 +3,20 @@ require 'tabulous/tabulous_formatter'
 
 class TabulousFormatterTest < Test::Unit::TestCase
 
+  # expected and actual are arrays of strings; they represent the
+  # before and after contents of a text file that has been run
+  # through TabulousFormatter
+  def assert_same_text(expected, actual)
+    # remove trailing whitespace as it doesn't matter for the purposes of diffing
+    expected = expected.map(&:rstrip)
+    actual = actual.map(&:rstrip)
+    # now make one big string out of the array of strings
+    expected = expected.join("\n")
+    actual = actual.join("\n")
+    message = Diffy::Diff.new(expected, actual).to_s(:color)
+    assert_block(message) { expected == actual }
+  end
+
   def test_returns_array_of_strings
     result = TabulousFormatter.format(['foo', 'bar'])
     assert_kind_of Array, result
@@ -18,9 +32,17 @@ class TabulousFormatterTest < Test::Unit::TestCase
   end
 
   def test_text_in_text_out
-    input = IO.readlines('test/test_initializers/text')
-    result = TabulousFormatter.format(input)
-    assert_equal input, result
+    expected = IO.readlines('test/test_initializers/text')
+    input = expected
+    actual = TabulousFormatter.format(input)
+    assert_same_text expected, actual
+  end
+
+  def test_well_formatted_in_well_formatted_out
+    expected = IO.readlines('test/test_initializers/expected')
+    input = expected
+    actual = TabulousFormatter.format(input)
+    assert_same_text expected, actual
   end
 
 end

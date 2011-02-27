@@ -1,4 +1,4 @@
-require 'active_support/core_ext/string/starts_ends_with'
+require 'active_support/core_ext/string'
 
 class TabulousFormatter
 
@@ -9,6 +9,7 @@ class TabulousFormatter
     headings = []
     indentation = nil
     lines.each do |line|
+      line = line.rstrip
       if inside && end_line?(line)
         output_formatted_table(indentation, headings, inside_lines)
         inside = false
@@ -48,12 +49,14 @@ class TabulousFormatter
   
   def self.start_line?(line)
     line = line.split('#').first # naively strip out comments
+    return false if line.nil?
     line = line.gsub(/\s/, '')
     return line == 'config.tabs=[' || line == 'config.actions=['
   end
   
   def self.end_line?(line)
     line = line.split('#').first # naively strip out comments
+    return false if line.nil?
     line = line.gsub(/\s/, '')
     return line == ']'
   end

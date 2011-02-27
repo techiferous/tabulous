@@ -50,6 +50,7 @@ GEM
     colored (1.2)
     configuration (1.2.0)
     culerity (0.2.15)
+    diffy (2.0.1)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     ffi (0.6.3)
@@ -107,6 +108,7 @@ DEPENDENCIES
   bundler (>= 1.0.0)
   capybara (>= 0.4.1.2)
   colored (>= 1.2.0)
+  diffy
   launchy
   rails (>= 3.0.0)
   redgreen
