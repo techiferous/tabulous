@@ -7,6 +7,7 @@ class TabulousFormatter
   # note #2: only the insides are formatted, not the config = line
   # trailing comments at the end of table headers will be lost (fix this?)
   # trailing comments will be reinserted two spaces after end of code line
+  # no comments or other code can be interspersed between rows
 
   def self.format(lines)
     @out = []
@@ -26,6 +27,7 @@ class TabulousFormatter
       if inside_a_table
         stripped_line = line.strip
         at_header_labels = headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
+        at_bottom_header_labels = !headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
         at_table_row = stripped_line.starts_with?('[')
         at_start_of_header = (indentation.nil? && line =~ /^(\s*)#--/)
         if at_start_of_header
@@ -38,6 +40,14 @@ class TabulousFormatter
             end_of_line_comment = $2
             table_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
           end
+        elsif stripped_line.blank?
+          # blank lines go away
+        elsif stripped_line.starts_with? '#--'
+          # we can also safely ignore header lines as they will be regenerated
+        elsif at_bottom_header_labels
+          # we can also safely ignore these as they will be regenerated
+        else
+          raise "only properly formatted table rows expected. aborting" # TODO: better error message
         end
       else
         @out << line

@@ -15,6 +15,7 @@ Tabulous.setup do |config|
     [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'    ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
     [    :spiral_galaxies_subtab        ,    'Spiral Galaxies'        ,    '/galaxies/spiral_galaxies'        ,    true                                              ,    true                                             ],
 
+   
 
     [    :lenticular_galaxies_subtab    ,    'Lenticular Galaxies'    ,    '/galaxies/lenticular_galaxies'    ,    true                                              ,    true                                             ],
     [    :planets_tab                   ,    'Planets'                ,    '/exoplanets'                      ,    true                                              ,    true                                             ],
