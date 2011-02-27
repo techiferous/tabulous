@@ -76,8 +76,9 @@ module Tabulous
     html = ''
     html << (@@html5 ? '<nav id="subtabs">' : '<div id="subtabs">')
     html << '<ul>'
-    for subtab in tab.subtabs
-      next if !subtab.visible?(view)
+    subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
+    return if subtabs.empty? && !@@always_render_subtabs
+    for subtab in subtabs
       html << render_tab(:text => subtab.text(view),
                          :path => subtab.path(view),
                          :active => active?(controller, action, subtab.name),
