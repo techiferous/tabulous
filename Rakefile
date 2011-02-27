@@ -21,6 +21,12 @@ namespace :test do
       end
     end
   end
+  desc "run unit tests for tabulous"
+  Rake::TestTask.new(:units) do |t|
+    t.libs << 'lib'
+    t.pattern = 'test/units/**/*_test.rb'
+    t.verbose = true
+  end
 end
 
 task :test do
@@ -33,6 +39,7 @@ task :test do
       puts %x{rake test:#{name}}
     end
   end
+  # TODO: also call test:units here...
 end
 
 task :default => :test
