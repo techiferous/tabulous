@@ -48,7 +48,10 @@ module Tabulous
           elsif at_bottom_header_labels
             # we can also safely ignore these as they will be regenerated
           else
-            raise "only properly formatted table rows expected. aborting" # TODO: better error message
+            raise FormattingError,
+                  "Only properly formatted table rows expected. " +
+                  "For example, comments can only appear at the end of table rows, not " +
+                  "between them.  Aborting."
           end
         else
           @out << line
@@ -66,7 +69,9 @@ module Tabulous
       last_heading = headings.pop
       first_heading = first_heading.split('#').last.strip
       if last_heading =~ /#\s*\S+/
-        raise "no text can appear after table headings. aborting" # TODO: better error message
+        raise FormattingError,
+              "No extra text is allowed on the table heading lines.  " + 
+              "Text was detected to the right of the table headers; aborting. "
       end
       last_heading = last_heading.split('#').first.strip
       headings = [first_heading] + headings.map(&:strip) + [last_heading]
