@@ -45,25 +45,27 @@ module ActionController
     end
 
     def assert_tab_disabled(text)
-      begin
-        message = "expected tab with text '#{text}' to be disabled"
-        # would be better to check for the disabled class but don't know how to do that
-        page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/span[. = "#{text}"]})
-        assert_block(message) { false }
-      rescue Capybara::ElementNotFound:
-        assert_block(message) { true }
-      end
+      message = "expected tab with text '#{text}' to be disabled"
+      result = page.all('#tabs li.disabled', :text => text)
+      assert_block(message) { !result.empty? }
     end
 
     def assert_tab_enabled(text)
-      begin
-        message = "expected tab with text '#{text}' to be enabled"
-        # would be better to check for the disabled class but don't know how to do that
-        page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/span[. = "#{text}"]})
-        assert_block(message) { true }
-      rescue Capybara::ElementNotFound:
-        assert_block(message) { false }
-      end
+      message = "expected tab with text '#{text}' to be enabled"
+      result = page.all('#tabs li.enabled', :text => text)
+      assert_block(message) { !result.empty? }
+    end
+
+    def assert_subtab_disabled(text)
+      message = "expected subtab with text '#{text}' to be disabled"
+      result = page.all('#subtabs li.disabled', :text => text)
+      assert_block(message) { !result.empty? }
+    end
+
+    def assert_subtab_enabled(text)
+      message = "expected subtab with text '#{text}' to be enabled"
+      result = page.all('#subtabs li.enabled', :text => text)
+      assert_block(message) { !result.empty? }
     end
 
   end
