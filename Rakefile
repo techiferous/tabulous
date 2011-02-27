@@ -39,6 +39,7 @@ task :test do
       puts %x{rake test:#{name}}
     end
   end
+  puts "Running unit tests".magenta
   Rake::Task['test:units'].invoke
 end
 
