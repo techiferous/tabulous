@@ -3,7 +3,7 @@ Tabulous.setup do |config|
   config.tabs = [  # this comment should be preserved and not otherwise affect anything
     #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
     #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?                                          |    ENABLED?                                         #
-    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
+    #----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#   
     [    :home_tab                      ,    'Explanation'            ,    '/'                                ,    true                                              ,    true                                             ],  # this comment should be preserved and not otherwise affect anything
     [    :galaxies_tab                  ,    'Galaxies'               ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
     [    :elliptical_galaxies_subtab    ,    'Elliptical Galaxies'    ,    '/galaxies/elliptical_galaxies'    ,    true                                              ,    true                                             ],
