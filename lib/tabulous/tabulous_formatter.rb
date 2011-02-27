@@ -2,6 +2,12 @@ require 'active_support/core_ext/string'
 
 class TabulousFormatter
 
+  # TODO: write up these rules more formally
+  # note: the first #------ header sets the indentation level
+  # note #2: only the insides are formatted, not the config = line
+  # trailing comments at the end of table headers will be lost (fix this?)
+  # trailing comments will be reinserted two spaces after end of code line
+
   def self.format(lines)
     @out = []
     inside = false
@@ -21,8 +27,6 @@ class TabulousFormatter
       if inside
         stripped_line = line.strip
         if indentation.nil? && line =~ /^(\s*)#--/
-          # note: the first #------ header sets the indentation level
-          # note #2: only the insides are formatted, not the config = line
           indentation = $1
         elsif headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
           headings = stripped_line.split(%r{(#|\|)}).map(&:strip)

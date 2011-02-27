@@ -52,4 +52,11 @@ class TabulousFormatterTest < Test::Unit::TestCase
     assert_same_text expected, actual
   end
 
+  def test_trailing_comments
+    input = IO.readlines('test/test_initializers/trailing_comments')
+    expected = input
+    actual = TabulousFormatter.format(input)
+    assert_same_text expected, actual
+  end
+
 end
