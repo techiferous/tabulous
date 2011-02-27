@@ -1,5 +1,5 @@
 require File.expand_path('../unit_test_helper', File.dirname(__FILE__))
-require 'tabulous/tabulous_formatter'
+require 'tabulous/formatter'
 
 class TabulousFormatterTest < Test::Unit::TestCase
 
@@ -18,7 +18,7 @@ class TabulousFormatterTest < Test::Unit::TestCase
   end
 
   def test_returns_array_of_strings
-    result = TabulousFormatter.format(['foo', 'bar'])
+    result = Tabulous::Formatter.format(['foo', 'bar'])
     assert_kind_of Array, result
     for element in result
       assert_kind_of String, element
@@ -27,42 +27,42 @@ class TabulousFormatterTest < Test::Unit::TestCase
 
   def test_empty_in_empty_out
     input = IO.readlines('test/test_initializers/empty')
-    result = TabulousFormatter.format(input)
+    result = Tabulous::Formatter.format(input)
     assert_equal [], result
   end
 
   def test_text_in_text_out
     input = IO.readlines('test/test_initializers/text')
     expected = input
-    actual = TabulousFormatter.format(input)
+    actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_well_formatted_in_well_formatted_out
     input = IO.readlines('test/test_initializers/expected')
     expected = input
-    actual = TabulousFormatter.format(input)
+    actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_random_horizontal_whitespace
     input = IO.readlines('test/test_initializers/random_horizontal_whitespace')
     expected = IO.readlines('test/test_initializers/expected')
-    actual = TabulousFormatter.format(input)
+    actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_random_vertical_whitespace
     input = IO.readlines('test/test_initializers/random_vertical_whitespace')
     expected = IO.readlines('test/test_initializers/expected')
-    actual = TabulousFormatter.format(input)
+    actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_trailing_comments
     input = IO.readlines('test/test_initializers/trailing_comments')
     expected = input
-    actual = TabulousFormatter.format(input)
+    actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
