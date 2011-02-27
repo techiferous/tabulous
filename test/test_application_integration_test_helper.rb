@@ -69,6 +69,18 @@ module ActionController
       assert_block(message) { !result.empty? }
     end
 
+    def assert_tab_active(text)
+      message = "expected tab with text '#{text}' to be active"
+      result = page.all('#tabs li.active', :text => text)
+      assert_block(message) { !result.empty? }
+    end
+
+    def assert_subtab_active(text)
+      message = "expected subtab with text '#{text}' to be active"
+      result = page.all('#subtabs li.active', :text => text)
+      assert_block(message) { !result.empty? }
+    end
+
     def use_initializer(i)
       eval i
     end
