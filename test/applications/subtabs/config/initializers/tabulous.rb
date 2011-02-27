@@ -16,6 +16,9 @@ Tabulous.setup do |config|
     [    :hidden_tab                    ,    'Hidden'                 ,    '/hidden/always_visible'           ,    lambda { request.path =~ /(hidden|galaxies)/ }    ,    true        ],
     [    :always_visible_subtab         ,    'Always Visible'         ,    '/hidden/always_visible'           ,    true                                              ,    true        ],
     [    :always_hidden_subtab          ,    'Always Hidden'          ,    '/hidden/always_hidden'            ,    false                                             ,    true        ],
+    [    :disabled_tab                    ,    'Disabled'                 ,    '/disabled/always_enabled'           ,   true    ,          lambda { request.path =~ /(hidden|stars)/ }   ],
+    [    :always_enabled_subtab         ,    'Always Enabled'         ,    '/disabled/always_enabled'           ,    true                                              ,    true        ],
+    [    :always_disabled_subtab          ,    'Always Disabled'          ,    '/disabled/always_disabled'            ,    true                                            ,    false        ],
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
     #    TAB NAME                       |    DISPLAY TEXT             |    PATH                               |    VISIBLE?                                          |    ENABLED?    #
     #---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -34,6 +37,8 @@ Tabulous.setup do |config|
     [    :stars                  ,    :all_actions    ,    :stars_tab                     ],
     [    :misc                   ,    :always_visible ,    :always_visible_subtab         ],
     [    :misc                   ,    :always_hidden  ,    :always_hidden_subtab          ],
+    [    :misc                   ,    :always_enabled ,    :always_enabled_subtab         ],
+    [    :misc                   ,    :always_disabled  ,    :always_disabled_subtab          ],
     #-------------------------------------------------------------------------------------#
     #    CONTROLLER              |    ACTION          |    TAB                            #
     #-------------------------------------------------------------------------------------#
