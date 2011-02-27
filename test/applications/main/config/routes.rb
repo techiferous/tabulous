@@ -2,6 +2,10 @@ Main::Application.routes.draw do
 
   root :to => "home#index"
 
+  match 'subtabs/one' => 'subtabs#one'
+  match 'subtabs/two' => 'subtabs#two'
+  match 'subtabs/three' => 'subtabs#three'
+
   resources :galaxies
   resources :stars
   resources :planets
