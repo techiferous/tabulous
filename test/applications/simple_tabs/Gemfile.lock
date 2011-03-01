@@ -2,6 +2,7 @@ PATH
   remote: ../../..
   specs:
     tabulous (0.0.1)
+      colored (>= 1.2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -47,6 +48,7 @@ GEM
     celerity (0.8.8)
     childprocess (0.1.7)
       ffi (~> 0.6.3)
+    colored (1.2)
     configuration (1.2.0)
     culerity (0.2.15)
     erubis (2.6.6)

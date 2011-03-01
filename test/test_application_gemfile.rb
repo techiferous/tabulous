@@ -8,7 +8,7 @@ def shared_test_application_gems(bundler)
     group :test do
       gem 'capybara'
       gem 'launchy'
-      gem 'redgreen'
+      gem 'redgreen' unless RUBY_VERSION >= "1.9"
     end
   end
 end

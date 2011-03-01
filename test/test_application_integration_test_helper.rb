@@ -10,7 +10,7 @@ module ActionController
         message = "expected tab with text '#{text}' to not be present"
         page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/*[. = "#{text}"]})
         assert_block(message) { false }
-      rescue Capybara::ElementNotFound:
+      rescue Capybara::ElementNotFound
         assert_block(message) { true }
       end
     end
@@ -20,7 +20,7 @@ module ActionController
         message = "expected tab with text '#{text}' to be present"
         page.find(:xpath, %Q{//div[@id="tabs"]//ul/li/*[. = "#{text}"]})
         assert_block(message) { true }
-      rescue Capybara::ElementNotFound:
+      rescue Capybara::ElementNotFound
         assert_block(message) { false }
       end
     end
@@ -30,7 +30,7 @@ module ActionController
         message = "expected subtab with text '#{text}' to not be present"
         page.find(:xpath, %Q{//div[@id="subtabs"]//ul/li/*[. = "#{text}"]})
         assert_block(message) { false }
-      rescue Capybara::ElementNotFound:
+      rescue Capybara::ElementNotFound
         assert_block(message) { true }
       end
     end
@@ -40,7 +40,7 @@ module ActionController
         message = "expected subtab with text '#{text}' to be present"
         page.find(:xpath, %Q{//div[@id="subtabs"]//ul/li/*[. = "#{text}"]})
         assert_block(message) { true }
-      rescue Capybara::ElementNotFound:
+      rescue Capybara::ElementNotFound
         assert_block(message) { false }
       end
     end

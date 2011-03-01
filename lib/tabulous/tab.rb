@@ -34,7 +34,7 @@ module Tabulous
     
     def text(view)
       if @text.is_a? Proc
-        view.instance_eval(&@text)
+        run_closure(view, @text)
       else
         @text
       end
@@ -42,7 +42,7 @@ module Tabulous
     
     def path(view)
       if @path.is_a? Proc
-        view.instance_eval(&@path)
+        run_closure(view, @path)
       else
         @path
       end
@@ -50,7 +50,7 @@ module Tabulous
     
     def visible?(view)
       if @visible.is_a? Proc
-        !!view.instance_eval(&@visible)
+        !!run_closure(view, @visible)
       else
         !!@visible
       end
@@ -58,12 +58,22 @@ module Tabulous
     
     def enabled?(view)
       if @enabled.is_a? Proc
-        !!view.instance_eval(&@enabled)
+        !!run_closure(view, @enabled)
       else
         !!@enabled
       end
     end
-    
+
+    private
+
+    def run_closure(view, closure)
+      if view.respond_to? :instance_exec
+        view.instance_exec(&closure) # for Ruby 1.9
+      else
+        view.instance_eval(&closure)
+      end
+    end
+
   end
 
 end
