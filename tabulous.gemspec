@@ -14,10 +14,10 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "tabulous"
 
+  s.add_dependency "colored", ">= 1.2.0"
   s.add_development_dependency "bundler", ">= 1.0.0"
   s.add_development_dependency "rails", ">= 3.0.0"
   s.add_development_dependency "capybara", ">= 0.4.1.2"
-  s.add_development_dependency "colored", ">= 1.2.0"
   s.add_development_dependency "redgreen"
   s.add_development_dependency "launchy"
   s.add_development_dependency "diffy"
