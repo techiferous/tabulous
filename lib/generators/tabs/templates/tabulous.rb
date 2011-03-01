@@ -116,19 +116,19 @@ Tabulous.setup do |config|
   #-------------
 
   # By default, you cannot click on the active tab.
-  config.active_tab_clickable = true
+  config.active_tab_clickable = false
 
   # By default, the subtabs HTML element is not rendered if it is empty.
-  config.always_render_subtabs = true
+  config.always_render_subtabs = false
 
   # By default, when an action renders and no tab is defined for that action,
   # an error is thrown.  If you turn this off, no error is thrown and the
   # tabs are simply not rendered.
-  config.raise_error_if_no_tab_found = false
+  config.raise_error_if_no_tab_found = true
 
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
-  config.html5 = true
+  config.html5 = false
 
   #------------
   #   STYLES
