@@ -11,13 +11,21 @@
 -%>
 Tabulous.setup do |config|
 
+<% index_routes = Rails.application.routes.routes.select{|r| r.requirements[:action] == 'index'}
+   tab_data = index_routes.map do |route|
+     name = route.requirements[:controller].gsub('/', '_')
+     { :text => name.titleize,
+       :name => name,
+       :path_helper => route.name + '_path' }
+   end
+-%>
 <%= s = []
     s <<  '  config.tabs = ['
     s <<  '    #-------------------------------------------------------------------------------------------------#'
     s <<  '    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #'
     s <<  '    #-------------------------------------------------------------------------------------------------#'
-    for c in controllers 
-      s << "[    :#{c}_tab  ,  '#{c.titleize}'  ,  '/#{c}'  ,  true  ,  true  ],"
+    for tab in tab_data
+      s << "[    :#{tab[:name]}_tab  ,  '#{tab[:text]}'    ,  lambda { #{tab[:path_helper]} }  ,  true  ,  true  ],"
     end
     s <<  '    #-------------------------------------------------------------------------------------------------#'
     s <<  '    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #'
@@ -30,8 +38,8 @@ Tabulous.setup do |config|
     s <<  '    #-------------------------------------------------------------#'
     s <<  '    #    CONTROLLER    |    ACTION          |    TAB              #'
     s <<  '    #-------------------------------------------------------------#'
-    for c in controllers 
-      s << "[    :#{c}  ,  :all_actions  ,  :#{c}_tab  ],"
+    for tab in tab_data
+      s << "[    :#{tab[:name]}  ,  :all_actions  ,  :#{tab[:name]}_tab  ],"
     end
     s <<  '    #-------------------------------------------------------------#'
     s <<  '    #    CONTROLLER    |    ACTION          |    TAB              #'
