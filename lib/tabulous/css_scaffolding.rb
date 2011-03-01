@@ -3,10 +3,17 @@ module Tabulous
     return '' unless @@css.scaffolding
     %Q{
       <style type="text/css">
-      body, #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li span a,
-      #subtabs, #subtabs ul, #subtabs ul li, #subtabs ul li span, #subtabs ul li span a {
+      
+      body {
         margin: 0;
         padding: 0;
+      }
+      
+      #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li a,
+      #subtabs, #subtabs ul, #subtabs ul li, #subtabs ul li span, #subtabs ul li a {
+        margin: 0;
+        padding: 0;
+        line-height: 1;
       }
 
       #tabs, #tabs a, #tabs a:visited, #tabs a:hover {
@@ -24,7 +31,7 @@ module Tabulous
 
       #tabs ul {
         font-size: 24px;
-        height: 59px;
+        height: 57px;
         list-style-type: none;
         background-color: #{@@css.background_color};
         padding: 0 0 0 50px;
@@ -37,7 +44,8 @@ module Tabulous
       }
 
       #tabs ul li .tab {
-        padding: 5px 15px 0px 15px;
+        background-color: #{@@css.inactive_tab_color};
+        padding: 5px 15px 3px 15px;
         float: left;
       	-webkit-border-top-left-radius: 8px;
       	-khtml-border-radius-topleft: 8px;	
@@ -49,21 +57,24 @@ module Tabulous
       	border-top-right-radius: 8px;
       }
 
-      #tabs ul li .tab {
-        background-color: #{@@css.inactive_tab_color};
-      }
-
       #tabs ul li.active .tab {
         background-color: #{@@css.active_tab_color};
-        padding-bottom: 16px;
+        padding-bottom: 14px;
       }
 
       #tabs ul li a:hover {
         background-color: #{@@css.hover_tab_color};
       }
 
+      #tabs ul {
+        /* float clearing */
+        overflow: hidden;
+        display: inline-block; /* Necessary to trigger "hasLayout" in IE */
+        display: block; /* Sets element back to block */
+      }
+
       #subtabs ul {
-        margin-top: 15px;
+        margin-top: 5px;
       }
 
       #subtabs, #subtabs a, #subtabs a:visited {
