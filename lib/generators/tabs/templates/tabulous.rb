@@ -35,9 +35,12 @@ Tabulous.setup do |config|
   # you: rake tabs:format.  However, for this prettifier to work properly
   # you have to follow some special rules:
   #
-  #   * Commas that separate cells should be surrounded by spaces.
   #   * No comments are allowed between rows.
   #   * Comments are allowed to the right of rows, except for header rows.
+  #   * And most importantly: commas that separate cells should be surrounded
+  #     by spaces and commas that are within cells should not.  This gives the
+  #     formatter an easy way to distinguish between cells without having
+  #     to actually parse the Ruby.
 
   #----------
   #   TABS
