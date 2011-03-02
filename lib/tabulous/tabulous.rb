@@ -65,7 +65,8 @@ module Tabulous
     return unless tab_defined?(view)
     html = ''
     html << embed_styles
-    active_tab_name = active_tab(view).name
+    active_tab = active_tab(view)
+    active_tab_name = active_tab.name
     html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
     html << '<ul>'
     for tab in main_tabs
@@ -144,6 +145,16 @@ module Tabulous
       else
         return false
       end
+    end
+    tab = active_tab(view)
+    if tab.nil?
+      alleged_tab = @@actions[controller][action]
+      if alleged_tab.nil?
+        alleged_tab = @@actions[controller][:all_actions]
+      end
+      raise UnknownTabError,
+            "You've hooked the action '#{action}' in controller '#{controller}' to " +
+            "the tab '#{alleged_tab}', but this tab is not defined."
     end
     true
   end
