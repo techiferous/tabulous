@@ -1,1 +1,85 @@
-== tabulous
+= Tabulous
+
+== Description
+
+Tabulous provides an easy way to add tabs to your Rails application.
+
+== Requirements
+
+Tabulous only works with Rails 3.  It has been tested on Ruby 1.8.7 and 1.9.2.
+
+== Usage
+
+Traditionally, implementing tabs in Rails involves adding logic to your views and sprinkling
+tab-related code all over your controllers.  Tabulous takes a different approach and
+consolidates all of the tab-related code into one configuration file.  Apart from this
+configuration file, you just have to call <%= tabs %> and <%= subtabs %> in your view layout(s)
+and then create your own CSS styles for the tabs.
+
+To get started, add the gem to your Rails application's Gemfile and install it using:
+
+  bundle install
+
+Then generate the tab initializer:
+
+  rails generate tabs
+
+This will generate config/initializers/tabulous.rb.  Open the file and configure it to your liking.
+You'll notice the code is formatted into a grid.  After you edit the file, run the following rake
+task to prettify the code back into a nice grid:
+
+  rake tabs:format
+
+Make sure you call the following view helpers in your layout(s):
+
+  <%= tabs %>
+  <%= subtabs %>
+
+The tabs helper will generate markup that looks like this:
+
+  <div id="tabs">
+    <ul>
+      <li class="active enabled"><span class="tab">Explanation</span></li>
+      <li class="inactive enabled"><a href="/galaxies/elliptical_galaxies" class="tab">Galaxies</a></li>
+      <li class="inactive enabled"><a href="/exoplanets" class="tab">Planets</a></li>
+      <li class="inactive enabled"><a href="/stars" class="tab">Stars</a></li>
+      <li class="inactive disabled"><span class="tab">Asteroids</span></li>
+    </ul>
+  </div>
+
+And the subtabs helper will generate markup that looks like this:
+
+  <div id="subtabs">
+    <ul>
+      <li class="active enabled"><span class="tab">Exoplanets</span></li>
+      <li class="inactive enabled"><a href="/rogue_planets" class="tab">Rogue Planets</a></li>
+    </ul>
+  </div>
+
+Tabulous will start you off with some CSS scaffolding but you'll eventually want to create your own
+CSS. 
+
+== Examples
+
+Look in this gem's test/applications directory to find working example applications.  Look at their
+config/initializers/tabulous.rb and app/layouts/application.html.erb files.
+
+== Contributing
+
+Developers are encouraged to contribute ideas or code.
+
+To make code changes:
+
+  * First, check out this gem's code from github.
+  * Next, type bundle install in tabulous's directory.  This will install any gems you need
+    for developing tabulous.
+  * Then go to each directory in test/applications and type bundle install.  This makes sure
+    the test applications have the gems that they need to run.
+  * To save you the effort of having to create and migrate databases for each test application,
+    I've committed the sqlite databases of each test application to the repository.
+  * Now go to tabulous's directory and type rake test.  If everything has been installed
+    properly, all of the tests will pass.    
+  * Now you should be all set to code.
+
+Please send me a message if you find any confusing or incorrect documentation in Tabulous or if
+you encounter any bugs.  Thank you and enjoy!
