@@ -16,12 +16,129 @@ module Tabulous
 
   class Table
 
-    attr_accessor :table_lines, :headings, :indentation
+    attr_reader :header_cells, :end_of_row_comments, :rows
+    attr_accessor :indentation
 
     def initialize
-      @table_lines = []
-      @headings = []
+      @rows = []
+      @header_cells = []
+      @end_of_row_comments = []
       @indentation = nil
+    end
+
+    def header_cells=(val)
+      @header_cells = val
+      calculate_column_widths
+    end
+
+    def add_row(cells, end_of_row_comment)
+      @rows << cells
+      @end_of_row_comments << end_of_row_comment
+      calculate_column_widths
+    end
+
+    def column_width(column_number)
+      @column_widths[column_number]
+    end
+
+    private
+
+    def calculate_column_widths
+      @column_widths = {}
+      num_columns = @header_cells.size
+      for column in (0..num_columns-1)
+        column_cells = [@header_cells[column]]
+        row_number = 0
+        column_cells += @rows.map do |row|
+          row_number += 1
+          if row[column].nil?
+            raise FormattingError,
+                  "There appears to be at least one missing table cell, probably " +
+                  "in row ##{row_number}, column ##{column}."
+          else
+            row[column]
+          end
+        end
+        @column_widths[column] = column_cells.map(&:length).max
+      end
+    end
+
+  end
+
+  class Line
+
+    def initialize(line)
+      @line = line
+    end
+
+    def text
+      @line
+    end
+
+    def beginning_of_table?
+      line = @line.split('#').first # naively strip out comments
+      return false if line.nil?
+      line = line.gsub(/\s/, '')
+      return line == 'config.tabs=[' || line == 'config.actions=['
+    end
+  
+    def end_of_table?
+      line = @line.split('#').first # naively strip out comments
+      return false if line.nil?
+      line = line.gsub(/\s/, '')
+      return line == ']'
+    end
+
+    def horizontal_rule?
+      @line =~ /^(\s*)#--/
+    end
+
+    def header_cells?
+      stripped_line = @line.strip
+      stripped_line.starts_with?('# ') && stripped_line.slice('|')
+    end
+
+    def table_cells?
+      stripped_line = @line.strip
+      stripped_line.starts_with?('[')
+    end
+
+    def blank?
+      @line.strip.blank?
+    end
+
+    def indentation
+      @line =~ /^(\s*)\S+/
+      $1.size
+    end
+
+    def header_cells
+      return nil unless header_cells?
+      cells = @line.strip.split('|')
+      first_cell = cells.shift
+      first_cell = first_cell.split('#').last.strip
+      last_cell = cells.pop
+      if last_cell =~ /#\s*\S+/
+        raise FormattingError,
+              "No extra text is allowed on the table header lines.  " + 
+              "Text was detected to the right of the table headers; aborting. "
+      end
+      last_cell = last_cell.split('#').first.strip
+      [first_cell] + cells.map(&:strip) + [last_cell]
+    end
+
+    def table_cells
+      if @line.strip =~ /^\[(.+)\],(\s*|\s*#.*)$/
+        cells = $1
+        end_of_row_comment = $2
+        cells = cells.split(' , ').map(&:strip)
+        [cells, end_of_row_comment]
+      else
+        raise FormattingError,
+              "Only properly formatted table rows expected. " +
+              "For example, comments can only appear at the end of table rows, not " +
+              "between them.  Aborting."
+      end
     end
 
   end
@@ -34,34 +151,28 @@ module Tabulous
     end
 
     def go
-      @table = nil
-      @input_lines.each do |line|
-        line.rstrip!
-        if @table && at_end_of_table?(line)
-          @output_lines += Prettifier.prettify(@table)
-          @table = nil
+      @current_table = nil
+      @input_lines.each do |input_line|
+        line = Line.new(input_line)
+        if @current_table && line.end_of_table?
+          @output_lines += Prettifier.prettify(@current_table)
+          @current_table = nil
         end
-        if @table
-          stripped_line = line.strip
-          at_header_labels = @table.headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
-          at_bottom_header_labels = !@table.headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
-          at_table_row = stripped_line.starts_with?('[')
-          at_start_of_header = (@table.indentation.nil? && line =~ /^(\s*)#--/)
+        if @current_table
+          at_start_of_header = (@current_table.indentation.nil? && line.horizontal_rule?)
+          at_top_header_cells = @current_table.header_cells.empty? && line.header_cells?
+          at_bottom_header_cells = !@current_table.header_cells.empty? && line.header_cells?
           if at_start_of_header
-            @table.indentation = $1
-          elsif at_header_labels
-            @table.headings = parse_header_labels(stripped_line)
-          elsif at_table_row
-            if stripped_line =~ /^\[(.+)\],(\s*|\s*#.*)$/
-              cells = $1
-              end_of_line_comment = $2
-              @table.table_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
-            end
-          elsif stripped_line.blank?
+            @current_table.indentation = line.indentation
+          elsif at_top_header_cells
+            @current_table.header_cells = line.header_cells
+          elsif line.table_cells?
+            @current_table.add_row(*line.table_cells)
+          elsif line.blank?
             # blank lines go away
-          elsif stripped_line.starts_with? '#--'
+          elsif line.horizontal_rule?
             # we can also safely ignore header lines as they will be regenerated
-          elsif at_bottom_header_labels
+          elsif at_bottom_header_cells
             # we can also safely ignore these as they will be regenerated
           else
             raise FormattingError,
@@ -70,44 +181,13 @@ module Tabulous
                   "between them.  Aborting."
           end
         else
-          @output_lines << line
+          @output_lines << line.text
         end
-        if !@table && at_beginning_of_table?(line)
-          @table = Table.new
+        if !@current_table && line.beginning_of_table?
+          @current_table = Table.new
         end
       end
       return @output_lines
-    end
-
-    private
-
-    def parse_header_labels(line)
-      @table.headings = line.split('|')
-      first_heading = @table.headings.shift
-      last_heading = @table.headings.pop
-      first_heading = first_heading.split('#').last.strip
-      if last_heading =~ /#\s*\S+/
-        raise FormattingError,
-              "No extra text is allowed on the table heading lines.  " + 
-              "Text was detected to the right of the table headers; aborting. "
-      end
-      last_heading = last_heading.split('#').first.strip
-      @table.headings = [first_heading] + @table.headings.map(&:strip) + [last_heading]
-      @table.headings
-    end
-
-    def at_beginning_of_table?(line)
-      line = line.split('#').first # naively strip out comments
-      return false if line.nil?
-      line = line.gsub(/\s/, '')
-      return line == 'config.tabs=[' || line == 'config.actions=['
-    end
-  
-    def at_end_of_table?(line)
-      line = line.split('#').first # naively strip out comments
-      return false if line.nil?
-      line = line.gsub(/\s/, '')
-      return line == ']'
     end
 
   end
@@ -115,37 +195,24 @@ module Tabulous
   class Prettifier
     def self.prettify(table)
       indentation = table.indentation
-      headings = table.headings
-      table_lines = table.table_lines
+      headings = table.header_cells
       @output_lines = []
       num_columns = headings.size
-      column_sizes = {}
-      for column in (0..num_columns-1)
-        cells = [headings[column]]
-        cells += table_lines.map{|x| x[column]}
-        empty_cell = cells.find_index(&:nil?)
-        if empty_cell
-          raise FormattingError,
-                "There appears to be at least one missing table cell, probably " +
-                "in row #{empty_cell}."
-        end
-        column_sizes[column] = cells.map(&:length).max
-      end
-      padding = ' ' * 4
       column = 0
       headings = headings.map do |heading|
-        result = padding + heading.ljust(column_sizes[column]) + padding
+        result = build_cell(heading, table.column_width(column))
         column += 1
         result
       end
       header = headings.join('|')
-      header_divider = indentation + '#' + ('-' * header.size) + '#'
-      header = indentation + '#' + header + '#'
+      header_divider = (' '*indentation) + '#' + ('-' * header.size) + '#'
+      header = (' '*indentation) + '#' + header + '#'
       @output_lines << header_divider
       @output_lines << header
       @output_lines << header_divider
-      for cells in table_lines
-        if (cells.size-1) != num_columns  # subtract one because the last column are the comments
+      table.rows.each_with_index do |cells, index|
+        end_of_row_comment = table.end_of_row_comments[index]
+        if cells.size != num_columns
           if cells.size > 0
             raise FormattingError,
                   "Wrong number of table cells in row #{cells.first}.  " +
@@ -156,13 +223,12 @@ module Tabulous
           end
         end
         for column in (0..num_columns-1)
-          cells[column] = padding + cells[column].ljust(column_sizes[column]) + padding
+          cells[column] = build_cell(cells[column], table.column_width(column))
         end
-        end_of_line_comment = cells.pop
         line = cells.join(',')
-        line = indentation + '[' + line + '],'
-        unless end_of_line_comment.blank?
-          line += '  ' + end_of_line_comment.strip
+        line = (' '*indentation) + '[' + line + '],'
+        unless end_of_row_comment.blank?
+          line += '  ' + end_of_row_comment.strip
         end
         @output_lines << line
       end
@@ -170,6 +236,11 @@ module Tabulous
       @output_lines << header
       @output_lines << header_divider
       @output_lines
+    end
+
+    def self.build_cell(text, width)
+      padding = ' ' * 4
+      padding + text.ljust(width) + padding
     end
   end
 
