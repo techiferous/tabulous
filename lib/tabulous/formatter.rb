@@ -106,7 +106,9 @@ module Tabulous
           if row[column].nil?
             raise FormattingError,
                   "There appears to be at least one missing table cell, probably " +
-                  "in row ##{row_number}, column ##{column}."
+                  "in row ##{row_number}, column ##{column+1}.  Remember that commas " +
+                  "that separate table cells must be surrounded by spaces or " +
+                  "the formatter gets confused."
           else
             row[column]
           end
@@ -213,11 +215,18 @@ module Tabulous
           if cells.size > 0
             raise FormattingError,
                   "Wrong number of table cells in row #{cells.first}.  " +
-                  "Expected #{@table.number_of_columns} cells, got #{cells.size-1}."
+                  "Expected #{@table.number_of_columns} cells, got #{cells.size}.  " +
+                  "Remember that if you put Ruby expressions inside of table cells, the " +
+                  "expressions should not have commas surrounded by spaces or the " +
+                  "formatter gets confused."
           else
             raise FormattingError,
                   "One of the tables has the wrong number of cells."
           end
+        end
+        if cells.map(&:strip).any?(&:blank?)
+            raise FormattingError,
+                  "You have at least one empty cell in row ##{index+1}."
         end
         for column in (0..@table.number_of_columns-1)
           cells[column] = build_cell(cells[column], @table.column_width(column))
