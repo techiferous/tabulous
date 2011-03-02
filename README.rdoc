@@ -81,5 +81,5 @@ To make code changes:
     properly, all of the tests will pass.    
   * Now you should be all set to code.
 
-Please send me a message if you find any confusing or incorrect documentation in Tabulous or if
+Please send me a message if you find any confusing or incorrect documentation in tabulous or if
 you encounter any bugs.  Thank you and enjoy!
