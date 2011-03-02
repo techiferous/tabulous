@@ -42,25 +42,6 @@ module Tabulous
     end
   end
   
-  def self.main_tabs
-    @@tabs.select { |t| !t.subtab? }
-  end
-  
-  def self.active_tab(view)
-    controller = view.controller_name.to_sym
-    action = view.action_name.to_sym
-    for tab in @@tabs
-      if active?(controller, action, tab.name)
-        if tab.subtab?
-          return tab.parent
-        else
-          return tab
-        end
-      end
-    end
-    nil
-  end
-
   def self.render_tabs(view)
     return unless tab_defined?(view)
     html = ''
@@ -114,6 +95,25 @@ module Tabulous
     end
     html << '</li>'
     html
+  end
+
+  def self.main_tabs
+    @@tabs.select { |t| !t.subtab? }
+  end
+  
+  def self.active_tab(view)
+    controller = view.controller_name.to_sym
+    action = view.action_name.to_sym
+    for tab in @@tabs
+      if active?(controller, action, tab.name)
+        if tab.subtab?
+          return tab.parent
+        else
+          return tab
+        end
+      end
+    end
+    nil
   end
 
   def self.active?(controller, action, tab_name)
