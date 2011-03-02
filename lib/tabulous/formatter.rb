@@ -2,32 +2,81 @@ require 'active_support/core_ext/string'
 
 module Tabulous
 
+
+
   class Formatter
-    # TODO: write up these rules more formally
-    # note: the first #------ header sets the @indentation level
-    # note #2: only the insides are formatted, not the config = line
-    # trailing comments at the end of table headers will be lost (fix this?)
-    # trailing comments will be reinserted two spaces after end of code line
-    # no comments or other code can be interspersed between rows
     def self.format(lines)
       Parser.new(lines).go
     end
   end
 
+
+
+  class Parser
+
+    def initialize(lines)
+      @input_lines = lines
+    end
+
+    def go
+      output_lines = []
+      @current_table = nil
+      @input_lines.each do |input_line|
+        line = Line.new(input_line)
+        if @current_table && line.end_of_table?
+          output_lines += Prettifier.new(@current_table).prettify
+          @current_table = nil
+        end
+        if @current_table
+          at_start_of_header = (@current_table.indentation.nil? && line.horizontal_rule?)
+          at_top_header_row = @current_table.header_row.empty? && line.header_row?
+          at_bottom_header_row = !@current_table.header_row.empty? && line.header_row?
+          if at_start_of_header
+            @current_table.indentation = line.indentation
+          elsif at_top_header_row
+            @current_table.header_row = line.header_row
+          elsif line.table_row?
+            @current_table.add_row(*line.table_row)
+          elsif line.blank?
+            # blank lines go away
+          elsif line.horizontal_rule?
+            # we can also safely ignore header lines as they will be regenerated
+          elsif at_bottom_header_row
+            # we can also safely ignore this as it will be regenerated
+          else
+            raise FormattingError,
+                  "Only properly formatted table rows expected. " +
+                  "For example, comments can only appear at the end of table rows, not " +
+                  "between them.  Aborting."
+          end
+        else
+          output_lines << line.text
+        end
+        if !@current_table && line.beginning_of_table?
+          @current_table = Table.new
+        end
+      end
+      return output_lines
+    end
+
+  end
+
+
+
   class Table
 
-    attr_reader :header_cells, :end_of_row_comments, :rows
+    attr_reader :header_row, :end_of_row_comments, :rows
     attr_accessor :indentation
 
     def initialize
       @rows = []
-      @header_cells = []
+      @header_row = []
       @end_of_row_comments = []
       @indentation = nil
     end
 
-    def header_cells=(val)
-      @header_cells = val
+    def header_row=(val)
+      @header_row = val
       calculate_column_widths
     end
 
@@ -41,13 +90,16 @@ module Tabulous
       @column_widths[column_number]
     end
 
+    def number_of_columns
+      @header_row.size
+    end
+
     private
 
     def calculate_column_widths
       @column_widths = {}
-      num_columns = @header_cells.size
-      for column in (0..num_columns-1)
-        column_cells = [@header_cells[column]]
+      for column in (0..number_of_columns-1)
+        column_cells = [@header_row[column]]
         row_number = 0
         column_cells += @rows.map do |row|
           row_number += 1
@@ -64,6 +116,8 @@ module Tabulous
     end
 
   end
+
+
 
   class Line
 
@@ -93,12 +147,12 @@ module Tabulous
       @line =~ /^(\s*)#--/
     end
 
-    def header_cells?
+    def header_row?
       stripped_line = @line.strip
       stripped_line.starts_with?('# ') && stripped_line.slice('|')
     end
 
-    def table_cells?
+    def table_row?
       stripped_line = @line.strip
       stripped_line.starts_with?('[')
     end
@@ -112,8 +166,8 @@ module Tabulous
       $1.size
     end
 
-    def header_cells
-      return nil unless header_cells?
+    def header_row
+      return nil unless header_row?
       cells = @line.strip.split('|')
       first_cell = cells.shift
       first_cell = first_cell.split('#').last.strip
@@ -127,7 +181,7 @@ module Tabulous
       [first_cell] + cells.map(&:strip) + [last_cell]
     end
 
-    def table_cells
+    def table_row
       if @line.strip =~ /^\[(.+)\],(\s*|\s*#.*)$/
         cells = $1
         end_of_row_comment = $2
@@ -143,105 +197,73 @@ module Tabulous
 
   end
 
-  class Parser
 
-    def initialize(lines)
-      @input_lines = lines
-      @output_lines = []
-    end
-
-    def go
-      @current_table = nil
-      @input_lines.each do |input_line|
-        line = Line.new(input_line)
-        if @current_table && line.end_of_table?
-          @output_lines += Prettifier.prettify(@current_table)
-          @current_table = nil
-        end
-        if @current_table
-          at_start_of_header = (@current_table.indentation.nil? && line.horizontal_rule?)
-          at_top_header_cells = @current_table.header_cells.empty? && line.header_cells?
-          at_bottom_header_cells = !@current_table.header_cells.empty? && line.header_cells?
-          if at_start_of_header
-            @current_table.indentation = line.indentation
-          elsif at_top_header_cells
-            @current_table.header_cells = line.header_cells
-          elsif line.table_cells?
-            @current_table.add_row(*line.table_cells)
-          elsif line.blank?
-            # blank lines go away
-          elsif line.horizontal_rule?
-            # we can also safely ignore header lines as they will be regenerated
-          elsif at_bottom_header_cells
-            # we can also safely ignore these as they will be regenerated
-          else
-            raise FormattingError,
-                  "Only properly formatted table rows expected. " +
-                  "For example, comments can only appear at the end of table rows, not " +
-                  "between them.  Aborting."
-          end
-        else
-          @output_lines << line.text
-        end
-        if !@current_table && line.beginning_of_table?
-          @current_table = Table.new
-        end
-      end
-      return @output_lines
-    end
-
-  end
 
   class Prettifier
-    def self.prettify(table)
-      indentation = table.indentation
-      headings = table.header_cells
-      @output_lines = []
-      num_columns = headings.size
-      column = 0
-      headings = headings.map do |heading|
-        result = build_cell(heading, table.column_width(column))
-        column += 1
-        result
-      end
-      header = headings.join('|')
-      header_divider = (' '*indentation) + '#' + ('-' * header.size) + '#'
-      header = (' '*indentation) + '#' + header + '#'
-      @output_lines << header_divider
-      @output_lines << header
-      @output_lines << header_divider
-      table.rows.each_with_index do |cells, index|
-        end_of_row_comment = table.end_of_row_comments[index]
-        if cells.size != num_columns
+
+    def initialize(table)
+      @table = table
+    end
+
+    def prettify
+      output_lines = []
+      output_lines += build_header_row
+      @table.rows.each_with_index do |cells, index|
+        if cells.size != @table.number_of_columns
           if cells.size > 0
             raise FormattingError,
                   "Wrong number of table cells in row #{cells.first}.  " +
-                  "Expected #{num_columns} cells, got #{cells.size-1}."
+                  "Expected #{@table.number_of_columns} cells, got #{cells.size-1}."
           else
             raise FormattingError,
                   "One of the tables has the wrong number of cells."
           end
         end
-        for column in (0..num_columns-1)
-          cells[column] = build_cell(cells[column], table.column_width(column))
+        for column in (0..@table.number_of_columns-1)
+          cells[column] = build_cell(cells[column], @table.column_width(column))
         end
         line = cells.join(',')
-        line = (' '*indentation) + '[' + line + '],'
+        line = indent('[' + line + '],')
+        end_of_row_comment = @table.end_of_row_comments[index]
         unless end_of_row_comment.blank?
           line += '  ' + end_of_row_comment.strip
         end
-        @output_lines << line
+        output_lines << line
       end
-      @output_lines << header_divider
-      @output_lines << header
-      @output_lines << header_divider
-      @output_lines
+      output_lines += build_header_row
+      output_lines
     end
 
-    def self.build_cell(text, width)
+    private
+
+    def build_cell(text, width)
       padding = ' ' * 4
       padding + text.ljust(width) + padding
     end
+
+    def indent(s)
+      ' ' * @table.indentation + s
+    end
+
+    def build_header_row
+      output_lines = []
+      column = 0
+      headings = @table.header_row.map do |heading|
+        result = build_cell(heading, @table.column_width(column))
+        column += 1
+        result
+      end
+      header = headings.join('|')
+      header_divider = indent('#' + ('-' * header.size) + '#')
+      header = indent('#' + header + '#')
+      output_lines << header_divider
+      output_lines << header
+      output_lines << header_divider
+      output_lines
+    end
+
   end
+
+
 
 end
