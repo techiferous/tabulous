@@ -1,45 +1,61 @@
 require 'active_support/core_ext/string'
 
 module Tabulous
-  class Formatter
 
+  class Formatter
     # TODO: write up these rules more formally
-    # note: the first #------ header sets the indentation level
+    # note: the first #------ header sets the @indentation level
     # note #2: only the insides are formatted, not the config = line
     # trailing comments at the end of table headers will be lost (fix this?)
     # trailing comments will be reinserted two spaces after end of code line
     # no comments or other code can be interspersed between rows
-
     def self.format(lines)
-      @out = []
-      inside_a_table = false
-      table_lines = []
-      headings = []
-      indentation = nil
-      lines.each do |line|
+      Parser.new(lines).go
+    end
+  end
+
+  class Table
+
+    attr_accessor :table_lines, :headings, :indentation
+
+    def initialize
+      @table_lines = []
+      @headings = []
+      @indentation = nil
+    end
+
+  end
+
+  class Parser
+
+    def initialize(lines)
+      @input_lines = lines
+      @output_lines = []
+    end
+
+    def go
+      @table = nil
+      @input_lines.each do |line|
         line.rstrip!
-        if inside_a_table && at_end_of_table?(line)
-          prepare_formatted_table(indentation, headings, table_lines)
-          inside_a_table = false
-          table_lines = []
-          headings = []
-          indentation = nil
+        if @table && at_end_of_table?(line)
+          @output_lines += Prettifier.prettify(@table)
+          @table = nil
         end
-        if inside_a_table
+        if @table
           stripped_line = line.strip
-          at_header_labels = headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
-          at_bottom_header_labels = !headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
+          at_header_labels = @table.headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
+          at_bottom_header_labels = !@table.headings.empty? && stripped_line.starts_with?('# ') && stripped_line.slice('|')
           at_table_row = stripped_line.starts_with?('[')
-          at_start_of_header = (indentation.nil? && line =~ /^(\s*)#--/)
+          at_start_of_header = (@table.indentation.nil? && line =~ /^(\s*)#--/)
           if at_start_of_header
-            indentation = $1
+            @table.indentation = $1
           elsif at_header_labels
-            headings = parse_header_labels(stripped_line)
+            @table.headings = parse_header_labels(stripped_line)
           elsif at_table_row
             if stripped_line =~ /^\[(.+)\],(\s*|\s*#.*)$/
               cells = $1
               end_of_line_comment = $2
-              table_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
+              @table.table_lines << cells.split(' , ').map(&:strip) + [end_of_line_comment]
             end
           elsif stripped_line.blank?
             # blank lines go away
@@ -54,19 +70,21 @@ module Tabulous
                   "between them.  Aborting."
           end
         else
-          @out << line
+          @output_lines << line
         end
-        if !inside_a_table && at_beginning_of_table?(line)
-          inside_a_table = true
+        if !@table && at_beginning_of_table?(line)
+          @table = Table.new
         end
       end
-      return @out
+      return @output_lines
     end
 
-    def self.parse_header_labels(line)
-      headings = line.split('|')
-      first_heading = headings.shift
-      last_heading = headings.pop
+    private
+
+    def parse_header_labels(line)
+      @table.headings = line.split('|')
+      first_heading = @table.headings.shift
+      last_heading = @table.headings.pop
       first_heading = first_heading.split('#').last.strip
       if last_heading =~ /#\s*\S+/
         raise FormattingError,
@@ -74,28 +92,32 @@ module Tabulous
               "Text was detected to the right of the table headers; aborting. "
       end
       last_heading = last_heading.split('#').first.strip
-      headings = [first_heading] + headings.map(&:strip) + [last_heading]
-      headings
+      @table.headings = [first_heading] + @table.headings.map(&:strip) + [last_heading]
+      @table.headings
     end
-    private_class_method :parse_header_labels
 
-    def self.at_beginning_of_table?(line)
+    def at_beginning_of_table?(line)
       line = line.split('#').first # naively strip out comments
       return false if line.nil?
       line = line.gsub(/\s/, '')
       return line == 'config.tabs=[' || line == 'config.actions=['
     end
-    private_class_method :at_beginning_of_table?
   
-    def self.at_end_of_table?(line)
+    def at_end_of_table?(line)
       line = line.split('#').first # naively strip out comments
       return false if line.nil?
       line = line.gsub(/\s/, '')
       return line == ']'
     end
-    private_class_method :at_end_of_table?
 
-    def self.prepare_formatted_table(indentation, headings, table_lines)
+  end
+
+  class Prettifier
+    def self.prettify(table)
+      indentation = table.indentation
+      headings = table.headings
+      table_lines = table.table_lines
+      @output_lines = []
       num_columns = headings.size
       column_sizes = {}
       for column in (0..num_columns-1)
@@ -119,9 +141,9 @@ module Tabulous
       header = headings.join('|')
       header_divider = indentation + '#' + ('-' * header.size) + '#'
       header = indentation + '#' + header + '#'
-      @out << header_divider
-      @out << header
-      @out << header_divider
+      @output_lines << header_divider
+      @output_lines << header
+      @output_lines << header_divider
       for cells in table_lines
         if (cells.size-1) != num_columns  # subtract one because the last column are the comments
           if cells.size > 0
@@ -142,13 +164,13 @@ module Tabulous
         unless end_of_line_comment.blank?
           line += '  ' + end_of_line_comment.strip
         end
-        @out << line
+        @output_lines << line
       end
-      @out << header_divider
-      @out << header
-      @out << header_divider
+      @output_lines << header_divider
+      @output_lines << header
+      @output_lines << header_divider
+      @output_lines
     end
-    private_class_method :prepare_formatted_table
-
   end
+
 end
