@@ -101,6 +101,12 @@ module Tabulous
       for column in (0..num_columns-1)
         cells = [headings[column]]
         cells += table_lines.map{|x| x[column]}
+        empty_cell = cells.find_index(&:nil?)
+        if empty_cell
+          raise FormattingError,
+                "There appears to be at least one missing table cell, probably " +
+                "in row #{empty_cell}."
+        end
         column_sizes[column] = cells.map(&:length).max
       end
       padding = ' ' * 4
@@ -117,6 +123,16 @@ module Tabulous
       @out << header
       @out << header_divider
       for cells in table_lines
+        if (cells.size-1) != num_columns  # subtract one because the last column are the comments
+          if cells.size > 0
+            raise FormattingError,
+                  "Wrong number of table cells in row #{cells.first}.  " +
+                  "Expected #{num_columns} cells, got #{cells.size-1}."
+          else
+            raise FormattingError,
+                  "One of the tables has the wrong number of cells."
+          end
+        end
         for column in (0..num_columns-1)
           cells[column] = padding + cells[column].ljust(column_sizes[column]) + padding
         end
