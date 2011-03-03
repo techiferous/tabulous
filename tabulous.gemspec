@@ -8,15 +8,15 @@ Gem::Specification.new do |s|
   s.authors     = ["Wyatt Greene"]
   s.email       = ["techiferous@gmail.com"]
   s.homepage    = "http://rubygems.org/gems/tabulous"
-  s.summary     = "Write a gem summary"
-  s.description = "Write a gem description"
+  s.summary     = "Easy tabbed navigation for Rails."
+  s.description = "Tabulous provides an easy way to add tabs to your Rails application."
 
   s.required_rubygems_version = ">= 1.4.0"
   s.rubyforge_project         = "tabulous"
 
   s.add_dependency "colored", "~> 1.2.0"
+  s.add_dependency "rails", "~> 3.0.0"
   s.add_development_dependency "bundler", "~> 1.0.10"
-  s.add_development_dependency "rails", "~> 3.0.0"
   s.add_development_dependency "capybara", "~> 0.4.1.2"
   if RUBY_VERSION < "1.9"
     s.add_development_dependency "redgreen"
