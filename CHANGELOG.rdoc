@@ -1,2 +1,5 @@
+== 0.0.2 (March 2, 2011)
+* Changed homepage in gemspec.
+
 == 0.0.1 (March 2, 2011)
 * Initial release.

@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Wyatt Greene"]
   s.email       = ["techiferous@gmail.com"]
-  s.homepage    = "http://rubygems.org/gems/tabulous"
+  s.homepage    = "https://github.com/techiferous/tabulous"
   s.summary     = "Easy tabbed navigation for Rails."
   s.description = "Tabulous provides an easy way to add tabs to your Rails application."
 
