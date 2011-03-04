@@ -78,7 +78,7 @@ Tabulous.setup do |config|
     s <<  '      #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #'
     s <<  '      #-------------------------------------------------------------------------------------------------#'
     for tab in tab_data
-      s << "[    :#{tab[:name]}_tab  ,  '#{tab[:text]}'    ,  lambda { #{tab[:path_helper]} }  ,  true  ,  true  ],"
+      s << "[    :#{tab[:name]}_tab  ,  '#{tab[:text]}'    ,  #{tab[:path_helper]}  ,  true  ,  true  ],"
     end
     s <<  '      #-------------------------------------------------------------------------------------------------#'
     s <<  '      #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #'
