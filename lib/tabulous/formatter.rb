@@ -134,15 +134,13 @@ module Tabulous
     def beginning_of_table?
       line = @line.split('#').first # naively strip out comments
       return false if line.nil?
-      line = line.gsub(/\s/, '')
-      return line == 'config.tabs=[' || line == 'config.actions=['
+      line.strip == '['
     end
   
     def end_of_table?
       line = @line.split('#').first # naively strip out comments
       return false if line.nil?
-      line = line.gsub(/\s/, '')
-      return line == ']'
+      line.strip == ']'
     end
 
     def horizontal_rule?
