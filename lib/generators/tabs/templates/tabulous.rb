@@ -37,6 +37,8 @@ Tabulous.setup do |config|
   #
   #   * No comments are allowed between rows.
   #   * Comments are allowed to the right of rows, except for header rows.
+  #   * The start of a table is signified by a [ all by itself on a line.
+  #   * The end of a table is signified by a ] all by itself on a line.
   #   * And most importantly: commas that separate cells should be surrounded
   #     by spaces and commas that are within cells should not.  This gives the
   #     formatter an easy way to distinguish between cells without having
