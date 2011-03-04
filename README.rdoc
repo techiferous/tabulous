@@ -20,11 +20,11 @@ To get started, add the gem to your Rails application's Gemfile and install it u
 
   bundle install
 
-Then generate the tab initializer:
+Then generate the tab file:
 
   rails generate tabs
 
-This will generate config/initializers/tabulous.rb.  Open the file and configure it to your liking.
+This will generate app/tabs/tabulous.rb.  Open the file and configure it to your liking.
 You'll notice the code is formatted into a grid.  After you edit the file, run the following rake
 task to prettify the code back into a nice grid:
 
@@ -62,7 +62,7 @@ CSS.
 == Examples
 
 Look in this gem's test/applications directory to find working example applications.  Look at their
-config/initializers/tabulous.rb and app/layouts/application.html.erb files.
+app/tabs/tabulous.rb and app/layouts/application.html.erb files.
 
 == Contributing
 

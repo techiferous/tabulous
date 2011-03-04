@@ -128,7 +128,7 @@ module Tabulous
       if @@raise_error_if_no_tab_found
         raise NoTabFoundError,
               "No tabs are defined for the controller '#{controller}'.  " +
-              "You can define a tab for this controller in config/initializers/tabulous.rb " +
+              "You can define a tab for this controller in app/tabs/tabulous.rb " +
               "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
               "by setting config.raise_error_if_no_tab_found to false."
       else
@@ -139,7 +139,7 @@ module Tabulous
       if @@raise_error_if_no_tab_found
         raise NoTabFoundError,
               "No tab is defined for the action '#{action}' in the controller '#{controller}'.  " +
-              "You can define a tab for this action in config/initializers/tabulous.rb " +
+              "You can define a tab for this action in app/tabs/tabulous.rb " +
               "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
               "by setting config.raise_error_if_no_tab_found to false."
       else

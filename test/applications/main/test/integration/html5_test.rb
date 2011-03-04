@@ -3,7 +3,7 @@ require File.expand_path("../integration_test_helper", File.dirname(__FILE__))
 class Html5Test < ActionController::IntegrationTest
 
   def init(html5)
-    use_initializer %Q{
+    use_tab_file %Q{
       Tabulous.setup do |config|
 
         config.tabs = [

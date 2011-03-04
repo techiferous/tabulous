@@ -3,7 +3,7 @@ require File.expand_path("../integration_test_helper", File.dirname(__FILE__))
 class PathTest < ActionController::IntegrationTest
 
   def setup
-    use_initializer %Q{
+    use_tab_file %Q{
       Tabulous.setup do |config|
 
         config.tabs = [

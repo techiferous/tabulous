@@ -26,41 +26,41 @@ class TabulousFormatterTest < Test::Unit::TestCase
   end
 
   def test_empty_in_empty_out
-    input = IO.readlines('test/test_initializers/empty')
+    input = IO.readlines('test/test_tab_files/empty')
     result = Tabulous::Formatter.format(input)
     assert_equal [], result
   end
 
   def test_text_in_text_out
-    input = IO.readlines('test/test_initializers/text')
+    input = IO.readlines('test/test_tab_files/text')
     expected = input
     actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_well_formatted_in_well_formatted_out
-    input = IO.readlines('test/test_initializers/expected')
+    input = IO.readlines('test/test_tab_files/expected')
     expected = input
     actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_random_horizontal_whitespace
-    input = IO.readlines('test/test_initializers/random_horizontal_whitespace')
-    expected = IO.readlines('test/test_initializers/expected')
+    input = IO.readlines('test/test_tab_files/random_horizontal_whitespace')
+    expected = IO.readlines('test/test_tab_files/expected')
     actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_random_vertical_whitespace
-    input = IO.readlines('test/test_initializers/random_vertical_whitespace')
-    expected = IO.readlines('test/test_initializers/expected')
+    input = IO.readlines('test/test_tab_files/random_vertical_whitespace')
+    expected = IO.readlines('test/test_tab_files/expected')
     actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual
   end
 
   def test_trailing_comments
-    input = IO.readlines('test/test_initializers/trailing_comments')
+    input = IO.readlines('test/test_tab_files/trailing_comments')
     expected = input
     actual = Tabulous::Formatter.format(input)
     assert_same_text expected, actual

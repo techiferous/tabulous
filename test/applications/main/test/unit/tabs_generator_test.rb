@@ -9,6 +9,6 @@ class TabsGeneratorTest < Rails::Generators::TestCase
  
   test "all files are properly created" do
     run_generator
-    assert_file "config/initializers/tabulous.rb"
+    assert_file "app/tabs/tabulous.rb"
   end
 end

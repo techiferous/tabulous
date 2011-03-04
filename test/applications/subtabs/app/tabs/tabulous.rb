@@ -1,6 +1,6 @@
 # Tabulous gives you an easy way to set up tabs for your Rails application.
 #
-#   1. Configure this initializer.
+#   1. Configure this file.
 #   2. Add <%= tabs %> and <%= subtabs %> in your layout(s) wherever you want
 #      your tabs to appear.
 #   3. Add styles for these tabs in your stylesheets.
@@ -156,12 +156,5 @@ Tabulous.setup do |config|
   config.css.hover_tab_color = '#dfd'
   config.css.inactive_tab_color = '#aca'
   config.css.inactive_text_color = '#8a8'
-
-  #-----------
-  #   NOTES
-  #-----------
-  #
-  # In development mode this initializer is reloaded for each request so that
-  # you don't have to restart the server each time you edit this file.
 
 end

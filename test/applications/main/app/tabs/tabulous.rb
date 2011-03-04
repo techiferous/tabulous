@@ -1,6 +1,6 @@
 # Tabulous gives you an easy way to set up tabs for your Rails application.
 #
-#   1. Configure this initializer.
+#   1. Configure this file.
 #   2. Add <%= tabs %> and <%= subtabs %> in your layout(s) wherever you want
 #      your tabs to appear.
 #   3. Add styles for these tabs in your stylesheets.
@@ -51,16 +51,20 @@ Tabulous.setup do |config|
   #   whether the tab is disabled (unclickable)
 
   config.tabs = [
-    #-------------------------------------------------------------------------------------------------#
-    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
-    #-------------------------------------------------------------------------------------------------#
-    [    :home_tab        ,    'Explanation'    ,    "/"            ,    true        ,    true        ],
-    [    :galaxies_tab    ,    'Galaxies'       ,    "/galaxies"    ,    true        ,    true        ],
-    [    :stars_tab       ,    'Stars'          ,    "/stars"       ,    true        ,    true        ],
-    [    :planets_tab     ,    'Planets'        ,    "/planets"     ,    true        ,    true        ],
-    #-------------------------------------------------------------------------------------------------#
-    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
-    #-------------------------------------------------------------------------------------------------#
+    #------------------------------------------------------------------------------------------------------#
+    #    TAB NAME         |    DISPLAY TEXT     |    PATH                |    VISIBLE?    |    ENABLED?    #
+    #------------------------------------------------------------------------------------------------------#
+    [    :home_tab        ,    'Explanation'    ,    "/"                 ,    true        ,    true        ],
+    [    :galaxies_tab    ,    'Galaxies'       ,    "/galaxies"         ,    true        ,    true        ],
+    [    :stars_tab       ,    'Stars'          ,    "/stars"            ,    true        ,    true        ],
+    [    :planets_tab     ,    'Planets'        ,    "/planets"          ,    true        ,    true        ],
+    [    :subtabs_tab     ,    'Subtabs'        ,    "/subtabs/one"      ,    true        ,    true        ],
+    [    :one_subtab      ,    'One'            ,    "/subtabs/one"      ,    true        ,    true        ],
+    [    :two_subtab      ,    'Two'            ,    "/subtabs/two"      ,    true        ,    true        ],
+    [    :three_subtab    ,    'Three'          ,    "/subtabs/three"    ,    true        ,    true        ],
+    #------------------------------------------------------------------------------------------------------#
+    #    TAB NAME         |    DISPLAY TEXT     |    PATH                |    VISIBLE?    |    ENABLED?    #
+    #------------------------------------------------------------------------------------------------------#
   ]
 
   #-------------
@@ -85,6 +89,9 @@ Tabulous.setup do |config|
     [    :galaxies     ,    :all_actions    ,    :galaxies_tab    ],
     [    :stars        ,    :all_actions    ,    :stars_tab       ],
     [    :planets      ,    :all_actions    ,    :planets_tab     ],
+    [    :subtabs      ,    :one            ,    :one_subtab      ],
+    [    :subtabs      ,    :two            ,    :two_subtab      ],
+    [    :subtabs      ,    :three          ,    :three_subtab    ],
     #-------------------------------------------------------------#
     #    CONTROLLER    |    ACTION          |    TAB              #
     #-------------------------------------------------------------#
@@ -95,19 +102,19 @@ Tabulous.setup do |config|
   #-------------
 
   # By default, you cannot click on the active tab.
-  # config.active_tab_clickable = false
+  config.active_tab_clickable = false
 
   # By default, the subtabs HTML element is not rendered if it is empty.
-  # config.always_render_subtabs = false
+  config.always_render_subtabs = false
 
   # By default, when an action renders and no tab is defined for that action,
   # an error is thrown.  If you turn this off, no error is thrown and the
   # tabs are simply not rendered.
-  # config.raise_error_if_no_tab_found = true
+  config.raise_error_if_no_tab_found = true
 
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
-  # config.html5 = false
+  config.html5 = false
 
   #------------
   #   STYLES
@@ -138,12 +145,5 @@ Tabulous.setup do |config|
   # config.css.hover_tab_color = '#ddd'
   # config.css.inactive_tab_color = '#aaa'
   # config.css.inactive_text_color = '#888'
-
-  #-----------
-  #   NOTES
-  #-----------
-  #
-  # In development mode this initializer is reloaded for each request so that
-  # you don't have to restart the server each time you edit this file.
 
 end

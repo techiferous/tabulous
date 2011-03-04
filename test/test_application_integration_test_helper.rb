@@ -81,7 +81,7 @@ module ActionController
       assert_block(message) { !result.empty? }
     end
 
-    def use_initializer(i)
+    def use_tab_file(i)
       eval i
     end
 
