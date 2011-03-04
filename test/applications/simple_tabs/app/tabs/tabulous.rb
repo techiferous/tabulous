@@ -50,18 +50,20 @@ Tabulous.setup do |config|
   # ENABLED
   #   whether the tab is disabled (unclickable)
 
-  config.tabs = [
-    #-------------------------------------------------------------------------------------------------#
-    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
-    #-------------------------------------------------------------------------------------------------#
-    [    :home_tab        ,    'Explanation'    ,    "/"            ,    true        ,    true        ],
-    [    :galaxies_tab    ,    'Galaxies'       ,    "/galaxies"    ,    true        ,    true        ],
-    [    :stars_tab       ,    'Stars'          ,    "/stars"       ,    true        ,    true        ],
-    [    :planets_tab     ,    'Planets'        ,    "/planets"     ,    true        ,    true        ],
-    #-------------------------------------------------------------------------------------------------#
-    #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
-    #-------------------------------------------------------------------------------------------------#
-  ]
+  config.tabs do
+    [
+      #-------------------------------------------------------------------------------------------------#
+      #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
+      #-------------------------------------------------------------------------------------------------#
+      [    :home_tab        ,    'Explanation'    ,    "/"            ,    true        ,    true        ],
+      [    :galaxies_tab    ,    'Galaxies'       ,    "/galaxies"    ,    true        ,    true        ],
+      [    :stars_tab       ,    'Stars'          ,    "/stars"       ,    true        ,    true        ],
+      [    :planets_tab     ,    'Planets'        ,    "/planets"     ,    true        ,    true        ],
+      #-------------------------------------------------------------------------------------------------#
+      #    TAB NAME         |    DISPLAY TEXT     |    PATH           |    VISIBLE?    |    ENABLED?    #
+      #-------------------------------------------------------------------------------------------------#
+    ]
+  end
 
   #-------------
   #   ACTIONS
@@ -77,18 +79,20 @@ Tabulous.setup do |config|
   # TAB
   #   the name of the tab or subtab that is active when this action is rendered
 
-  config.actions = [
-    #-------------------------------------------------------------#
-    #    CONTROLLER    |    ACTION          |    TAB              #
-    #-------------------------------------------------------------#
-    [    :home         ,    :all_actions    ,    :home_tab        ],
-    [    :galaxies     ,    :all_actions    ,    :galaxies_tab    ],
-    [    :stars        ,    :all_actions    ,    :stars_tab       ],
-    [    :planets      ,    :all_actions    ,    :planets_tab     ],
-    #-------------------------------------------------------------#
-    #    CONTROLLER    |    ACTION          |    TAB              #
-    #-------------------------------------------------------------#
-  ]
+  config.actions do
+    [
+      #-------------------------------------------------------------#
+      #    CONTROLLER    |    ACTION          |    TAB              #
+      #-------------------------------------------------------------#
+      [    :home         ,    :all_actions    ,    :home_tab        ],
+      [    :galaxies     ,    :all_actions    ,    :galaxies_tab    ],
+      [    :stars        ,    :all_actions    ,    :stars_tab       ],
+      [    :planets      ,    :all_actions    ,    :planets_tab     ],
+      #-------------------------------------------------------------#
+      #    CONTROLLER    |    ACTION          |    TAB              #
+      #-------------------------------------------------------------#
+    ]
+  end
 
   #-------------
   #   OPTIONS

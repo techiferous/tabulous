@@ -4,6 +4,81 @@ module Tabulous
     yield self
   end
   
+  def self.tabs(&block)
+    @@tabs_block = block
+  end
+
+  def self.actions(&block)
+    @@actions_block = block
+  end
+
+  def self.render_tabs(view)
+    initialize_tabs(view)
+    return unless tab_defined?(view)
+    html = ''
+    html << embed_styles
+    active_tab = active_tab(view)
+    active_tab_name = active_tab.name
+    html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
+    html << '<ul>'
+    for tab in main_tabs
+      next if !tab.visible?(view)
+      html << render_tab(:text => tab.text(view),
+                         :path => tab.path(view),
+                         :active => (tab.name == active_tab_name),
+                         :enabled => tab.enabled?(view))
+    end
+    html << '</ul>'
+    html << (@@html5 ? '</nav>' : '</div>')
+    view.raw(html)
+  end
+  
+  def self.render_subtabs(view)
+    initialize_tabs(view)
+    return unless tab_defined?(view)
+    controller = view.controller_name.to_sym
+    action = view.action_name.to_sym
+    tab = active_tab(view)
+    html = ''
+    html << (@@html5 ? '<nav id="subtabs">' : '<div id="subtabs">')
+    html << '<ul>'
+    subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
+    return if subtabs.empty? && !@@always_render_subtabs
+    for subtab in subtabs
+      html << render_tab(:text => subtab.text(view),
+                         :path => subtab.path(view),
+                         :active => active?(controller, action, subtab.name),
+                         :enabled => subtab.enabled?(view))
+    end
+    html << '</ul>'
+    html << (@@html5 ? '</nav>' : '</div>')
+    view.raw(html)
+  end
+
+  def self.render_tab(options)
+    html = ''
+    klass = (options[:active] ? 'active' : 'inactive')
+    klass << (options[:enabled] ? ' enabled' : ' disabled')
+    html << %Q{<li class="#{klass}">}
+    if (options[:active] && !@@active_tab_clickable) || options[:enabled] == false
+      html << %Q{<span class="tab">#{options[:text]}</span>}
+    else
+      html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
+    end
+    html << '</li>'
+    html
+  end
+
+  def self.initialize_tabs(view)
+    if view.respond_to? :instance_exec # for Ruby 1.9
+      self.tabs = view.instance_exec(&@@tabs_block)
+      self.actions = view.instance_exec(&@@actions_block)
+    else
+      self.tabs = view.instance_eval(&@@tabs_block)
+      self.actions = view.instance_eval(&@@actions_block)
+    end
+  end
+
   def self.tabs=(ary)
     @@tabs = []
     last_tab = nil
@@ -42,61 +117,6 @@ module Tabulous
     end
   end
   
-  def self.render_tabs(view)
-    return unless tab_defined?(view)
-    html = ''
-    html << embed_styles
-    active_tab = active_tab(view)
-    active_tab_name = active_tab.name
-    html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
-    html << '<ul>'
-    for tab in main_tabs
-      next if !tab.visible?(view)
-      html << render_tab(:text => tab.text(view),
-                         :path => tab.path(view),
-                         :active => (tab.name == active_tab_name),
-                         :enabled => tab.enabled?(view))
-    end
-    html << '</ul>'
-    html << (@@html5 ? '</nav>' : '</div>')
-    view.raw(html)
-  end
-  
-  def self.render_subtabs(view)
-    return unless tab_defined?(view)
-    controller = view.controller_name.to_sym
-    action = view.action_name.to_sym
-    tab = active_tab(view)
-    html = ''
-    html << (@@html5 ? '<nav id="subtabs">' : '<div id="subtabs">')
-    html << '<ul>'
-    subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
-    return if subtabs.empty? && !@@always_render_subtabs
-    for subtab in subtabs
-      html << render_tab(:text => subtab.text(view),
-                         :path => subtab.path(view),
-                         :active => active?(controller, action, subtab.name),
-                         :enabled => subtab.enabled?(view))
-    end
-    html << '</ul>'
-    html << (@@html5 ? '</nav>' : '</div>')
-    view.raw(html)
-  end
-
-  def self.render_tab(options)
-    html = ''
-    klass = (options[:active] ? 'active' : 'inactive')
-    klass << (options[:enabled] ? ' enabled' : ' disabled')
-    html << %Q{<li class="#{klass}">}
-    if (options[:active] && !@@active_tab_clickable) || options[:enabled] == false
-      html << %Q{<span class="tab">#{options[:text]}</span>}
-    else
-      html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
-    end
-    html << '</li>'
-    html
-  end
-
   def self.main_tabs
     @@tabs.select { |t| !t.subtab? }
   end
