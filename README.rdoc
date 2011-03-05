@@ -61,8 +61,10 @@ CSS.
 
 == Examples
 
-Look in this gem's test/applications directory to find working example applications.  Look at their
-app/tabs/tabulous.rb and app/layouts/application.html.erb files.
+There is a tutorial at http://techiferous.com/2011/03/tutorial-for-adding-tabs-to-rails-using-tabulous/
+
+Also, look in this gem's test/applications directory to find working example applications.
+Look at their app/tabs/tabulous.rb and app/layouts/application.html.erb files.
 
 == Contributing
 
