@@ -1,3 +1,6 @@
+== 1.0.1 (March 9, 2011)
+* No longer requires Rubygems version > 1.4.0; requires > 1.3.7 instead.
+
 == 1.0.0 (March 4, 2011)
 * Moved tab file from config/initializers/tabulous.rb to app/tabs/tabulous.rb.
 * Changed syntax so that config.tabs and config.actions accepts a block.
