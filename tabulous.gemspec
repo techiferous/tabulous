@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Easy tabbed navigation for Rails."
   s.description = "Tabulous provides an easy way to add tabs to your Rails application."
 
-  s.required_rubygems_version = ">= 1.4.0"
+  s.required_rubygems_version = ">= 1.3.7"
   s.rubyforge_project         = "tabulous"
 
   s.add_dependency "colored", "~> 1.2.0"
