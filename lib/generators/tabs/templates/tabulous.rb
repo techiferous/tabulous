@@ -66,9 +66,14 @@ Tabulous.setup do |config|
 <% index_routes = Rails.application.routes.routes.select{|r| r.requirements[:action] == 'index'}
    tab_data = index_routes.map do |route|
      name = route.requirements[:controller].gsub('/', '_')
+     if route.name.nil?
+       path = "url_for(:controller => '#{route.requirements[:controller]}', :action => 'index')"
+     else
+       path = route.name + '_path'
+     end
      { :text => name.titleize,
        :name => name,
-       :path_helper => route.name + '_path' }
+       :path_helper => path }
    end
 -%>
 <%= s = []
