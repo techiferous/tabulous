@@ -7,6 +7,8 @@ Tabulous provides an easy way to add tabs to your Rails application.
 == Requirements
 
 Tabulous only works with Rails 3.  It has been tested on Ruby 1.8.7 and 1.9.2.
+This works with rails 3.1, but I have just tested it by navigating in the browser.
+I have just changed the dependency in the gemspec file.
 
 == Usage
 
@@ -16,7 +18,11 @@ consolidates all of the tab-related code into one configuration file.  Apart fro
 configuration file, you just have to call <%= tabs %> and <%= subtabs %> in your view layout(s)
 and then create your own CSS styles for the tabs.
 
-To get started, add the gem to your Rails application's Gemfile and install it using:
+To get started, add the this line your Rails application's Gemfile 
+
+  gem 'tabulous', :git => 'git@github.com:andreaslyngstad/tabulous.git'
+
+and install it using:
 
   bundle install
 
