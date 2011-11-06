@@ -1,0 +1,2 @@
+module SpiralGalaxiesHelper
+end
