@@ -1,3 +1,6 @@
+== 1.0.3 (November 6, 2011)
+* Added support for Rails 3.1 (finally!).
+
 == 1.0.2 (April 19, 2011)
 * Fixed bug where the tabs generator would crash if there were index routes that were not named.
 
