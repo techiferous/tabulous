@@ -9,15 +9,31 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 
 namespace :test do
-  Dir['test/applications/*'].each do |filename|
-    if File.directory?(filename)
-      name = filename.split('/').last
-      desc "run tests for the test application #{name}"
-      Rake::TestTask.new(name) do |t|
-        t.libs << 'lib'
-        t.libs << 'test'
-        t.pattern = "test/applications/#{name}/**/*_test.rb"
-        t.verbose = false
+  namespace :rails30 do
+    Dir['test/applications/rails30/*'].each do |filename|
+      if File.directory?(filename)
+        name = filename.split('/').last
+        desc "run tests for the Rails 3.0 test application #{name}"
+        Rake::TestTask.new(name) do |t|
+          t.libs << 'lib'
+          t.libs << 'test'
+          t.pattern = "test/applications/rails30/#{name}/**/*_test.rb"
+          t.verbose = false
+        end
+      end
+    end
+  end
+  namespace :rails31 do
+    Dir['test/applications/rails31/*'].each do |filename|
+      if File.directory?(filename)
+        name = filename.split('/').last
+        desc "run tests for the Rails 3.1 test application #{name}"
+        Rake::TestTask.new(name) do |t|
+          t.libs << 'lib'
+          t.libs << 'test'
+          t.pattern = "test/applications/rails31/#{name}/**/*_test.rb"
+          t.verbose = false
+        end
       end
     end
   end
@@ -32,11 +48,18 @@ end
 task :test do
   # we cannot load more than one Rails app at a time so we run the rake tasks
   # from the shell so that each has its own process
-  Dir['test/applications/*'].each do |filename|
+  Dir['test/applications/rails30/*'].each do |filename|
     if File.directory?(filename)
       name = filename.split('/').last
-      puts "Running tests for test application \"#{name}\"".magenta
-      puts %x{rake test:#{name}}
+      puts "Running tests for the Rails 3.0 test application \"#{name}\"".magenta
+      puts %x{rake test:rails30:#{name}}
+    end
+  end
+  Dir['test/applications/rails31/*'].each do |filename|
+    if File.directory?(filename)
+      name = filename.split('/').last
+      puts "Running tests for the Rails 3.1 test application \"#{name}\"".magenta
+      puts %x{rake test:rails31:#{name}}
     end
   end
   puts "Running unit tests".magenta
