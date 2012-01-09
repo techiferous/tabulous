@@ -28,6 +28,9 @@ module Tabulous
   mattr_accessor :raise_error_if_no_tab_found
   @@raise_error_if_no_tab_found = true
 
+  mattr_accessor :render_tabs_if_no_tab_found
+  @@render_tabs_if_no_tab_found = false
+
   mattr_accessor :css
   @@css = Css.new
 

@@ -14,7 +14,7 @@ module Tabulous
 
   def self.render_tabs(view)
     initialize_tabs(view)
-    # return unless tab_defined?(view)
+    return unless tab_defined?(view) || @@render_tabs_if_no_tab_found
     html = ''
     html << embed_styles
     active_tab = active_tab(view)
