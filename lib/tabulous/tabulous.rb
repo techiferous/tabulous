@@ -14,11 +14,11 @@ module Tabulous
 
   def self.render_tabs(view)
     initialize_tabs(view)
-    return unless tab_defined?(view)
+    return unless tab_defined?(view) || @@render_tabs_if_no_tab_found
     html = ''
     html << embed_styles
     active_tab = active_tab(view)
-    active_tab_name = active_tab.name
+    active_tab_name = (active_tab ? active_tab.name : nil);
     html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
     html << '<ul>'
     for tab in main_tabs
@@ -137,8 +137,12 @@ module Tabulous
   end
 
   def self.active?(controller, action, tab_name)
-    (@@actions[controller][action] && @@actions[controller][action].include?(tab_name)) ||
-     (@@actions[controller][:all_actions] && @@actions[controller][:all_actions].include?(tab_name))
+    if @@actions[controller] && (@@actions[controller][:all_actions] || @@actions[controller][action])
+      (@@actions[controller][action] && @@actions[controller][action].include?(tab_name)) ||
+       (@@actions[controller][:all_actions] && @@actions[controller][:all_actions].include?(tab_name))
+    else
+      false
+    end
   end
 
   def self.tab_defined?(view)

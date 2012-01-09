@@ -136,6 +136,11 @@ Tabulous.setup do |config|
   # an error is thrown.  If you turn this off, no error is thrown and the
   # tabs are simply not rendered.
   config.raise_error_if_no_tab_found = true
+  
+  # By default, when an action renders and no tab is defined for that action,
+  # the tabs are simply not rendered. If you turn this on, the tabs are
+  # still rendered, though no tab will be active.
+  render_tabs_if_no_tab_found = false
 
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
