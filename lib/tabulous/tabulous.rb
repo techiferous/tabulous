@@ -14,7 +14,7 @@ module Tabulous
 
   def self.render_tabs(view)
     initialize_tabs(view)
-    return unless tab_defined?(view) || @@render_tabs_if_no_tab_found
+    return if !tab_defined?(view) && @@when_action_has_no_tab == :do_not_render
     html = ''
     html << embed_styles
     active_tab = active_tab(view)
@@ -25,7 +25,7 @@ module Tabulous
       next if !tab.visible?(view)
       html << render_tab(:text => tab.text(view),
                          :path => tab.path(view),
-                         :active => (tab.name == active_tab_name),
+                         :active => (active_tab_name && tab.name == active_tab_name),
                          :enabled => tab.enabled?(view))
     end
     html << '</ul>'
@@ -35,14 +35,18 @@ module Tabulous
   
   def self.render_subtabs(view)
     initialize_tabs(view)
-    return unless tab_defined?(view)
+    return if !tab_defined?(view) && @@when_action_has_no_tab == :do_not_render
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
     tab = active_tab(view)
     html = ''
     html << (@@html5 ? '<nav id="subtabs">' : '<div id="subtabs">')
     html << '<ul>'
-    subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
+    if tab.nil?
+      subtabs = []
+    else
+      subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
+    end
     return if subtabs.empty? && !@@always_render_subtabs
     for subtab in subtabs
       html << render_tab(:text => subtab.text(view),
@@ -137,35 +141,32 @@ module Tabulous
   end
 
   def self.active?(controller, action, tab_name)
-    if @@actions[controller] && (@@actions[controller][:all_actions] || @@actions[controller][action])
-      (@@actions[controller][action] && @@actions[controller][action].include?(tab_name)) ||
-       (@@actions[controller][:all_actions] && @@actions[controller][:all_actions].include?(tab_name))
-    else
-      false
-    end
+    return false if @@actions[controller].nil?
+    (@@actions[controller][action] && @@actions[controller][action].include?(tab_name)) ||
+    (@@actions[controller][:all_actions] && @@actions[controller][:all_actions].include?(tab_name))
   end
 
   def self.tab_defined?(view)
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
     if @@actions[controller].nil?
-      if @@raise_error_if_no_tab_found
+      if @@when_action_has_no_tab == :raise_error
         raise NoTabFoundError,
               "No tabs are defined for the controller '#{controller}'.  " +
               "You can define a tab for this controller in app/tabs/tabulous.rb " +
               "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
-              "by setting config.raise_error_if_no_tab_found to false."
+              "by changing the value of config.when_action_has_no_tab."
       else
         return false
       end
     end
     if @@actions[controller][action].nil? && !@@actions[controller][:all_actions]
-      if @@raise_error_if_no_tab_found
+      if @@when_action_has_no_tab == :raise_error
         raise NoTabFoundError,
               "No tab is defined for the action '#{action}' in the controller '#{controller}'.  " +
               "You can define a tab for this action in app/tabs/tabulous.rb " +
               "in the 'config.actions =' section.  You can also turn off NoTabFoundErrors " +
-              "by setting config.raise_error_if_no_tab_found to false."
+              "by changing the value of config.when_action_has_no_tab."
       else
         return false
       end

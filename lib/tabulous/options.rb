@@ -25,16 +25,25 @@ module Tabulous
   mattr_accessor :active_tab_clickable
   @@active_tab_clickable = false
 
-  mattr_accessor :raise_error_if_no_tab_found
-  @@raise_error_if_no_tab_found = true
-
-  mattr_accessor :render_tabs_if_no_tab_found
-  @@render_tabs_if_no_tab_found = false
+  mattr_accessor :when_action_has_no_tab
+  @@when_action_has_no_tab = :raise_error
 
   mattr_accessor :css
   @@css = Css.new
 
   mattr_accessor :html5
   @@html5 = false
+
+  def self.raise_error_if_no_tab_found=(value)
+    msg = "DEPRECATION WARNING: Tabulous's config.raise_error_if_no_tab_found "
+    msg << "has been replaced by config.when_action_has_no_tab. "
+    msg << "Acceptable values are :raise_error, :do_not_render, or :render."
+    Rails.logger.warn msg
+    if value
+      self.when_action_has_no_tab = :raise_error
+    else
+      self.when_action_has_no_tab = :do_not_render
+    end
+  end
 
 end
