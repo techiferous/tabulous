@@ -2,8 +2,10 @@
 
 def shared_test_application_gems(bundler, rails_version)
   bundler.instance_eval do
+    gem 'rake', '=0.8.7'
     if rails_version == '3.0'
       gem 'rails', '~>3.0.0'
+      gem 'sqlite3-ruby', :require => 'sqlite3'
     elsif rails_version == '3.1'
       gem 'rails', '~>3.1.0'
       group :assets do
@@ -16,7 +18,6 @@ def shared_test_application_gems(bundler, rails_version)
     else
       raise "Unknown rails version '#{rails_version}'."
     end
-    gem 'sqlite3-ruby', :require => 'sqlite3'
     gem 'tabulous', :path => "../../../.."
     group :test do
       gem 'capybara'

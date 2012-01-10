@@ -9,34 +9,6 @@ require 'rake/rdoctask'
 require 'rake/testtask'
 
 namespace :test do
-  namespace :rails30 do
-    Dir['test/applications/rails30/*'].each do |filename|
-      if File.directory?(filename)
-        name = filename.split('/').last
-        desc "run tests for the Rails 3.0 test application #{name}"
-        Rake::TestTask.new(name) do |t|
-          t.libs << 'lib'
-          t.libs << 'test'
-          t.pattern = "test/applications/rails30/#{name}/**/*_test.rb"
-          t.verbose = false
-        end
-      end
-    end
-  end
-  namespace :rails31 do
-    Dir['test/applications/rails31/*'].each do |filename|
-      if File.directory?(filename)
-        name = filename.split('/').last
-        desc "run tests for the Rails 3.1 test application #{name}"
-        Rake::TestTask.new(name) do |t|
-          t.libs << 'lib'
-          t.libs << 'test'
-          t.pattern = "test/applications/rails31/#{name}/**/*_test.rb"
-          t.verbose = false
-        end
-      end
-    end
-  end
   desc "run unit tests for tabulous"
   Rake::TestTask.new(:units) do |t|
     t.libs << 'lib'
@@ -52,14 +24,14 @@ task :test do
     if File.directory?(filename)
       name = filename.split('/').last
       puts "Running tests for the Rails 3.0 test application \"#{name}\"".magenta
-      puts %x{rake test:rails30:#{name}}
+      puts %x{cd #{filename} && bundle exec rake test}
     end
   end
   Dir['test/applications/rails31/*'].each do |filename|
     if File.directory?(filename)
       name = filename.split('/').last
       puts "Running tests for the Rails 3.1 test application \"#{name}\"".magenta
-      puts %x{rake test:rails31:#{name}}
+      puts %x{cd #{filename} && bundle exec rake test}
     end
   end
   puts "Running unit tests".magenta
