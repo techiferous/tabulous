@@ -3,7 +3,7 @@ require 'capybara/rails'
 module ActionController
   class IntegrationTest
 
-    include Capybara
+    include Capybara::DSL
 
     def assert_tab_not_present(text)
       begin

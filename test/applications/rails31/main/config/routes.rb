@@ -5,6 +5,7 @@ Main::Application.routes.draw do
   match 'subtabs/one' => 'subtabs#one'
   match 'subtabs/two' => 'subtabs#two'
   match 'subtabs/three' => 'subtabs#three'
+  match 'notabs' => 'no_tabs#index'
 
   resources :galaxies
   resources :stars

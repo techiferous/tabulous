@@ -124,10 +124,13 @@ Tabulous.setup do |config|
   # By default, the subtabs HTML element is not rendered if it is empty.
   config.always_render_subtabs = false
 
-  # By default, when an action renders and no tab is defined for that action,
-  # an error is thrown.  If you turn this off, no error is thrown and the
-  # tabs are simply not rendered.
-  config.raise_error_if_no_tab_found = true
+  # Tabulous expects every controller action to be associated with a tab.
+  # When an action does not have an associated tab (or subtab), you can
+  # instruct tabulous how to behave:
+  config.when_action_has_no_tab = :raise_error      # the default behavior
+  # config.when_action_has_no_tab = :do_not_render  # no tab navigation HTML will be generated
+  # config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
+                                                    # but no tab or subtab will be active
 
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.

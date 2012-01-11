@@ -20,7 +20,7 @@ def shared_test_application_gems(bundler, rails_version)
     end
     gem 'tabulous', :path => "../../../.."
     group :test do
-      gem 'capybara'
+      gem 'capybara', "~> 1.1.2"
       gem 'launchy'
       gem 'redgreen' unless RUBY_VERSION >= "1.9"
       if rails_version == '3.1'
