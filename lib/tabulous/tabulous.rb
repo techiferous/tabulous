@@ -19,8 +19,8 @@ module Tabulous
     html << embed_styles
     active_tab = active_tab(view)
     active_tab_name = (active_tab ? active_tab.name : nil);
-    html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
-    html << '<ul>'
+    html << (@@html5 ? '<nav id="' + @@wrapper_id + '"">' : '<div id="' + @@wrapper_id + '">') unless !@@use_wrapper
+    html << (@@container_class.empty? ? '<ul>' : '<ul class="' + @@container_class + '">')
     for tab in main_tabs
       next if !tab.visible?(view)
       html << render_tab(:text => tab.text(view),
@@ -29,7 +29,7 @@ module Tabulous
                          :enabled => tab.enabled?(view))
     end
     html << '</ul>'
-    html << (@@html5 ? '</nav>' : '</div>')
+    html << (@@html5 ? '</nav>' : '</div>') unless !@@use_wrapper
     view.raw(html)
   end
   

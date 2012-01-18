@@ -143,6 +143,16 @@ Tabulous.setup do |config|
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
   config.html5 = false
+  
+  # By default, the tabs are wrapped in a div#tabs wrapper, or nav#tabs wrapper
+  # when html5 is true.
+  config.use_wrapper = true
+
+  # By default, the wrapper id is #tabs.
+  config.wrapper_id = "tabs"
+  
+  # By default, the <ul> element does not use a class. You can override this here.
+  config.container_class = ""
 
   #------------
   #   STYLES
