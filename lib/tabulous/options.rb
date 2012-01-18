@@ -33,6 +33,15 @@ module Tabulous
 
   mattr_accessor :html5
   @@html5 = false
+  
+  mattr_accessor :use_wrapper
+  @@use_wrapper = true
+  
+  mattr_accessor :wrapper_id
+  @@wrapper_id = "tabs"
+  
+  mattr_accessor :container_class
+  @@container_class = ""
 
   def self.raise_error_if_no_tab_found=(value)
     msg = "DEPRECATION WARNING: Tabulous's config.raise_error_if_no_tab_found "

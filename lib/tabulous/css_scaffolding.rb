@@ -9,27 +9,27 @@ module Tabulous
         padding: 0;
       }
       
-      #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li a,
+      ##{@@wrapper_id}, ##{@@wrapper_id} ul, ##{@@wrapper_id} ul li, ##{@@wrapper_id} ul li span, ##{@@wrapper_id} ul li a,
       #subtabs, #subtabs ul, #subtabs ul li, #subtabs ul li span, #subtabs ul li a {
         margin: 0;
         padding: 0;
         line-height: 1;
       }
 
-      #tabs, #tabs a, #tabs a:visited, #tabs a:hover {
+      ##{@@wrapper_id}, ##{@@wrapper_id} a, ##{@@wrapper_id} a:visited, ##{@@wrapper_id} a:hover {
         color: #{@@css.text_color};
       }
 
-      #tabs li.disabled, #tabs li.disabled a, #tabs li.disabled a:visited, #tabs li.disabled a:hover,
+      ##{@@wrapper_id} li.disabled, ##{@@wrapper_id} li.disabled a, ##{@@wrapper_id} li.disabled a:visited, ##{@@wrapper_id} li.disabled a:hover,
       #subtabs li.disabled, #subtabs li.disabled a, #subtabs li.disabled a:visited, #subtabs li.disabled a:hover {
         color: #{@@css.inactive_text_color};
       }
 
-      #tabs a {
+      ##{@@wrapper_id} a {
         text-decoration: none;
       }
 
-      #tabs ul {
+      ##{@@wrapper_id} ul {
         font-size: 24px;
         height: 57px;
         list-style-type: none;
@@ -37,13 +37,13 @@ module Tabulous
         padding: 0 0 0 50px;
       }
 
-      #tabs ul li {
+      ##{@@wrapper_id} ul li {
         padding-top: 25px;
         padding-right: 5px;
         float: left;
       }
 
-      #tabs ul li .tab {
+      ##{@@wrapper_id} ul li .tab {
         background-color: #{@@css.inactive_tab_color};
         padding: 5px 15px 3px 15px;
         float: left;
@@ -57,16 +57,16 @@ module Tabulous
       	border-top-right-radius: 8px;
       }
 
-      #tabs ul li.active .tab {
+      ##{@@wrapper_id} ul li.active .tab {
         background-color: #{@@css.active_tab_color};
         padding-bottom: 14px;
       }
 
-      #tabs ul li a:hover {
+      ##{@@wrapper_id} ul li a:hover {
         background-color: #{@@css.hover_tab_color};
       }
 
-      #tabs ul {
+      ##{@@wrapper_id} ul {
         /* float clearing */
         overflow: hidden;
         display: inline-block; /* Necessary to trigger "hasLayout" in IE */
