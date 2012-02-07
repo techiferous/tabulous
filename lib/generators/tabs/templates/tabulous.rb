@@ -143,6 +143,9 @@ Tabulous.setup do |config|
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
   config.html5 = false
+  
+  # You can also specify that you want Tabulous to play nice with Twitter Bootstrap 2.0 by setting this to true
+  config.twitter_bootstrap = false
 
   #------------
   #   STYLES

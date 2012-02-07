@@ -33,6 +33,10 @@ module Tabulous
 
   mattr_accessor :html5
   @@html5 = false
+  
+  mattr_accessor :twitter_bootstrap
+  @@twitter_bootstrap = false
+  
 
   def self.raise_error_if_no_tab_found=(value)
     msg = "DEPRECATION WARNING: Tabulous's config.raise_error_if_no_tab_found "
