@@ -6,7 +6,7 @@ Tabulous provides an easy way to add tabs to your Rails application.
 
 == Requirements
 
-Tabulous only works with Rails 3.0 and 3.1.  It has been tested on Ruby 1.8.7 and 1.9.2.
+Tabulous works with Rails 3.0, 3.1 and 3.2.  It has been tested on Ruby 1.8.7 and 1.9.2.
 
 == Usage
 
@@ -65,6 +65,23 @@ There is a tutorial at http://techiferous.com/2011/03/tutorial-for-adding-tabs-t
 
 Also, look in this gem's test/applications directory to find working example applications.
 Look at their app/tabs/tabulous.rb and app/layouts/application.html.erb files.
+
+== Twitter Bootstrap
+
+To get tabulous to work with Twitter Bootstrap version 2, make sure the
+following values are set in app/tabs/tabulous.rb:
+
+* config.css.scaffolding = false
+* config.tabs_ul_class = "nav nav-pills" # or whatever Bootstrap class you want
+* config.bootstrap_style_subtabs = true
+* config.active_tab_clickable = true
+
+When config.bootstrap_style_subtabs is set to true, the subtabs are rendered
+inside the tab markup, so you only need to call the tabs helper in your
+layout, not the subtabs helper.
+
+Also note that if you use Twitter Bootstrap, you lose the ability to disable
+individual subtabs.
 
 == Contributing
 

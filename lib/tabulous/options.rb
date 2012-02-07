@@ -34,6 +34,12 @@ module Tabulous
   mattr_accessor :html5
   @@html5 = false
 
+  mattr_accessor :tabs_ul_class
+  @@tabs_ul_class = nil
+
+  mattr_accessor :bootstrap_style_subtabs
+  @@bootstrap_style_subtabs = false
+
   def self.raise_error_if_no_tab_found=(value)
     msg = "DEPRECATION WARNING: Tabulous's config.raise_error_if_no_tab_found "
     msg << "has been replaced by config.when_action_has_no_tab. "

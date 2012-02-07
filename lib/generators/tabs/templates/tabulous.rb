@@ -122,9 +122,9 @@ Tabulous.setup do |config|
     s <<  '  end'
     Tabulous::Formatter.format(s).join("\n") %>
 
-  #-------------
-  #   OPTIONS
-  #-------------
+  #---------------------
+  #   GENERAL OPTIONS
+  #---------------------
 
   # By default, you cannot click on the active tab.
   config.active_tab_clickable = false
@@ -140,13 +140,28 @@ Tabulous.setup do |config|
   # config.when_action_has_no_tab = :render         # the tab navigation HTML will be generated,
                                                     # but no tab or subtab will be active
 
+  #--------------------
+  #   MARKUP OPTIONS
+  #--------------------
+
   # By default, div elements are used in the tab markup.  When html5 is
   # true, nav elements are used instead.
   config.html5 = false
 
-  #------------
-  #   STYLES
-  #------------
+  # This gives you control over what class the <ul> element that wraps the tabs
+  # will have.  Good for interfacing with third-party code like Twitter
+  # Bootstrap.
+  # config.tabs_ul_class = "nav nav-pills"
+
+  # Set this to true to have subtabs rendered in markup that Twitter Bootstrap
+  # understands.  If this is set to true, you don't need to call subtabs in
+  # your layout, just tabs.
+  # config.bootstrap_style_subtabs = true
+
+
+  #-------------------
+  #   STYLE OPTIONS
+  #-------------------
   #
   # The markup that is generated has the following properties:
   #
@@ -161,7 +176,8 @@ Tabulous.setup do |config|
   # Some styles will be generated for you to get you off to a good start.
   # Scaffolded styles are not meant to be used in production as they
   # generate invalid HTML markup.  They are merely meant to give you a
-  # head start or an easy way to prototype quickly.
+  # head start or an easy way to prototype quickly.  Set this to false if
+  # you are using Twitter Bootstrap.
   # 
   config.css.scaffolding = true
 

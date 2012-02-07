@@ -1,3 +1,7 @@
+== 1.2.0 (February 8, 2012)
+* Added support for Twitter Bootstrap (version 2).
+* Noted in the documentation that tabulous works with Rails 3.2.
+
 == 1.1.0 (January 10, 2012)
 * Deprecated the raise_error_if_no_tab_found configuration setting.  Replaced it with
   config.when_action_has_no_tab.

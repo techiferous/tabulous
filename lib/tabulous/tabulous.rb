@@ -20,13 +20,29 @@ module Tabulous
     active_tab = active_tab(view)
     active_tab_name = (active_tab ? active_tab.name : nil);
     html << (@@html5 ? '<nav id="tabs">' : '<div id="tabs">')
-    html << '<ul>'
+    if @@tabs_ul_class
+      html << %Q{<ul class="#{@@tabs_ul_class}">}
+    else
+      html << '<ul>'
+    end
     for tab in main_tabs
       next if !tab.visible?(view)
-      html << render_tab(:text => tab.text(view),
-                         :path => tab.path(view),
-                         :active => (active_tab_name && tab.name == active_tab_name),
-                         :enabled => tab.enabled?(view))
+      if @@bootstrap_style_subtabs
+        subtabs = tab.subtabs.select{|subtab| subtab.visible?(view)}
+      end
+      if @@bootstrap_style_subtabs && !subtabs.empty?
+        html << render_dropdown_tab(view,
+                                    :text => tab.text(view),
+                                    :path => tab.path(view),
+                                    :active => (active_tab_name && tab.name == active_tab_name),
+                                    :enabled => tab.enabled?(view),
+                                    :subtabs => subtabs)
+      else
+        html << render_tab(:text => tab.text(view),
+                           :path => tab.path(view),
+                           :active => (active_tab_name && tab.name == active_tab_name),
+                           :enabled => tab.enabled?(view))
+      end
     end
     html << '</ul>'
     html << (@@html5 ? '</nav>' : '</div>')
@@ -34,6 +50,12 @@ module Tabulous
   end
   
   def self.render_subtabs(view)
+    if @@bootstrap_style_subtabs
+      raise TabulousError,
+            "You should not call the subtabs view helper when config.bootstrap_style_subtabs " +
+            "is set to true.  Simply call the tabs helper and the subtabs will be " +
+            "automatically rendered."
+    end
     initialize_tabs(view)
     return if !tab_defined?(view) && @@when_action_has_no_tab == :do_not_render
     controller = view.controller_name.to_sym
@@ -69,6 +91,36 @@ module Tabulous
     else
       html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
     end
+    html << '</li>'
+    html
+  end
+
+  # markup spefically tailored for Twitter Bootstrap
+  def self.render_dropdown_tab(view, options)
+    html = ''
+    klass = 'dropdown'
+    klass << (options[:active] ? ' active' : ' inactive')
+    klass << (options[:enabled] ? ' enabled' : ' disabled')
+    html << %Q{<li class="#{klass}">}
+    if (options[:active] && !@@active_tab_clickable) || options[:enabled] == false
+      html << %Q{<span class="tab">#{options[:text]}</span>}
+    else
+      html << %Q{<a class="dropdown-toggle tab"}
+      html << %Q{   data-toggle="dropdown"}
+      html << %Q{   href="#">}
+      html << %Q{#{options[:text]}<b class="caret"></b></a>}
+    end
+    html << '<ul class="dropdown-menu">'
+    for subtab in options[:subtabs]
+      if subtab.enabled?(view)
+        html << '<li class="enabled">'
+      else
+        html << '<li class="disabled">'
+      end
+      html << %Q{<a href="#{subtab.path(view)}">#{subtab.text(view)}</a>}
+      html << '</li>'
+    end
+    html << '</ul>'
     html << '</li>'
     html
   end
