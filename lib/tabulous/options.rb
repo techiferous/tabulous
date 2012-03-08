@@ -37,6 +37,9 @@ module Tabulous
   mattr_accessor :tabs_ul_class
   @@tabs_ul_class = nil
 
+  mattr_accessor :subtabs_ul_class
+  @@subtabs_ul_class = nil
+
   mattr_accessor :bootstrap_style_subtabs
   @@bootstrap_style_subtabs = false
 
