@@ -114,7 +114,11 @@ module Tabulous
       html << %Q{   href="#">}
       html << %Q{#{options[:text]}<b class="caret"></b></a>}
     end
-    html << '<ul class="dropdown-menu">'
+    if @@subtabs_ul_class
+      html << %Q{<ul class="dropdown-menu #{@@subtabs_ul_class}">}
+    else
+      html << '<ul class="dropdown-menu">'
+    end
     for subtab in options[:subtabs]
       if subtab.enabled?(view)
         html << '<li class="enabled">'
