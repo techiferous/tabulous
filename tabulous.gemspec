@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "colored", "~> 1.2.0"
   s.add_dependency "rails", "~> 3.0"
-  s.add_development_dependency "bundler", "~> 1.0.10"
+  s.add_development_dependency "bundler", "~> 1.1.1"
   s.add_development_dependency "capybara", "~> 1.1.2"
   s.add_development_dependency "rake", "=0.8.7"
   if RUBY_VERSION < "1.9"
