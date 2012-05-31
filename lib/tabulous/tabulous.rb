@@ -111,7 +111,7 @@ module Tabulous
     else
       html << %Q{<a class="dropdown-toggle tab"}
       html << %Q{   data-toggle="dropdown"}
-      html << %Q{   href="#">}
+      html << %Q{   href="#{options[:path]}">}
       html << %Q{#{options[:text]}<b class="caret"></b></a>}
     end
     if @@subtabs_ul_class
@@ -120,12 +120,15 @@ module Tabulous
       html << '<ul class="dropdown-menu">'
     end
     for subtab in options[:subtabs]
+      href = subtab.path(view)
       if subtab.enabled?(view)
         html << '<li class="enabled">'
       else
         html << '<li class="disabled">'
+        href = "javascript:void(0)"
       end
-      html << %Q{<a href="#{subtab.path(view)}">#{subtab.text(view)}</a>}
+      html << %Q{<a href="#{href}" class="unselectable" unselectable="on">#{subtab.text(view)}</a>}
+      #html << %Q{<a href="#{subtab.path(view)}">#{subtab.text(view)}</a>}
       html << '</li>'
     end
     html << '</ul>'
