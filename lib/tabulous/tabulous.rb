@@ -3,7 +3,7 @@ module Tabulous
   def self.setup
     yield self
   end
-  
+
   def self.tabs(&block)
     @@tabs_block = block
   end
@@ -48,7 +48,7 @@ module Tabulous
     html << (@@html5 ? '</nav>' : '</div>')
     view.raw(html)
   end
-  
+
   def self.render_subtabs(view)
     if @@bootstrap_style_subtabs
       raise TabulousError,
@@ -128,7 +128,6 @@ module Tabulous
         href = "javascript:void(0)"
       end
       html << %Q{<a href="#{href}" class="unselectable" unselectable="on">#{subtab.text(view)}</a>}
-      #html << %Q{<a href="#{subtab.path(view)}">#{subtab.text(view)}</a>}
       html << '</li>'
     end
     html << '</ul>'
@@ -166,7 +165,7 @@ module Tabulous
       @@tabs << tab
     end
   end
-  
+
   def self.actions=(ary)
     @@actions = {}
     ary.each do |a|
@@ -177,17 +176,20 @@ module Tabulous
               "in the config.actions array has the wrong number of elements."
       end
     end
-    ary.each do |controller, action, tab|
+    ary.each do |controller, actions, tab|
       @@actions[controller] ||= {}
-      @@actions[controller][action] ||= []
-      @@actions[controller][action] << tab
+      actions = [actions] unless actions.is_a?( Array)
+      actions.each do |action|
+        @@actions[controller][action] ||= []
+        @@actions[controller][action] << tab
+      end
     end
   end
-  
+
   def self.main_tabs
     @@tabs.select { |t| !t.subtab? }
   end
-  
+
   def self.active_tab(view)
     controller = view.controller_name.to_sym
     action = view.action_name.to_sym
