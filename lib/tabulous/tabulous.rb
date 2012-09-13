@@ -43,6 +43,7 @@ module Tabulous
                            :active => (active_tab_name && tab.name == active_tab_name),
                            :enabled => tab.enabled?(view))
       end
+      html << " "
     end
     html << '</ul>'
     html << (@@html5 ? '</nav>' : '</div>')
