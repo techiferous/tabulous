@@ -5,7 +5,7 @@ module Tabulous
     attr_reader :name, :parent
     attr_accessor :subtabs
     
-    def initialize(name, text, path, visible, enabled)
+    def initialize(name, text, path, visible, enabled, options)
       @name = name
       name = name.to_s
       if name.ends_with? '_tab'
@@ -20,6 +20,7 @@ module Tabulous
       @path = path
       @visible = visible
       @enabled = enabled
+      @options = options || {}
       @subtabs = []
     end
     
@@ -46,6 +47,10 @@ module Tabulous
     
     def enabled?(view)
       !!@enabled
+    end
+
+    def options(view)
+      @options
     end
 
   end
