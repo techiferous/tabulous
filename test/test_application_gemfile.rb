@@ -18,7 +18,7 @@ def shared_test_application_gems(bundler, rails_version)
       raise "Unknown rails version '#{rails_version}'."
     end
     group :test do
-      gem 'capybara', "~> 1.1.2"
+      gem 'capybara', "~> 2.0.2"
       gem 'launchy'
       gem 'redgreen' unless RUBY_VERSION >= "1.9"
       if rails_version == '3.1'
