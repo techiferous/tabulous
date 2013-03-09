@@ -18,22 +18,10 @@ namespace :test do
 end
 
 task :test do
-  # we cannot load more than one Rails app at a time so we run the rake tasks
-  # from the shell so that each has its own process
-  Dir['test/applications/rails30/*'].each do |filename|
-    if File.directory?(filename)
-      name = filename.split('/').last
-      puts "Running tests for the Rails 3.0 test application \"#{name}\"".magenta
-      puts %x{cd #{filename} && bundle exec rake test}
-    end
-  end
-  Dir['test/applications/rails31/*'].each do |filename|
-    if File.directory?(filename)
-      name = filename.split('/').last
-      puts "Running tests for the Rails 3.1 test application \"#{name}\"".magenta
-      puts %x{cd #{filename} && bundle exec rake test}
-    end
-  end
+  # we cannot load more than one Rails app at a time so running the
+  # integration tests this way ensures each Rails app gets its own clean
+  # new shell environment
+  puts %x{ script/for_all_test_apps bundle exec rake test }
   puts "Running unit tests".magenta
   Rake::Task['test:units'].invoke
 end

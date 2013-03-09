@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+# Run a command for all test apps.  Examples:
+#
+#  $ script/for_all_test_apps bundle install
+#  $ script/for_all_test_apps bundle exec rake db:migrate
+#  $ script/for_all_test_apps bundle exec rake test
+
+require 'colored'
+
+command = ARGV.join(' ')
+
+Dir['test/applications/rails*/*'].each do |filename|
+  if File.directory?(filename)
+    name = filename.split('/').last
+    rails_version = filename.split('/')[-2]
+    print "Running".magenta
+    print " #{command} ".yellow
+    print "in test app".magenta
+    print " #{name} ".yellow
+    print "for version".magenta
+    print " #{rails_version}".yellow
+    puts ".".magenta
+    puts %x{cd #{filename} && #{command}}
+  end
+end
