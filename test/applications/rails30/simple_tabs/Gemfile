@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 # Do not add gems directly to this file.  Add them to the test/test_application_gemfile
 # instead and they will be automatically loaded in.
