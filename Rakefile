@@ -5,7 +5,7 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 require 'colored'
 require 'rake'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/testtask'
 
 namespace :test do
