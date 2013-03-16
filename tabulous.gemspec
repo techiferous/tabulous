@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "bundler", "~> 1.3"
   s.add_development_dependency "capybara", "~> 2.0.2"
   s.add_development_dependency "rake"
+  s.add_development_dependency "rspec", "~> 2.13"
   if RUBY_VERSION < "1.9"
     s.add_development_dependency "redgreen"
   end

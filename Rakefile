@@ -7,13 +7,12 @@ require 'colored'
 require 'rake'
 require 'rdoc/task'
 require 'rake/testtask'
+require 'rspec/core/rake_task'
 
-namespace :test do
-  desc "run unit tests for tabulous"
-  Rake::TestTask.new(:units) do |t|
-    t.libs << 'lib'
-    t.pattern = 'test/units/**/*_test.rb'
-    t.verbose = true
+namespace :spec do
+  desc "Run the unit specs"
+  RSpec::Core::RakeTask.new(:units) do |t|
+    t.pattern = "./spec/lib/**/*_spec.rb"
   end
 end
 
@@ -22,8 +21,8 @@ task :test do
   # integration tests this way ensures each Rails app gets its own clean
   # new shell environment
   puts %x{ script/for_all_test_apps bundle exec rake test }
-  puts "Running unit tests".magenta
-  Rake::Task['test:units'].invoke
+  puts "Running unit specs".magenta
+  Rake::Task['spec:units'].invoke
 end
 
 task :default => :test
