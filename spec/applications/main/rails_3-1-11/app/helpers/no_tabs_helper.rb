@@ -1,0 +1,2 @@
+module NoTabsHelper
+end

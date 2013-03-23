@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+
+
+# This script is used to generate test applications for testing with various
+# versions of Rails.
+#
+# Refer to spec/applications/README for a full understanding of test
+# applications.
+
+
+require 'fileutils'
+
+#*******************************************************************************
+#  CHECK ARGUMENTS
+
+if ARGV.size != 2
+  puts "Usage: create_test_app [app name] [Rails version]"
+  puts "  both arguments are required"
+  puts "  app name: the name of an application living in spec/applications"
+  puts "  Rails version: the gem version, such as 3.1.11 or 4.0.0.beta"
+  puts
+  puts "  Read spec/applications/README for a full understanding of test apps."
+  exit
+end
+
+app_name = ARGV[0]
+rails_version = ARGV[1]
+
+installed_rails_versions = %x{ gem list rails }
+if installed_rails_versions =~ /rails\s\((.+)\)/
+  versions = $1.split(',').map(&:strip)
+  if !versions.include?(rails_version)
+    abort "Rails version '#{rails_version}' is not installed. First install this version of Rails before continuing."
+  end
+else
+  abort "Rails is not installed. First install the version of Rails you wish to use."
+end
+
+test_app_dir = File.expand_path('../../spec/applications', __FILE__)
+test_app_dirs = Dir[test_app_dir+'/*'].select{|f| File.directory?(f)}
+test_app_names = test_app_dirs.map{|x| x.split('/').last}.select{|f| f != 'universal'}
+if !test_app_names.include?(app_name)
+  abort "Could not find test app named '#{app_name}' in spec/applications. Read spec/applications/README for a full understanding of test apps."
+end
+
+#*******************************************************************************
+#  INVOKE RAILS TEMPLATE
+
+app_dir = File.expand_path("../../spec/applications/#{app_name}/" + 'rails_' + rails_version.gsub('.', '-'), __FILE__)
+if File.exists?(app_dir)
+  FileUtils.remove_dir(app_dir, true)
+end
+
+app_template_path = File.expand_path("../../spec/applications/#{app_name}/application_template.rb", __FILE__)
+
+puts %x{ TEST_APP_RAILS_VERSION='#{rails_version}' rails _#{rails_version}_ new #{app_dir} -m #{app_template_path} }
+
