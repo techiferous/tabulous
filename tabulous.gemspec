@@ -27,7 +27,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "diffy"
   s.add_development_dependency 'sqlite3', '>= 1.3.7'
 
-  s.files        = `git ls-files`.split("\n")
-  s.executables  = `git ls-files`.split("\n").map{|f| f =~ /^bin\/(.*)/ ? $1 : nil}.compact
+  s.files        = Dir['lib/**/*.rb']
   s.require_path = 'lib'
 end
