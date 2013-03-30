@@ -63,12 +63,11 @@ puts
 
 rails_executable_version = %x{ rails _#{rails_version}_ -v }
 if rails_executable_version !~ %r{#{rails_version}}
-  puts "Accessing the executable for rails version #{rails_version} failed for an unknown reason."
+  puts "Accessing the executable for rails version #{rails_version} failed."
   puts "  The rails gem with version #{rails_version} appears to be installed."
   puts "  However, running 'rails _#{rails_version}_ -v' did not produce the right version of Rails."
   puts
-  puts "One way to get around this is to create a clean gemset with just that version of Rails."
-  puts "So sorry. This sucks."
+  puts "  Refer to spec/applications/README for a better understanding of this issue."
   abort
 end
 

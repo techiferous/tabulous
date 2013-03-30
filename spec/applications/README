@@ -64,6 +64,7 @@ like so:
 
 $ bundle exec rake test
 $ bundle exec rake spec
+$ bundle exec rake
 
 
 
@@ -77,3 +78,32 @@ $ bundle exec rake spec
 * Any specs or tests should live in this shared directory.
 * If we need to add any gems to the Rails app, modify
   spec/applications/universal_gemfile.rb.
+
+
+
+## WTF?! Why isn't this working for me?
+
+Two things can be particularly problematic when testing multiple versions of
+Rails apps from within a gem:
+
+### Wrong Gemfile
+
+Bundler can get confused and accidentally use the tabulous gem's Gemfile
+instead of the Gemfile found in the test app.  So if you have gem version
+problems, consider this.  More info is here: http://spectator.in/2011/01/28/bundler-in-subshells/
+
+### Wrong Rails Executable
+
+When you have multiple versions of Rails installed, it can be very difficult
+to target the correct version of the rails executable to use.  Even if you
+use the rails _version.number_ trick, the wrong version of Rails may still
+be used.  This is because rails is a dependency in tabulous's Gemfile, and so
+even if you try to force the usage of a different rails executable, the version
+specified in the Gemfile may be winning.  This probably depends on what tools
+you are using to manage your gems and rubies (rvm, Bundler, rubygems-bundler,
+etc.).
+
+If you have this problem, one way to get the generation of a new test application
+to work is to create a fresh, new gemset and install just that version of
+Rails in it.  Then you can create a new test application targeted to that
+version of Rails.
