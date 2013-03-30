@@ -3,6 +3,7 @@
 #**************************************************************************************#
 
 require File.expand_path('../universal_gemfile', __FILE__)
+require File.expand_path('../shims', __FILE__)
 
 # convenience method to save typing
 def replace_view(controller_name, action_name, view_code)
@@ -83,6 +84,12 @@ def make_adjustments_per_rails_version
   end
 end
 
+def install_gems
+  inside do
+    run "bundle install"
+  end
+end
+
 # All of the test applications share boilerplate code and behavior.  Instead
 # of having this repeated in each test application's application template,
 # the common behavior is found here.
@@ -93,7 +100,8 @@ end
 # behavior.
 def generate_test_application
   use_the_right_gemfile
-  add_gems
+  create_gemfile
+  install_gems
   make_adjustments_per_rails_version
   yield
   remove_file 'public/index.html'

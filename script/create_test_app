@@ -54,8 +54,11 @@ end
 app_template_path = File.expand_path("../../spec/applications/#{app_name}/application_template.rb", __FILE__)
 
 app_generation_command = "TEST_APP_RAILS_VERSION='#{rails_version}' rails _#{rails_version}_ new #{app_dir} -m #{app_template_path}"
-puts "Generating a new rails app:"
+puts "Generating a new rails app with the command:"
+puts
 puts app_generation_command
+puts
+puts "When this script finishes, scroll back through the output to check for errors in case the Rails app was not generated properly."
 puts
 
 rails_executable_version = %x{ rails _#{rails_version}_ -v }
