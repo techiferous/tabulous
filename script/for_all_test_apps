@@ -10,17 +10,14 @@ require 'colored'
 
 command = ARGV.join(' ')
 
-Dir['test/applications/rails*/*'].each do |filename|
+Dir['spec/applications/*/rails*'].each do |filename|
   if File.directory?(filename)
-    name = filename.split('/').last
-    rails_version = filename.split('/')[-2]
+    name = filename.split('/')[-2..-1].join('/')
     print "Running".magenta
     print " #{command} ".yellow
     print "in test app".magenta
     print " #{name} ".yellow
-    print "for version".magenta
-    print " #{rails_version}".yellow
-    puts ".".magenta
+    puts
     puts %x{cd #{filename} && #{command}}
   end
 end
