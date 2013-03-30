@@ -38,6 +38,20 @@ def create_gemfile
         gem 'minitest'
       end
     CODE
+  elsif rails_version? '3.2'
+    gemfile += <<-CODE.strip_heredoc
+      gem 'rails', '~> 3.2.0'
+      group :assets do
+        gem 'sass-rails',   '~> 3.2.3'
+        gem 'coffee-rails', '~> 3.2.1'
+        gem 'uglifier', '>= 1.0.3'
+      end
+      gem 'jquery-rails'
+      group :test do
+        gem 'turn', :require => false
+        gem 'minitest'
+      end
+    CODE
   end
 
   add_file 'Gemfile', gemfile
