@@ -42,8 +42,6 @@ generate_test_application do
     <html>
     <head>
       <title>Main</title>
-      <%= stylesheet_link_tag :all %>
-      <%= javascript_include_tag :defaults %>
       <%= csrf_meta_tag %>
     </head>
     <body>
