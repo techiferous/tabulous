@@ -63,9 +63,6 @@ CSS.
 
 There is a tutorial at http://techiferous.com/2011/03/tutorial-for-adding-tabs-to-rails-using-tabulous/
 
-Also, look in this gem's test/applications directory to find working example applications.
-Look at their app/tabs/tabulous.rb and app/layouts/application.html.erb files.
-
 == Twitter Bootstrap
 
 To get tabulous to work with Twitter Bootstrap version 2, make sure the
@@ -82,23 +79,3 @@ layout, not the subtabs helper.
 
 Also note that if you use Twitter Bootstrap, you lose the ability to disable
 individual subtabs.
-
-== Contributing
-
-Developers are encouraged to contribute ideas or code.
-
-To make code changes:
-
-* First, check out this gem's code from github.
-* Next, type bundle install in tabulous's directory.  This will install any gems you need
-  for developing tabulous.
-* Then type script/for_all_test_apps bundle install.  This makes sure the test applications
-  have the gems that they need to run.
-* To save you the effort of having to create and migrate databases for each test application,
-  I've committed the sqlite databases of each test application to the repository.
-* Now go to tabulous's directory and type rake test.  If everything has been installed
-  properly, all of the tests will pass.
-* Now you should be all set to code.
-
-Please send me a message if you find any confusing or incorrect documentation in tabulous or if
-you encounter any bugs.  Thank you and enjoy!

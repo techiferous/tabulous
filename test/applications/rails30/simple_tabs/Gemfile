@@ -1,7 +1,0 @@
-source 'https://rubygems.org'
-
-# Do not add gems directly to this file.  Add them to the test/test_application_gemfile
-# instead and they will be automatically loaded in.
-
-require File.expand_path('../../../test_application_gemfile', File.dirname(__FILE__))
-shared_test_application_gems(self, '3.0')

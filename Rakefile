@@ -17,12 +17,16 @@ namespace :spec do
 end
 
 task :test do
-  # we cannot load more than one Rails app at a time so running the
-  # integration tests this way ensures each Rails app gets its own clean
-  # new shell environment
-  puts %x{ script/for_all_test_apps bundle exec rake test }
-  puts "Running unit specs".magenta
-  Rake::Task['spec:units'].invoke
+  puts
+  puts "To run integration specs:"
+  puts "  $ script/for_all_test_apps rake"
+  puts
+  puts "To run unit specs:"
+  puts "  $ rake spec:units"
+  puts
+  puts "You may need to run this first before the integration specs will pass:"
+  puts "  $ script/for_all_test_apps bundle install"
+  puts
 end
 
 task :default => :test
