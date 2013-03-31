@@ -1,0 +1,2 @@
+module MiscHelper
+end
