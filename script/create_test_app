@@ -9,6 +9,9 @@
 
 
 require 'fileutils'
+require 'rake' # in order to get the nice sh method, which allows system
+               # command output to be streamed in real time
+include FileUtils
 
 #*******************************************************************************
 #  CHECK ARGUMENTS
@@ -58,8 +61,6 @@ puts "Generating a new rails app with the command:"
 puts
 puts app_generation_command
 puts
-puts "When this script finishes, scroll back through the output to check for errors in case the Rails app was not generated properly."
-puts
 
 rails_executable_version = %x{ rails _#{rails_version}_ -v }
 if rails_executable_version !~ %r{#{rails_version}}
@@ -71,4 +72,4 @@ if rails_executable_version !~ %r{#{rails_version}}
   abort
 end
 
-puts %x{ #{app_generation_command} }
+puts sh "#{app_generation_command}"

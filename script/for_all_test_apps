@@ -7,6 +7,9 @@
 #  $ script/for_all_test_apps bundle exec rake test
 
 require 'colored'
+require 'rake' # in order to get the nice sh method, which allows system
+               # command output to be streamed in real time
+include FileUtils
 
 command = ARGV.join(' ')
 
@@ -18,6 +21,6 @@ Dir['spec/applications/*/rails*'].each do |filename|
     print "in test app".magenta
     print " #{name} ".yellow
     puts
-    puts %x{cd #{filename} && #{command}}
+    puts sh "cd #{filename} && #{command}"
   end
 end
