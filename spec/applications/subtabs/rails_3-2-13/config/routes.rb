@@ -1,13 +1,13 @@
 Rails3213::Application.routes.draw do
-  match 'disabled/always_disabled' => 'misc#always_disabled'
+  get 'disabled/always_disabled' => 'misc#always_disabled'
 
-  match 'disabled/always_enabled' => 'misc#always_enabled'
+  get 'disabled/always_enabled' => 'misc#always_enabled'
 
-  match 'hidden/always_hidden' => 'misc#always_hidden'
+  get 'hidden/always_hidden' => 'misc#always_hidden'
 
-  match 'hidden/always_visible' => 'misc#always_visible'
+  get 'hidden/always_visible' => 'misc#always_visible'
 
-  root to: 'home#index'
+  root :to => 'home#index'
 
   get "misc/always_hidden"
 

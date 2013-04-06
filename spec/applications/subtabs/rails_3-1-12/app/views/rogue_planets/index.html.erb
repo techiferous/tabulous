@@ -13,7 +13,7 @@
     <td><%= rogue_planet.name %></td>
     <td><%= link_to 'Show', rogue_planet %></td>
     <td><%= link_to 'Edit', edit_rogue_planet_path(rogue_planet) %></td>
-    <td><%= link_to 'Destroy', rogue_planet, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', rogue_planet, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

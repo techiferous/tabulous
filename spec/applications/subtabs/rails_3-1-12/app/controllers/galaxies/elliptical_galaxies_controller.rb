@@ -6,7 +6,7 @@ class Galaxies::EllipticalGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @galaxies_elliptical_galaxies }
+      format.json { render :json => @galaxies_elliptical_galaxies }
     end
   end
 
@@ -17,7 +17,7 @@ class Galaxies::EllipticalGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @galaxies_elliptical_galaxy }
+      format.json { render :json => @galaxies_elliptical_galaxy }
     end
   end
 
@@ -28,7 +28,7 @@ class Galaxies::EllipticalGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @galaxies_elliptical_galaxy }
+      format.json { render :json => @galaxies_elliptical_galaxy }
     end
   end
 
@@ -44,11 +44,11 @@ class Galaxies::EllipticalGalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxies_elliptical_galaxy.save
-        format.html { redirect_to @galaxies_elliptical_galaxy, notice: 'Elliptical galaxy was successfully created.' }
-        format.json { render json: @galaxies_elliptical_galaxy, status: :created, location: @galaxies_elliptical_galaxy }
+        format.html { redirect_to @galaxies_elliptical_galaxy, :notice => 'Elliptical galaxy was successfully created.' }
+        format.json { render :json => @galaxies_elliptical_galaxy, :status => :created, :location => @galaxies_elliptical_galaxy }
       else
-        format.html { render action: "new" }
-        format.json { render json: @galaxies_elliptical_galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @galaxies_elliptical_galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class Galaxies::EllipticalGalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxies_elliptical_galaxy.update_attributes(params[:galaxies_elliptical_galaxy])
-        format.html { redirect_to @galaxies_elliptical_galaxy, notice: 'Elliptical galaxy was successfully updated.' }
+        format.html { redirect_to @galaxies_elliptical_galaxy, :notice => 'Elliptical galaxy was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @galaxies_elliptical_galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @galaxies_elliptical_galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end

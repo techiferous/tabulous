@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Rails400Beta1::Application.config.secret_key_base = '1ad3a8273758b89598435681b920c760fa8dec63502c959a659d8ae816fa49aae0f445adf0dee9fb366bac7a631c24b0276c35018ac09224e4015184753b7b23'
+Rails400Beta1::Application.config.secret_key_base = '5b205810b171ee6803a92fa7b13580d77a974b1ebfe9965d311d5add6ef4204926b5f512ebdff7c43da70fb1e20815eebe435269d555dd3722dc23cad698f45a'

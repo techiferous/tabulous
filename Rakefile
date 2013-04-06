@@ -21,6 +21,12 @@ task :test do
   puts "To run integration specs:"
   puts "  $ script/for_all_test_apps rake"
   puts
+  puts "To run integration specs in a Ruby 1.8 environment:"
+  puts "  $ RUBY_COMPATIBILITY=1.8 script/for_all_test_apps rake"
+  puts
+  puts "To run integration specs in a Ruby 2.0 environment:"
+  puts "  $ RUBY_COMPATIBILITY=2.0 script/for_all_test_apps rake"
+  puts
   puts "To run unit specs:"
   puts "  $ rake spec:units"
   puts

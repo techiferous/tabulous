@@ -6,7 +6,7 @@ class StarsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @stars }
+      format.json { render :json => @stars }
     end
   end
 
@@ -17,7 +17,7 @@ class StarsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @star }
+      format.json { render :json => @star }
     end
   end
 
@@ -28,7 +28,7 @@ class StarsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @star }
+      format.json { render :json => @star }
     end
   end
 
@@ -44,11 +44,11 @@ class StarsController < ApplicationController
 
     respond_to do |format|
       if @star.save
-        format.html { redirect_to @star, notice: 'Star was successfully created.' }
-        format.json { render json: @star, status: :created, location: @star }
+        format.html { redirect_to @star, :notice => 'Star was successfully created.' }
+        format.json { render :json => @star, :status => :created, :location => @star }
       else
-        format.html { render action: "new" }
-        format.json { render json: @star.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @star.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class StarsController < ApplicationController
 
     respond_to do |format|
       if @star.update_attributes(params[:star])
-        format.html { redirect_to @star, notice: 'Star was successfully updated.' }
+        format.html { redirect_to @star, :notice => 'Star was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @star.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @star.errors, :status => :unprocessable_entity }
       end
     end
   end

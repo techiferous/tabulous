@@ -6,7 +6,7 @@ class RoguePlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @rogue_planets }
+      format.json { render :json => @rogue_planets }
     end
   end
 
@@ -17,7 +17,7 @@ class RoguePlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @rogue_planet }
+      format.json { render :json => @rogue_planet }
     end
   end
 
@@ -28,7 +28,7 @@ class RoguePlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @rogue_planet }
+      format.json { render :json => @rogue_planet }
     end
   end
 
@@ -44,11 +44,11 @@ class RoguePlanetsController < ApplicationController
 
     respond_to do |format|
       if @rogue_planet.save
-        format.html { redirect_to @rogue_planet, notice: 'Rogue planet was successfully created.' }
-        format.json { render json: @rogue_planet, status: :created, location: @rogue_planet }
+        format.html { redirect_to @rogue_planet, :notice => 'Rogue planet was successfully created.' }
+        format.json { render :json => @rogue_planet, :status => :created, :location => @rogue_planet }
       else
-        format.html { render action: "new" }
-        format.json { render json: @rogue_planet.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @rogue_planet.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class RoguePlanetsController < ApplicationController
 
     respond_to do |format|
       if @rogue_planet.update_attributes(params[:rogue_planet])
-        format.html { redirect_to @rogue_planet, notice: 'Rogue planet was successfully updated.' }
+        format.html { redirect_to @rogue_planet, :notice => 'Rogue planet was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @rogue_planet.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @rogue_planet.errors, :status => :unprocessable_entity }
       end
     end
   end

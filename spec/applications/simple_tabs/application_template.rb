@@ -5,14 +5,14 @@ generate_test_application do
   #*****************************************************************************
   #  MODELS AND SCAFFOLDING
 
-  generate(:scaffold, 'galaxy name:string')
-  generate(:scaffold, 'planet name:string')
-  generate(:scaffold, 'star name:string')
+  generate(:scaffold, 'galaxy name:string --old-style-hash')
+  generate(:scaffold, 'planet name:string --old-style-hash')
+  generate(:scaffold, 'star name:string --old-style-hash')
 
   #*****************************************************************************
   #  MORE CONTROLLERS AND VIEWS
 
-  generate(:controller, 'home', 'index')
+  generate(:controller, 'home index --old-style-hash')
   replace_view 'home', 'index', <<-CODE.strip_heredoc
     <h1>Explanation</h1>
     This tests the most basic usage of tabulous.
@@ -21,7 +21,7 @@ generate_test_application do
   #*****************************************************************************
   #  MORE ROUTES
 
-  route "root to: 'home#index'"
+  route "root :to => 'home#index'"
 
   #*****************************************************************************
   #  LAYOUT

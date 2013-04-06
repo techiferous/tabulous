@@ -3,7 +3,7 @@ Rails400Beta1::Application.routes.draw do
   get 'disabled/always_enabled' => 'misc#always_enabled'
   get 'hidden/always_hidden' => 'misc#always_hidden'
   get 'hidden/always_visible' => 'misc#always_visible'
-  root to: 'home#index'
+  root :to => 'home#index'
   get "misc/always_hidden"
   get "misc/always_visible"
   get "misc/always_enabled"

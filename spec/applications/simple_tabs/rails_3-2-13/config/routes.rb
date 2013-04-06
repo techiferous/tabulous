@@ -1,5 +1,5 @@
 Rails3213::Application.routes.draw do
-  root to: 'home#index'
+  root :to => 'home#index'
 
   get "home/index"
 

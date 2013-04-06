@@ -13,7 +13,7 @@
     <td><%= star.name %></td>
     <td><%= link_to 'Show', star %></td>
     <td><%= link_to 'Edit', edit_star_path(star) %></td>
-    <td><%= link_to 'Destroy', star, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', star, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

@@ -1,7 +1,7 @@
 Rails3020::Application.routes.draw do
-  match 'notabs' => 'no_tabs#index'
+  get 'notabs' => 'no_tabs#index'
 
-  root to: 'home#index'
+  root :to => 'home#index'
 
   get "subtabs/one"
 

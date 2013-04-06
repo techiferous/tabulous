@@ -13,7 +13,7 @@
     <td><%= planet.name %></td>
     <td><%= link_to 'Show', planet %></td>
     <td><%= link_to 'Edit', edit_planet_path(planet) %></td>
-    <td><%= link_to 'Destroy', planet, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', planet, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

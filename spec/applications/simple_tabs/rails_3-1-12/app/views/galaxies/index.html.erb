@@ -13,7 +13,7 @@
     <td><%= galaxy.name %></td>
     <td><%= link_to 'Show', galaxy %></td>
     <td><%= link_to 'Edit', edit_galaxy_path(galaxy) %></td>
-    <td><%= link_to 'Destroy', galaxy, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', galaxy, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>

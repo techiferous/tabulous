@@ -6,7 +6,7 @@ class GalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @galaxies }
+      format.json { render :json => @galaxies }
     end
   end
 
@@ -17,7 +17,7 @@ class GalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @galaxy }
+      format.json { render :json => @galaxy }
     end
   end
 
@@ -28,7 +28,7 @@ class GalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @galaxy }
+      format.json { render :json => @galaxy }
     end
   end
 
@@ -44,11 +44,11 @@ class GalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxy.save
-        format.html { redirect_to @galaxy, notice: 'Galaxy was successfully created.' }
-        format.json { render json: @galaxy, status: :created, location: @galaxy }
+        format.html { redirect_to @galaxy, :notice => 'Galaxy was successfully created.' }
+        format.json { render :json => @galaxy, :status => :created, :location => @galaxy }
       else
-        format.html { render action: "new" }
-        format.json { render json: @galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class GalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxy.update_attributes(params[:galaxy])
-        format.html { redirect_to @galaxy, notice: 'Galaxy was successfully updated.' }
+        format.html { redirect_to @galaxy, :notice => 'Galaxy was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end

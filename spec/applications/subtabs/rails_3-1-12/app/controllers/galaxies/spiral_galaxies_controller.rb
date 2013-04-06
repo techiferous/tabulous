@@ -6,7 +6,7 @@ class Galaxies::SpiralGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @galaxies_spiral_galaxies }
+      format.json { render :json => @galaxies_spiral_galaxies }
     end
   end
 
@@ -17,7 +17,7 @@ class Galaxies::SpiralGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @galaxies_spiral_galaxy }
+      format.json { render :json => @galaxies_spiral_galaxy }
     end
   end
 
@@ -28,7 +28,7 @@ class Galaxies::SpiralGalaxiesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @galaxies_spiral_galaxy }
+      format.json { render :json => @galaxies_spiral_galaxy }
     end
   end
 
@@ -44,11 +44,11 @@ class Galaxies::SpiralGalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxies_spiral_galaxy.save
-        format.html { redirect_to @galaxies_spiral_galaxy, notice: 'Spiral galaxy was successfully created.' }
-        format.json { render json: @galaxies_spiral_galaxy, status: :created, location: @galaxies_spiral_galaxy }
+        format.html { redirect_to @galaxies_spiral_galaxy, :notice => 'Spiral galaxy was successfully created.' }
+        format.json { render :json => @galaxies_spiral_galaxy, :status => :created, :location => @galaxies_spiral_galaxy }
       else
-        format.html { render action: "new" }
-        format.json { render json: @galaxies_spiral_galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @galaxies_spiral_galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class Galaxies::SpiralGalaxiesController < ApplicationController
 
     respond_to do |format|
       if @galaxies_spiral_galaxy.update_attributes(params[:galaxies_spiral_galaxy])
-        format.html { redirect_to @galaxies_spiral_galaxy, notice: 'Spiral galaxy was successfully updated.' }
+        format.html { redirect_to @galaxies_spiral_galaxy, :notice => 'Spiral galaxy was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @galaxies_spiral_galaxy.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @galaxies_spiral_galaxy.errors, :status => :unprocessable_entity }
       end
     end
   end

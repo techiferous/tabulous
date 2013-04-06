@@ -5,19 +5,19 @@ generate_test_application do
   #*****************************************************************************
   #  MODELS AND SCAFFOLDING
 
-  generate(:model, 'galaxy name:string')
-  generate(:scaffold, 'galaxies/elliptical_galaxy name:string')
-  generate(:scaffold, 'galaxies/lenticular_galaxy name:string')
-  generate(:scaffold, 'galaxies/spiral_galaxy name:string')
-  generate(:model, 'planet name:string')
-  generate(:scaffold, 'exoplanet name:string')
-  generate(:scaffold, 'rogue_planet name:string')
-  generate(:scaffold, 'star name:string')
+  generate(:model, 'galaxy name:string --old-style-hash')
+  generate(:scaffold, 'galaxies/elliptical_galaxy name:string --old-style-hash')
+  generate(:scaffold, 'galaxies/lenticular_galaxy name:string --old-style-hash')
+  generate(:scaffold, 'galaxies/spiral_galaxy name:string --old-style-hash')
+  generate(:model, 'planet name:string --old-style-hash')
+  generate(:scaffold, 'exoplanet name:string --old-style-hash')
+  generate(:scaffold, 'rogue_planet name:string --old-style-hash')
+  generate(:scaffold, 'star name:string --old-style-hash')
 
   #*****************************************************************************
   #  MORE CONTROLLERS AND VIEWS
 
-  generate(:controller, 'home', 'index')
+  generate(:controller, 'home index --old-style-hash')
   replace_view 'home', 'index', <<-CODE.strip_heredoc
     <h1>Explanation</h1>
     This application is useful for testing that:
@@ -33,7 +33,7 @@ generate_test_application do
     </ul>
   CODE
 
-  generate(:controller, 'misc', 'always_hidden', 'always_visible', 'always_enabled', 'always_disabled')
+  generate(:controller, 'misc always_hidden always_visible always_enabled always_disabled --old-style-hash')
   replace_view 'misc', 'always_enabled', <<-CODE.strip_heredoc
     <p>
       This subtab is always enabled.  The neighboring subtab, called "always disabled",
@@ -50,7 +50,7 @@ generate_test_application do
   #*****************************************************************************
   #  MORE ROUTES
 
-  route "root to: 'home#index'"
+  route "root :to => 'home#index'"
   route "get 'hidden/always_visible' => 'misc#always_visible'"
   route "get 'hidden/always_hidden' => 'misc#always_hidden'"
   route "get 'disabled/always_enabled' => 'misc#always_enabled'"

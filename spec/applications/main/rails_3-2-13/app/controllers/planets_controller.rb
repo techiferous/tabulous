@@ -6,7 +6,7 @@ class PlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @planets }
+      format.json { render :json => @planets }
     end
   end
 
@@ -17,7 +17,7 @@ class PlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @planet }
+      format.json { render :json => @planet }
     end
   end
 
@@ -28,7 +28,7 @@ class PlanetsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render json: @planet }
+      format.json { render :json => @planet }
     end
   end
 
@@ -44,11 +44,11 @@ class PlanetsController < ApplicationController
 
     respond_to do |format|
       if @planet.save
-        format.html { redirect_to @planet, notice: 'Planet was successfully created.' }
-        format.json { render json: @planet, status: :created, location: @planet }
+        format.html { redirect_to @planet, :notice => 'Planet was successfully created.' }
+        format.json { render :json => @planet, :status => :created, :location => @planet }
       else
-        format.html { render action: "new" }
-        format.json { render json: @planet.errors, status: :unprocessable_entity }
+        format.html { render :action => "new" }
+        format.json { render :json => @planet.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -60,11 +60,11 @@ class PlanetsController < ApplicationController
 
     respond_to do |format|
       if @planet.update_attributes(params[:planet])
-        format.html { redirect_to @planet, notice: 'Planet was successfully updated.' }
+        format.html { redirect_to @planet, :notice => 'Planet was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
-        format.json { render json: @planet.errors, status: :unprocessable_entity }
+        format.html { render :action => "edit" }
+        format.json { render :json => @planet.errors, :status => :unprocessable_entity }
       end
     end
   end

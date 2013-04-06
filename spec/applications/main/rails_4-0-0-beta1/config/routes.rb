@@ -1,6 +1,6 @@
 Rails400Beta1::Application.routes.draw do
   get 'notabs' => 'no_tabs#index'
-  root to: 'home#index'
+  root :to => 'home#index'
   get "subtabs/one"
   get "subtabs/two"
   get "subtabs/three"
