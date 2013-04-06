@@ -72,4 +72,4 @@ if rails_executable_version !~ %r{#{rails_version}}
   abort
 end
 
-puts sh "#{app_generation_command}"
+sh "#{app_generation_command}"

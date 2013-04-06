@@ -21,6 +21,6 @@ Dir['spec/applications/*/rails*'].each do |filename|
     print "in test app".magenta
     print " #{name} ".yellow
     puts
-    puts sh "cd #{filename} && #{command}"
+    sh "cd #{filename} && #{command}"
   end
 end
