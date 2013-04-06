@@ -1,0 +1,27 @@
+<h1>Listing planets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @planets.each do |planet| %>
+    <tr>
+      <td><%= planet.name %></td>
+      <td><%= link_to 'Show', planet %></td>
+      <td><%= link_to 'Edit', edit_planet_path(planet) %></td>
+      <td><%= link_to 'Destroy', planet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Planet', new_planet_path %>

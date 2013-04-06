@@ -1,0 +1,21 @@
+<%= form_for(@galaxies_lenticular_galaxy) do |f| %>
+  <% if @galaxies_lenticular_galaxy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@galaxies_lenticular_galaxy.errors.count, "error") %> prohibited this galaxies_lenticular_galaxy from being saved:</h2>
+
+      <ul>
+      <% @galaxies_lenticular_galaxy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

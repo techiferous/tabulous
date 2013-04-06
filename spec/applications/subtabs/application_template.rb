@@ -51,10 +51,10 @@ generate_test_application do
   #  MORE ROUTES
 
   route "root to: 'home#index'"
-  route "match 'hidden/always_visible' => 'misc#always_visible'"
-  route "match 'hidden/always_hidden' => 'misc#always_hidden'"
-  route "match 'disabled/always_enabled' => 'misc#always_enabled'"
-  route "match 'disabled/always_disabled' => 'misc#always_disabled'"
+  route "get 'hidden/always_visible' => 'misc#always_visible'"
+  route "get 'hidden/always_hidden' => 'misc#always_hidden'"
+  route "get 'disabled/always_enabled' => 'misc#always_enabled'"
+  route "get 'disabled/always_disabled' => 'misc#always_disabled'"
 
   #*****************************************************************************
   #  LAYOUT

@@ -32,7 +32,7 @@ generate_test_application do
   #  MORE ROUTES
 
   route "root to: 'home#index'"
-  route "match 'notabs' => 'no_tabs#index'"
+  route "get 'notabs' => 'no_tabs#index'"
 
   #*****************************************************************************
   #  LAYOUT
