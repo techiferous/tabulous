@@ -17,7 +17,6 @@ def create_gemfile
     group :test do
       gem 'capybara', "~> 2.0.2"
       gem 'launchy'
-      gem 'redgreen' unless RUBY_VERSION >= "1.9"
     end
   CODE
   if rails_version? '3.0'
@@ -43,6 +42,7 @@ def create_gemfile
       gem 'rails', '~> 3.2.0'
       group :assets do
         gem 'sass-rails',   '~> 3.2.3'
+        gem 'bootstrap-sass', '~> 2.3.1.0'
         gem 'coffee-rails', '~> 3.2.1'
         gem 'uglifier', '>= 1.0.3'
       end
@@ -54,10 +54,11 @@ def create_gemfile
     CODE
   elsif rails_version? '4.0'
     gemfile += <<-CODE.strip_heredoc
-      gem 'rails', '~> 4.0.0.beta1'
+      gem 'rails', '~> 4.0.0.rc1'
       group :assets do
-        gem 'sass-rails',   '~> 4.0.0.beta1'
-        gem 'coffee-rails', '~> 4.0.0.beta1'
+        gem 'sass-rails',   '~> 4.0.0.rc1'
+        gem 'bootstrap-sass', '~> 2.3.1.0'
+        gem 'coffee-rails', '~> 4.0.0.rc1'
         gem 'uglifier', '>= 1.0.3'
       end
       gem 'jquery-rails'

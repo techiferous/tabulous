@@ -1,5 +1,4 @@
 ENV["RAILS_ENV"] = "test"
-require 'redgreen' unless RUBY_VERSION >= "1.9"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 

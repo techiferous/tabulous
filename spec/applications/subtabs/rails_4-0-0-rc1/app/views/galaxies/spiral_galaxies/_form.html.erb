@@ -1,0 +1,21 @@
+<%= form_for(@galaxies_spiral_galaxy) do |f| %>
+  <% if @galaxies_spiral_galaxy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@galaxies_spiral_galaxy.errors.count, "error") %> prohibited this galaxies_spiral_galaxy from being saved:</h2>
+
+      <ul>
+      <% @galaxies_spiral_galaxy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

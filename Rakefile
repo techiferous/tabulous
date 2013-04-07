@@ -21,9 +21,6 @@ task :test do
   puts "To run integration specs:"
   puts "  $ script/for_all_test_apps rake"
   puts
-  puts "To run integration specs in a Ruby 1.8 environment:"
-  puts "  $ RUBY_COMPATIBILITY=1.8 script/for_all_test_apps rake"
-  puts
   puts "To run integration specs in a Ruby 2.0 environment:"
   puts "  $ RUBY_COMPATIBILITY=2.0 script/for_all_test_apps rake"
   puts
@@ -36,11 +33,3 @@ task :test do
 end
 
 task :default => :test
-
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Test'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README.rdoc')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end

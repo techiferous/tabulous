@@ -12,7 +12,9 @@
  *= require_tree .
  */
 
-// These styles are placed in app/assets/stylesheets for Rails 4 and public/stylesheets for Rails 3.0
+/* These styles are duplicated in two places:
+     public/stylesheets for Rails 3.0
+     app/assets/stylesheets for Rails 3.1+ (which uses the asset pipeline) */
 
 body {
   font-family: 'Verdana', sans-serif;

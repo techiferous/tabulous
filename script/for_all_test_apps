@@ -9,7 +9,6 @@
 #  Set the RUBY_COMPATIBILITY environment variable to limit the action to
 #  only those test apps that are compatible with that version of Ruby.
 
-require 'rubygems' # for Ruby 1.8.7
 require 'colored'
 require 'rake' # in order to get the nice sh method, which allows system
                # command output to be streamed in real time
@@ -17,9 +16,7 @@ include FileUtils
 
 command = ARGV.join(' ')
 
-if ENV['RUBY_COMPATIBILITY'] == '1.8'
-  apps_to_test = Dir['spec/applications/*/rails_3*']
-elsif ENV['RUBY_COMPATIBILITY'] == '2.0'
+if ENV['RUBY_COMPATIBILITY'] == '2.0'
   apps_to_test = Dir['spec/applications/*/rails_3-2*'] + Dir['spec/applications/*/rails_4*']
 else
   apps_to_test = Dir['spec/applications/*/rails*']

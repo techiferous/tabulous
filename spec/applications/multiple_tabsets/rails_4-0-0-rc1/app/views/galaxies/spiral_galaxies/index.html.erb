@@ -1,0 +1,27 @@
+<h1>Listing galaxies_spiral_galaxies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @galaxies_spiral_galaxies.each do |galaxies_spiral_galaxy| %>
+      <tr>
+        <td><%= galaxies_spiral_galaxy.name %></td>
+        <td><%= link_to 'Show', galaxies_spiral_galaxy %></td>
+        <td><%= link_to 'Edit', edit_galaxies_spiral_galaxy_path(galaxies_spiral_galaxy) %></td>
+        <td><%= link_to 'Destroy', galaxies_spiral_galaxy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Spiral galaxy', new_galaxies_spiral_galaxy_path %>

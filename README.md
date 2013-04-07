@@ -1,0 +1,17 @@
+# Tabulous
+
+## Description
+
+Tabulous provides an easy way to add tabs to your Rails application.
+
+## Requirements
+
+Tabulous works with Rails 3.0, 3.1, 3.2 and 4.0.  It has been tested on MRI Ruby 1.9.3 and 2.0.0.  It does not work with Ruby 1.8.
+
+## Getting Started
+
+* [OVERVIEW](OVERVIEW.md) -- if you're new to tabulous, start here
+* [CHANGES FROM VERSION ONE](CHANGES_FROM_VERSION_ONE.md) -- if you've been using version one of tabulous, read this
+* [REFERENCE](REFERENCE.md) -- complete documentation on the usage of tabulous
+* [CONTRIBUTING](CONTRIBUTING.md) -- if you want to help out
+

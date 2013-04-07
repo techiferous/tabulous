@@ -1,7 +1,7 @@
 RSpec::Matchers.define :be_clickable do
   match do |tab_text|
-    clickable_tab = page.all('#tabs li a', :text => tab_text)
-    clickable_subtab = page.all('#subtabs li a', :text => tab_text)
+    clickable_tab = page.all('.tabs li a', :text => tab_text)
+    clickable_subtab = page.all('.subtabs li a', :text => tab_text)
     !clickable_tab.empty? || !clickable_subtab.empty?
   end
 

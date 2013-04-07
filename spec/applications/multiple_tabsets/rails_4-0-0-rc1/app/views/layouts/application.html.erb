@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiple Tabsets</title>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+  <%= tabs(:galaxies) %>
+  <%= tabs(:planets) %>
+  <%= yield %>
+</body>
+</html>

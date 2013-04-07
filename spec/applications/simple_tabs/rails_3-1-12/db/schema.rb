@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130406133629) do
+ActiveRecord::Schema.define(:version => 20130512153956) do
 
   create_table "galaxies", :force => true do |t|
     t.string   "name"

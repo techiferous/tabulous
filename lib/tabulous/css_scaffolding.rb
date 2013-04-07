@@ -1,111 +1,114 @@
 module Tabulous
-  def self.embed_styles
-    return '' unless @@css.scaffolding
-    %Q{
-      <style type="text/css">
-      
-      body {
-        margin: 0;
-        padding: 0;
-      }
-      
-      #tabs, #tabs ul, #tabs ul li, #tabs ul li span, #tabs ul li a,
-      #subtabs, #subtabs ul, #subtabs ul li, #subtabs ul li span, #subtabs ul li a {
-        margin: 0;
-        padding: 0;
-        line-height: 1;
-      }
+  class CssScaffolding
 
-      #tabs, #tabs a, #tabs a:visited, #tabs a:hover {
-        color: #{@@css.text_color};
-      }
+    def self.embeddable_styles
+      %Q{
+        <style type="text/css">
 
-      #tabs li.disabled, #tabs li.disabled a, #tabs li.disabled a:visited, #tabs li.disabled a:hover,
-      #subtabs li.disabled, #subtabs li.disabled a, #subtabs li.disabled a:visited, #subtabs li.disabled a:hover {
-        color: #{@@css.inactive_text_color};
-      }
+        body {
+          margin: 0;
+          padding: 0;
+        }
 
-      #tabs a {
-        text-decoration: none;
-      }
+        .tabs, .tabs ul, .tabs ul li, .tabs ul li span, .tabs ul li a,
+        .subtabs, .subtabs ul, .subtabs ul li, .subtabs ul li span, .subtabs ul li a {
+          margin: 0;
+          padding: 0;
+          line-height: 1;
+        }
 
-      #tabs ul {
-        font-size: 24px;
-        height: 57px;
-        list-style-type: none;
-        background-color: #{@@css.background_color};
-        padding: 0 0 0 50px;
-      }
+        .tabs, .tabs a, .tabs a:visited, .tabs a:hover {
+          color: #{Config.text_color};
+        }
 
-      #tabs ul li {
-        padding-top: 25px;
-        padding-right: 5px;
-        float: left;
-      }
+        .tabs li.disabled, .tabs li.disabled a, .tabs li.disabled a:visited, .tabs li.disabled a:hover,
+        .subtabs li.disabled, .subtabs li.disabled a, .subtabs li.disabled a:visited, .subtabs li.disabled a:hover {
+          color: #{Config.inactive_text_color};
+        }
 
-      #tabs ul li .tab {
-        background-color: #{@@css.inactive_tab_color};
-        padding: 5px 15px 3px 15px;
-        float: left;
-      	-webkit-border-top-left-radius: 8px;
-      	-khtml-border-radius-topleft: 8px;	
-      	-moz-border-radius-topleft: 8px;
-      	border-top-left-radius: 8px;
-      	-webkit-border-top-right-radius: 8px;
-      	-khtml-border-radius-topright: 8px;	
-      	-moz-border-radius-topright: 8px;
-      	border-top-right-radius: 8px;
-      }
+        .tabs a {
+          text-decoration: none;
+        }
 
-      #tabs ul li.active .tab {
-        background-color: #{@@css.active_tab_color};
-        padding-bottom: 14px;
-      }
+        .tabs ul {
+          font-size: 24px;
+          height: 57px;
+          list-style-type: none;
+          background-color: #{Config.background_color};
+          padding: 0 0 0 50px;
+        }
 
-      #tabs ul li a:hover {
-        background-color: #{@@css.hover_tab_color};
-      }
+        .tabs ul li {
+          padding-top: 25px;
+          padding-right: 5px;
+          float: left;
+        }
 
-      #tabs ul {
-        /* float clearing */
-        overflow: hidden;
-        display: inline-block; /* Necessary to trigger "hasLayout" in IE */
-        display: block; /* Sets element back to block */
-      }
+        .tabs ul li .tab {
+          background-color: #{Config.inactive_tab_color};
+          padding: 5px 15px 3px 15px;
+          float: left;
+          -webkit-border-top-left-radius: 8px;
+          -khtml-border-radius-topleft: 8px;
+          -moz-border-radius-topleft: 8px;
+          border-top-left-radius: 8px;
+          -webkit-border-top-right-radius: 8px;
+          -khtml-border-radius-topright: 8px;
+          -moz-border-radius-topright: 8px;
+          border-top-right-radius: 8px;
+        }
 
-      #subtabs ul {
-        margin-top: 5px;
-      }
+        .tabs ul li.active .tab {
+          background-color: #{Config.active_tab_color};
+          padding-bottom: 14px;
+        }
 
-      #subtabs, #subtabs a, #subtabs a:visited {
-        color: #{@@css.text_color};
-      }
+        .tabs ul li a:hover {
+          background-color: #{Config.hover_tab_color};
+        }
 
-      #subtabs li.active {
-        font-weight: bold;
-      }
+        .tabs ul {
+          /* float clearing */
+          overflow: hidden;
+          display: inline-block; /* Necessary to trigger "hasLayout" in IE */
+          display: block; /* Sets element back to block */
+        }
 
-      #subtabs a {
-        text-decoration: none;
-      }
+        .subtabs ul {
+          margin-top: 5px;
+        }
 
-      #subtabs ul {
-        font-size: 16px;
-        height: 30px;
-        list-style-type: none;
-        padding: 0 0 0 50px;
-      }
+        .subtabs, .subtabs a, .subtabs a:visited {
+          color: #{Config.text_color};
+        }
 
-      #subtabs ul li {
-        padding: 10px;
-        float: left;
-      }
+        .subtabs li.active {
+          font-weight: bold;
+        }
 
-      #subtabs ul li a:hover {
-        text-decoration: underline;
-      }
+        .subtabs a {
+          text-decoration: none;
+        }
 
-      </style>
-    }
+        .subtabs ul {
+          font-size: 16px;
+          height: 30px;
+          list-style-type: none;
+          padding: 0 0 0 50px;
+        }
+
+        .subtabs ul li {
+          padding: 10px;
+          float: left;
+        }
+
+        .subtabs ul li a:hover {
+          text-decoration: underline;
+        }
+
+        </style>
+      }
+    end
+
   end
 end

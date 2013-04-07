@@ -1,0 +1,23 @@
+<h1>Listing galaxies</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @galaxies.each do |galaxy| %>
+  <tr>
+    <td><%= galaxy.name %></td>
+    <td><%= link_to 'Show', galaxy %></td>
+    <td><%= link_to 'Edit', edit_galaxy_path(galaxy) %></td>
+    <td><%= link_to 'Destroy', galaxy, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Galaxy', new_galaxy_path %>

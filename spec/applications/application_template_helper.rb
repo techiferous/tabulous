@@ -2,8 +2,8 @@
 #   Refer to spec/applications/README for a full understanding of test applications.   #
 #**************************************************************************************#
 
-require File.expand_path('../universal_gemfile', __FILE__)
-require File.expand_path('../shims', __FILE__)
+require_relative 'universal_gemfile'
+require_relative 'shims'
 
 # convenience method to save typing
 def replace_view(controller_name, action_name, view_code)

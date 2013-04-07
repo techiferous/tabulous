@@ -3,11 +3,8 @@ require 'rails'
 
 module Tabulous
   class Railtie < Rails::Railtie
-    rake_tasks do
-      load "tasks/tabulous.rake"
-    end
-    initializer 'tabulous.helper' do |app|  
-      ActionView::Base.send :include, Tabulous::Helpers
+    initializer 'tabulous.helper' do |app|
+      ActionView::Base.send :include, Tabulous::ViewHelpers
     end
     config.to_prepare do
       filename = File.join(Rails.root.to_s, 'app/tabs/tabulous.rb')
