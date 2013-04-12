@@ -58,7 +58,7 @@ module Tabulous
     end
     initialize_tabs(view)
     return if !tab_defined?(view) && @@when_action_has_no_tab == :do_not_render
-    controller = view.controller_name.to_sym
+    controller = view.controller_path.to_sym
     action = view.action_name.to_sym
     tab = active_tab(view)
     html = ''
@@ -186,7 +186,7 @@ module Tabulous
   end
   
   def self.active_tab(view)
-    controller = view.controller_name.to_sym
+    controller = view.controller_path.to_sym
     action = view.action_name.to_sym
     for tab in @@tabs
       if active?(controller, action, tab.name)
@@ -207,7 +207,7 @@ module Tabulous
   end
 
   def self.tab_defined?(view)
-    controller = view.controller_name.to_sym
+    controller = view.controller_path.to_sym
     action = view.action_name.to_sym
     if @@actions[controller].nil?
       if @@when_action_has_no_tab == :raise_error
