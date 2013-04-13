@@ -36,12 +36,14 @@ module Tabulous
                                     :path => tab.path(view),
                                     :active => (active_tab_name && tab.name == active_tab_name),
                                     :enabled => tab.enabled?(view),
-                                    :subtabs => subtabs)
+                                    :subtabs => subtabs,
+                                    :method => tab.method(view))
       else
         html << render_tab(:text => tab.text(view),
                            :path => tab.path(view),
                            :active => (active_tab_name && tab.name == active_tab_name),
-                           :enabled => tab.enabled?(view))
+                           :enabled => tab.enabled?(view),
+                           :method => tab.method(view))
       end
     end
     html << '</ul>'
@@ -78,7 +80,8 @@ module Tabulous
       html << render_tab(:text => subtab.text(view),
                          :path => subtab.path(view),
                          :active => active?(controller, action, subtab.name),
-                         :enabled => subtab.enabled?(view))
+                         :enabled => subtab.enabled?(view),
+                         :method => subtab.method(view))
     end
     html << '</ul>'
     html << (@@html5 ? '</nav>' : '</div>')
@@ -93,7 +96,11 @@ module Tabulous
     if (options[:active] && !@@active_tab_clickable) || options[:enabled] == false
       html << %Q{<span class="tab">#{options[:text]}</span>}
     else
-      html << %Q{<a href="#{options[:path]}" class="tab">#{options[:text]}</a>}
+      html << %Q{<a href="#{options[:path]}" class="tab" }
+      if options[:method] != nil
+        html << %Q{data-method="#{options[:method]}"}
+      end
+      html << %Q{>#{options[:text]}</a>}
     end
     html << '</li>'
     html
@@ -111,8 +118,10 @@ module Tabulous
     else
       html << %Q{<a class="dropdown-toggle tab"}
       html << %Q{   data-toggle="dropdown"}
-      html << %Q{   href="#">}
-      html << %Q{#{options[:text]}<b class="caret"></b></a>}
+      if options[:method] != nil
+        html << %Q{data-method="#{options[:method]}"}
+      end
+      html << %Q{   href="#">#{options[:text]}<b class="caret"></b></a>}
     end
     if @@subtabs_ul_class
       html << %Q{<ul class="dropdown-menu #{@@subtabs_ul_class}">}
@@ -125,7 +134,11 @@ module Tabulous
       else
         html << '<li class="disabled">'
       end
-      html << %Q{<a href="#{subtab.path(view)}">#{subtab.text(view)}</a>}
+      html << %Q{<a href="#{subtab.path(view)}"%}
+      if subtab.method?
+        html << %Q{data-method="#{subtab.method}"}
+      end
+      html << %Q{>#{subtab.text(view)}</a>}
       html << '</li>'
     end
     html << '</ul>'
