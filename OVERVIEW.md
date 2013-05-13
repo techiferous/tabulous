@@ -170,7 +170,7 @@ Your tab declaration would look like this:
       text          { 'Unicorns' }
       link_path     { '/unicorns' }
       visible_when  { current_user.loves_unicorns? }
-      enabled_when  { Time.now.month == 5 }
+      enabled_when  { Time.now.month != 5 }
       active_when   { in_action('any').of_controller('unicorns') }
     end
 
