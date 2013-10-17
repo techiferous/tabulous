@@ -62,11 +62,11 @@ You can have more than one tabset on a page by passing in a name to the tabs blo
 
 Then, in your layout, you need to tell tabulous which tabset to draw:
 
-    <%= render tabs(:fun) %>
-    <%= render subtabs(:fun) %>
+    <%= tabs(:fun) %>
+    <%= subtabs(:fun) %>
     <p>some markup</p>
-    <%= render tabs(:colors) %>
-    <%= render subtabs(:colors) %>
+    <%= tabs(:colors) %>
+    <%= subtabs(:colors) %>
 
 ### Tab Order
 
@@ -380,21 +380,21 @@ You should turn off the CSS scaffolding and use your own CSS before launching yo
 
 Tabulous generates HTML for you to place in your layout.  It does this with the following helpers:
 
-    <%= render tabs %>
-    <%= render subtabs %>
+    <%= tabs %>
+    <%= subtabs %>
 
 If you have multiple tabsets, you need to call these helpers for each tabset:
 
-    <%= render tabs(:fun) %>
-    <%= render subtabs(:fun) %>
+    <%= tabs(:fun) %>
+    <%= subtabs(:fun) %>
 
-    <%= render tabs(:colors) %>
-    <%= render subtabs(:colors) %>
+    <%= tabs(:colors) %>
+    <%= subtabs(:colors) %>
 
 Some renderers, like the Twitter Bootstrap renderers, generate markup that has subtabs interspersed within tabs instead of a separate list of tabs and subtabs.  If a renderer does this, it is an error to call the subtabs helper:
 
-    <%= render tabs %>     # always ok
-    <%= render subtabs %>  # DO NOT DO THIS if using a Bootstrap renderer
+    <%= tabs %>     # always ok
+    <%= subtabs %>  # DO NOT DO THIS if using a Bootstrap renderer
 
 ## Generators
 
