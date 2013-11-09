@@ -20,7 +20,7 @@ if ARGV.size != 2
   puts "Usage: create_test_app [app name] [Rails version]"
   puts "  both arguments are required"
   puts "  app name: the name of an application living in spec/applications"
-  puts "  Rails version: the gem version, such as 3.1.11 or 4.0.0.beta"
+  puts "  Rails version: the gem version, such as 3.1.11 or 4.0.1"
   puts
   puts "  Read spec/applications/README for a full understanding of test apps."
   exit
