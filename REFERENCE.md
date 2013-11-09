@@ -10,6 +10,7 @@
 * [Tab Declarations](#tab-declarations)
     * [text](#text)
     * [link_path](#link_path)
+    * [http_verb](#http_verb)
     * [visible_when](#visible_when)
     * [enabled_when](#enabled_when)
     * [active_when](#active_when)
