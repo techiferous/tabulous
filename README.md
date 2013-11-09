@@ -1,6 +1,6 @@
 # Tabulous
 
-## Description
+[![Code Climate](https://codeclimate.com/github/techiferous/tabulous.png)](https://codeclimate.com/github/techiferous/tabulous)
 
 Tabulous provides an easy way to add tabs to your Rails application.
 
@@ -14,4 +14,3 @@ Tabulous works with Rails 3.0, 3.1, 3.2 and 4.0.  It has been tested on MRI Ruby
 * [CHANGES FROM VERSION ONE](CHANGES_FROM_VERSION_ONE.md) -- if you've been using version one of tabulous, read this
 * [REFERENCE](REFERENCE.md) -- complete documentation on the usage of tabulous
 * [CONTRIBUTING](CONTRIBUTING.md) -- if you want to help out
-
