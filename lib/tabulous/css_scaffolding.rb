@@ -67,7 +67,7 @@ module Tabulous
           background-color: #{Config.hover_tab_color};
         }
 
-        .tabs ul {
+        .tabs ul, .subtabs ul {
           /* float clearing */
           overflow: hidden;
           display: inline-block; /* Necessary to trigger "hasLayout" in IE */
