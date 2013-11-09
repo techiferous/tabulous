@@ -130,7 +130,7 @@ This creates app/tabs/tabulous.rb.  The generator guesses what your tabs might l
 
 Tabs are displayed in the order they appear.  So if you want a set of tabs that looks like this:
 
-     ,____________, ,____________, ,__________,
+      ____________   ____________   __________
     _|  UNICORNS  |_|  RAINBOWS  |_|  PONIES  |_
 
 your tabs block should look like this:
@@ -161,7 +161,7 @@ Let's say you wanted the unicorns tab to:
 
 * take you to '/unicorns' when clicked
 * be visible only if the user loves unicorns
-* be disabled if it's May
+* be enabled only if it's May
 * and be active whenever the UnicornsController ends up rendering the page.
 
 Your tab declaration would look like this:
@@ -170,7 +170,7 @@ Your tab declaration would look like this:
       text          { 'Unicorns' }
       link_path     { '/unicorns' }
       visible_when  { current_user.loves_unicorns? }
-      enabled_when  { Time.now.month != 5 }
+      enabled_when  { Time.now.month == 5 }
       active_when   { in_action('any').of_controller('unicorns') }
     end
 

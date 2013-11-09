@@ -72,7 +72,7 @@ Then, in your layout, you need to tell tabulous which tabset to draw:
 
 Tabs are displayed in the order they appear.  So if you want a set of tabs that looks like this:
 
-     ,____________, ,____________, ,__________,
+      ____________   ____________   __________
     _|  UNICORNS  |_|  RAINBOWS  |_|  PONIES  |_
 
 your tabs block should look like this:
@@ -93,7 +93,7 @@ your tabs block should look like this:
 
 ### Subtabs
 
-Any tab can have several subtabs associated with it that become visible when the parent tab is clicked.  Declare subtabs just like tabs, except make sure that their name ends in _subtab.  Subtabs should be declared immediately after their parent tab.  Parent tabs must include a_subtab_is_active in their active_when declaration:
+Any tab can have several subtabs associated with it that become visible when the parent tab is clicked.  Declare subtabs just like tabs, except make sure that their name ends in \_subtab.  Subtabs should be declared immediately after their parent tab.  Parent tabs must include a_subtab_is_active in their active_when declaration:
 
     tabs do
       unicorns_tab do

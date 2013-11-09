@@ -38,7 +38,7 @@ Tabulous.setup do
     # defaults to true
     # active_tab_clickable true
 
-    # what to do when there is no active tab for the currrent controller action
+    # what to do when there is no active tab for the current controller action
     # :render -- draw the tabset, even though no tab is active
     # :do_not_render -- do not draw the tabset
     # :raise_error -- raise an error
