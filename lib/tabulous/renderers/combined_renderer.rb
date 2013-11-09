@@ -6,16 +6,7 @@
 # everytime.
 
 module Tabulous
-  class CombinedRenderer
-
-    def initialize(tabset, view)
-      @view = view
-      @tabset = tabset
-    end
-
-    def tabs_html
-      raise "override me"
-    end
+  class CombinedRenderer < BaseRenderer
 
     def subtabs_html
       msg = "You have called the subtabs view helper. "
@@ -24,20 +15,6 @@ module Tabulous
       msg << "the tabs helper is called. Simply remove the call to "
       msg << "subtabs to fix this error."
       raise SubtabsHelperNotApplicable, msg
-    end
-
-  protected
-
-    def tab_html(tab)
-      raise "override me"
-    end
-
-    def tab_list_html
-      html = ''
-      for tab in @tabset.primary_tabs
-        html << tab_html(tab)
-      end
-      html
     end
 
   end

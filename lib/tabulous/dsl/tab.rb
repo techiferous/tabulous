@@ -28,6 +28,11 @@ module Tabulous
           @tab.link_path = block_given? ? block : val
         end
 
+        def http_verb(val = nil, &block)
+          @called << :http_verb
+          @tab.http_verb = block_given? ? block : val
+        end
+
         def visible_when(val = nil, &block)
           @called << :visible_when
           @tab.visible_when = block_given? ? block : val

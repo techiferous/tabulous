@@ -27,7 +27,7 @@ describe Tabulous::BootstrapRenderer do
     tabs_html = @renderer.tabs_html
     expected_html = <<-HTML.strip_heredoc
       <ul class="nav nav-tabs">
-        <li><a href="/cakes">cakes</a></li><li class="disabled"><a>cupcakes</a></li><li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">breads<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="/breads/spoonbread">spoonbread</a></li><li><a href="/breads/banana-bread">banana bread</a></li></ul></li>
+        <li><a href="/cakes" >cakes</a></li><li class="disabled"><a>cupcakes</a></li><li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">breads<b class="caret"></b></a><ul class="dropdown-menu"><li><a href="/breads/spoonbread" >spoonbread</a></li><li><a href="/breads/banana-bread" data-method="post">banana bread</a></li></ul></li>
       </ul>
     HTML
     tabs_html.should == expected_html

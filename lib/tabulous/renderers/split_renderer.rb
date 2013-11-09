@@ -9,34 +9,15 @@
 # everytime.
 
 module Tabulous
-  class SplitRenderer
+  class SplitRenderer < BaseRenderer
 
-    def initialize(tabset, view)
-      @view = view
-      @tabset = tabset
-    end
-
-    def tabs_html
-      raise "override me"
-    end
-
+    # all split renderers need to have a subtabs_html method that returns the
+    # HTML to be embedded when the <%= subtabs %> helper method is called
     def subtabs_html
       raise "override me"
     end
 
   protected
-
-    def tab_html(tab)
-      raise "override me"
-    end
-
-    def tab_list_html
-      html = ''
-      for tab in @tabset.primary_tabs
-        html << tab_html(tab)
-      end
-      html
-    end
 
     def subtab_list_html
       html = ''

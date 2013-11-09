@@ -38,16 +38,16 @@ module Tabulous
     def tab_link(tab)
       html = ''
       if tab.clickable?(@view) && tab.enabled?(@view)
-        html << %Q{<a href="#{tab.link_path(@view)}">#{tab.text(@view)}</a>}
+        html << %Q{<a href="#{tab_url(tab)}" #{tab_http_verb_attributes(tab)}>#{tab_text(tab)}</a>}
       else
-        html << %Q{<a>#{tab.text(@view)}</a>}
+        html << %Q{<a>#{tab_text(tab)}</a>}
       end
       html
     end
 
     def tab_link_with_subtabs(tab)
       html = ''
-      html << %Q{<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{tab.text(@view)}<b class="caret"></b></a>}
+      html << %Q{<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{tab_text(tab)}<b class="caret"></b></a>}
       html << %Q{<ul class="dropdown-menu">}
       for subtab in tab.subtabs
         next unless subtab.visible?(@view)

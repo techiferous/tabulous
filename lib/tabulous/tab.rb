@@ -3,13 +3,14 @@ module Tabulous
 
     attr_reader :parent
     attr_accessor :subtabs, :kind, :name, :declared_to_have_subtabs
-    attr_writer :text, :link_path, :visible_when, :enabled_when
+    attr_writer :text, :link_path, :visible_when, :enabled_when, :http_verb
 
     def initialize
       @subtabs = []
       @active_actions = {}
       @kind = :primary_tab
       @declared_to_have_subtabs = false
+      @http_verb = :get
     end
 
     def parent=(tab)
@@ -42,6 +43,19 @@ module Tabulous
       end
       unless value.is_a?(String)
         raise ImproperValueError, "The link_path of tab '#{self.name}' needs to be a string."
+      end
+      value
+    end
+
+    def http_verb(view=nil)
+      value = if @http_verb.respond_to?(:call)
+        view.instance_exec(&@http_verb)
+      else
+        @http_verb
+      end
+      value = value.to_s.downcase.to_sym
+      unless [:get, :post, :delete, :patch, :put].include?(value)
+        raise ImproperValueError, "The http_verb of tab '#{self.name}' must be :get, :post, :delete, :patch or :put."
       end
       value
     end

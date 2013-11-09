@@ -38,9 +38,9 @@ module Tabulous
         html << %Q{<li class="#{klass}">}
       end
       if tab.clickable?(@view)
-        html << %Q{<a href="#{tab.link_path(@view)}" class="tab">#{tab.text(@view)}</a>}
+        html << %Q{<a href="#{tab_url(tab)}" class="tab" #{tab_http_verb_attributes(tab)}>#{tab_text(tab)}</a>}
       else
-        html << %Q{<span class="tab">#{tab.text(@view)}</span>}
+        html << %Q{<span class="tab">#{tab_text(tab)}</span>}
       end
       html << "</li>"
       html

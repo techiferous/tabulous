@@ -44,6 +44,16 @@ describe Tabulous::Tab do
     subject.link_path(@view).should == 'some text'
   end
 
+  it "should allow http_verb to be set" do
+    subject.http_verb = :put
+    subject.http_verb.should == :put
+  end
+
+  it "should allow http_verb to be set lazily" do
+    subject.http_verb = lambda { :put }
+    subject.http_verb(@view).should == :put
+  end
+
   it "should allow visible_when to be set" do
     subject.visible_when = false
     subject.visible?.should be_false

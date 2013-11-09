@@ -45,6 +45,7 @@ module Tabulous
       @breads_tab.name = 'breads'
       @breads_tab.text = 'breads'
       @breads_tab.link_path = '/breads'
+      @breads_tab.http_verb = :delete
       @breads_tab.visible_when = true
       @breads_tab.enabled_when = true
       @tabset.add_tab(@breads_tab)
@@ -66,6 +67,7 @@ module Tabulous
       @banana_bread_tab.parent = @breads_tab
       @banana_bread_tab.text = 'banana bread'
       @banana_bread_tab.link_path = '/breads/banana-bread'
+      @banana_bread_tab.http_verb = :post
       @banana_bread_tab.visible_when = true
       @banana_bread_tab.enabled_when = true
       @banana_bread_tab.add_active_actions('breads', 'banana_bread')

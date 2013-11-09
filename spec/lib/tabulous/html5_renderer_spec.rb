@@ -35,7 +35,7 @@ describe Tabulous::Html5Renderer do
     expected_html = <<-HTML.strip_heredoc
       <nav class="tabs">
         <ul>
-          <li><a href="/cakes" class="tab">cakes</a></li><li class="disabled"><span class="tab">cupcakes</span></li><li class="active"><a href="/breads" class="tab">breads</a></li>
+          <li><a href="/cakes" class="tab" >cakes</a></li><li class="disabled"><span class="tab">cupcakes</span></li><li class="active"><a href="/breads" class="tab" data-method="delete">breads</a></li>
         </ul>
       </nav>
     HTML
@@ -47,7 +47,7 @@ describe Tabulous::Html5Renderer do
     expected_html = <<-HTML.strip_heredoc
       <nav class="subtabs">
         <ul>
-          <li class="active"><a href="/breads/spoonbread" class="tab">spoonbread</a></li><li><a href="/breads/banana-bread" class="tab">banana bread</a></li>
+          <li class="active"><a href="/breads/spoonbread" class="tab" >spoonbread</a></li><li><a href="/breads/banana-bread" class="tab" data-method="post">banana bread</a></li>
         </ul>
       </nav>
     HTML

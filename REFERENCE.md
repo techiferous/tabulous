@@ -139,7 +139,9 @@ It doesn't matter what you call a tab, but it must end in \_tab or \_subtab, and
 
 ## Tab Declarations
 
-Each tab has five declarations that you must specify.  The text, link_path, visible_when and enabled_when declarations do not need to be given a block.  If given a block, the block will be executed in the context of the layout where the tabs are rendered.
+Each tab has five required declarations (text, link_path, visible_when, enabled_when and active_when) and one optional declaration (http_verb).
+
+The text, link_path, visible_when and enabled_when declarations do not need to be given a block.  If given a block, the block will be executed in the context of the layout where the tabs are rendered.
 
 Here is an example of a tab with the five required declarations:
 
@@ -170,6 +172,16 @@ Since a block given to link_path is evaluated in the context of a view layout an
     narwhal_tab do
       ...
       link_path  { narwhal_path(params[:narwhal_id]) }  # WRONG
+      ...
+    end
+
+### http_verb
+
+http_verb is an optional declaration that must be either :get, :post, :put, :patch or :delete.  It defaults to :get.  When http_verb is not :get, a data-method attribute will be added to the tab's anchor tag.  This is useful for adding a "sign out" subtab action link, for example.
+
+    narwhals_tab do
+      ...
+      http_verb :delete
       ...
     end
 

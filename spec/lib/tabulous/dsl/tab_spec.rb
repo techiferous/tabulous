@@ -1,11 +1,12 @@
 require_relative '../../../spec_helper'
 
 describe "the tab DSL" do
-  context "with typical declarations" do
+  context "with all declarations" do
     before(:each) do
       @tab = Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         visible_when  true
         enabled_when  false
         active_when   { in_action('any').of_controller('cookies') }
@@ -28,6 +29,7 @@ describe "the tab DSL" do
     it "should use the values given" do
       @tab.text.should == 'text'
       @tab.link_path.should == 'path'
+      @tab.http_verb.should == :post
       @tab.visible?.should be_true
       @tab.enabled?.should be_false
       @tab.active?(@view).should be_true
@@ -38,6 +40,7 @@ describe "the tab DSL" do
     expect {
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         link_path     'path'
+        http_verb     :post
         visible_when  true
         enabled_when  false
         active_when   { in_action('any').of_controller('cookies') }
@@ -49,6 +52,7 @@ describe "the tab DSL" do
     expect {
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
+        http_verb     :post
         visible_when  true
         enabled_when  false
         active_when   { in_action('any').of_controller('cookies') }
@@ -56,11 +60,24 @@ describe "the tab DSL" do
     }.to raise_error(Tabulous::MissingDeclarationError)
   end
 
+  it "should not complain if 'http_verb' is missing" do
+    expect {
+      Tabulous::Dsl::Tab.process('tab_name', nil) do
+        text          'text'
+        link_path     'path'
+        visible_when  true
+        enabled_when  false
+        active_when   { in_action('any').of_controller('cookies') }
+      end
+    }.to_not raise_error(Tabulous::MissingDeclarationError)
+  end
+
   it "should complain if 'visible_when' is missing" do
     expect {
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         enabled_when  false
         active_when   { in_action('any').of_controller('cookies') }
       end
@@ -72,6 +89,7 @@ describe "the tab DSL" do
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         visible_when  true
         active_when   { in_action('any').of_controller('cookies') }
       end
@@ -83,6 +101,7 @@ describe "the tab DSL" do
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         visible_when  true
         enabled_when  false
       end
@@ -94,6 +113,7 @@ describe "the tab DSL" do
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         visible_when  true
         enabled_when  false
         active_when do
@@ -109,6 +129,7 @@ describe "the tab DSL" do
       Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :post
         visible_when  true
         enabled_when  false
         active_when   { in_actions('foo', 'bar').of_controller('cookies') }
@@ -121,6 +142,7 @@ describe "the tab DSL" do
       @tab = Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          'text'
         link_path     'path'
+        http_verb     :patch
         visible_when  true
         enabled_when  false
         active_when   { in_action('any').of_controller('cookies') }
@@ -130,6 +152,7 @@ describe "the tab DSL" do
     it "should use the values given" do
       @tab.text.should == 'text'
       @tab.link_path.should == 'path'
+      @tab.http_verb.should == :patch
       @tab.visible?.should be_true
       @tab.enabled?.should be_false
     end
@@ -140,6 +163,7 @@ describe "the tab DSL" do
       @tab = Tabulous::Dsl::Tab.process('tab_name', nil) do
         text          { 'te' + 'xt' }
         link_path     { 'path' }
+        http_verb     { :delete }
         visible_when  { 5 == 5 }
         enabled_when  { false }
         active_when   { in_action('any').of_controller('cookies') }
@@ -149,8 +173,38 @@ describe "the tab DSL" do
     it "should evaluate the values given" do
       @tab.text.should == 'text'
       @tab.link_path.should == 'path'
+      @tab.http_verb.should == :delete
       @tab.visible?.should be_true
       @tab.enabled?.should be_false
+    end
+  end
+
+  context "with no optional declarations" do
+    before(:each) do
+      @tab = Tabulous::Dsl::Tab.process('tab_name', nil) do
+        text          'text'
+        link_path     'path'
+        visible_when  true
+        enabled_when  false
+        active_when   { in_action('any').of_controller('cookies') }
+      end
+      class DummyViewContext
+        def controller_path
+          'cookies'
+        end
+        def action_name
+          'eat'
+        end
+      end
+      @view = DummyViewContext.new
+    end
+
+    context "http_verb" do
+      let(:http_verb) { @tab.http_verb }
+
+      it "should default to :get" do
+        http_verb.should == :get
+      end
     end
   end
 end
