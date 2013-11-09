@@ -255,11 +255,12 @@ This specifies the class that the tabs and subtabs view helpers use to generate 
       renderer :default
     end
 
-There are three other renderers you can use:
+There are four other renderers you can use:
 
 * **:html5** -- uses nav tags instead of divs
-* **:bootstrap** -- generates markup compatible with Twitter Bootstrap; it uses the "nav-tabs" class
-* **:bootstrap_pill** -- generates markup compatible with Twitter Bootstrap; it uses the "nav-pills" class
+* **:bootstrap** -- generates markup compatible with Twitter Bootstrap; it creates a ul tag with a "nav-tabs" class
+* **:bootstrap_pill** -- generates markup compatible with Twitter Bootstrap; it creates a ul tag with a "nav-pills" class
+* **:bootstrap_navbar** -- generates markup compatible with Twitter Bootstrap's navbar; it creates a ul tag with a "navbar-nav" class
 
 If this doesn't suit your needs, you can write your own custom renderer.  Here's an example of a custom renderer class:
 

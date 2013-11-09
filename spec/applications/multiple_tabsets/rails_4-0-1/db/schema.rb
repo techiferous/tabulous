@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131109143158) do
+ActiveRecord::Schema.define(version: 20131109165833) do
 
   create_table "galaxies_elliptical_galaxies", force: true do |t|
     t.string   "name"
