@@ -1,3 +1,9 @@
+### 2.1.0 (Nov 9, 2013)
+* Added http_verb tab declaration to support non-GET actions, like sign out links.
+* Added renderer that generates HTML compatible with Bootstrap 3's navbar.
+* Documentation tweaks.
+* Added better float-clearing styles in CSS scaffolding.
+
 ### 2.0.0 (May 12, 2013)
 * Introduced a completely new, non-backwards-compatible syntax for app/tabs/tabulous.rb.
 * You can have more than one tab navigation bar on the same page.

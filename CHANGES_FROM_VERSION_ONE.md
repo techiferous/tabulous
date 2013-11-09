@@ -19,6 +19,7 @@ There are three reasons this syntax was abandoned:
 * You can have more than one tab navigation bar on the same page.
 * You can easily customize the generated tab markup.
 * Namespaced controllers are now fully supported.
+* You can now customize the HTTP verb of a tab link.
 
 ## Changes
 
