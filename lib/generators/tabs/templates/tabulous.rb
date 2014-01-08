@@ -30,7 +30,7 @@ Tabulous.setup do
   customize do
 
     # which class to use to generate HTML
-    # :default, :html5, :bootstrap, or :bootstrap_pill
+    # :default, :html5, :bootstrap, :bootstrap_pill or :bootstrap_navbar
     # or create your own renderer class and reference it here
     # renderer :default
 
