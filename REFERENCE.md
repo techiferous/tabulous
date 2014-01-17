@@ -144,6 +144,8 @@ Each tab has five required declarations (text, link_path, visible_when, enabled_
 
 The text, link_path, visible_when and enabled_when declarations do not need to be given a block.  If given a block, the block will be executed in the context of the layout where the tabs are rendered.
 
+You can place any Ruby code in the tabulous blocks; it will be executed as if it were in a view.
+
 Here is an example of a tab with the five required declarations:
 
     unicorns_tab do
@@ -188,7 +190,11 @@ http_verb is an optional declaration that must be either :get, :post, :put, :pat
 
 ### visible_when
 
-If visible_when evaluates to false (or a falsy value like nil), the HTML for that particular tab will not be generated.
+If visible_when evaluates to false (or a falsy value like nil), the HTML for that particular tab will not be generated. This could be used to hide a tab conditionally, for instance:
+
+    visible_when  { current_user.present? }
+   
+could be used to hide a tab from anonymous users.
 
 ### enabled_when
 
