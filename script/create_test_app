@@ -30,7 +30,7 @@ app_name = ARGV[0]
 rails_version = ARGV[1]
 
 installed_rails_versions = %x{ gem list rails }
-if installed_rails_versions =~ /rails\s\((.+)\)/
+if installed_rails_versions =~ /^rails\s\((.+)\)$/
   versions = $1.split(',').map(&:strip)
   if !versions.include?(rails_version)
     abort "Rails version '#{rails_version}' is not installed. First install this version of Rails before continuing."
