@@ -4,6 +4,7 @@ require File.expand_path("../lib/tabulous/version", __FILE__)
 Gem::Specification.new do |s|
   s.name        = "tabulous"
   s.version     = Tabulous::VERSION
+  s.licenses    = ['MIT']
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Wyatt Greene"]
   s.email       = ["techiferous@gmail.com"]
