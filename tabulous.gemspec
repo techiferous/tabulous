@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec", "~> 2.13"
   s.add_development_dependency "launchy"
   s.add_development_dependency "diffy"
-  s.add_development_dependency 'sqlite3', '>= 1.3.7'
+  s.add_development_dependency 'sqlite3', '>= 1.3.9'
 
   s.files        = `git ls-files`.split("\n")
   s.require_path = 'lib'

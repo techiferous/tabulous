@@ -21,6 +21,9 @@ task :test do
   puts "To run integration specs:"
   puts "  $ script/for_all_test_apps bundle exec rake"
   puts
+  puts "To run integration specs in a Ruby 1.9 environment:"
+  puts "  due to configuration issues, integration specs no longer run for the Ruby 1.9 environment"
+  puts
   puts "To run integration specs in a Ruby 2.0 environment:"
   puts "  $ RUBY_COMPATIBILITY=2.0 script/for_all_test_apps bundle exec rake"
   puts

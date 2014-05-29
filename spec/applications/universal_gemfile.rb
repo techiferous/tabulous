@@ -10,7 +10,7 @@ def create_gemfile
   gemfile = <<-CODE.strip_heredoc
     source 'https://rubygems.org'
     gem 'tabulous', :path => "../../../.."
-    gem 'sqlite3', '>= 1.3.7'
+    gem 'sqlite3', '>= 1.3.9'
     group :test, :development do
       gem "rspec-rails"
     end
