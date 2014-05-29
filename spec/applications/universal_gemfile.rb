@@ -67,6 +67,24 @@ def create_gemfile
         gem 'minitest'
       end
     CODE
+  elsif rails_version? '4.1'
+    gemfile += <<-CODE.strip_heredoc
+      gem 'rails', '~> 4.1.1'
+      gem 'sass-rails',   '~> 4.0.3'
+      gem 'bootstrap-sass', '~> 3.0.2.0'
+      gem 'coffee-rails', '~> 4.0.0'
+      gem 'uglifier', '>= 1.3.0'
+      gem 'jquery-rails'
+      gem 'turbolinks'
+      gem 'jbuilder', '~> 2.0'
+      group :test do
+        gem 'turn', :require => false
+        gem 'minitest'
+      end
+      group :development do
+        gem 'spring'
+      end
+    CODE
   end
 
   add_file 'Gemfile', gemfile
