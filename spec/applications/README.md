@@ -56,15 +56,15 @@ would want run for this kind of test app.
 Let's say Rails 17.0.4 is released and we want to test the "main" test app
 against this.  Run this script:
 
-$ script/create_test_app main 17.0.4
+    $ script/create_test_app main 17.0.4
 
 This will create a Rails app in spec/applications/main/rails_17-0-4.  When it is
 finished generating, we can go into the new Rails app's directory and run tests
 like so:
 
-$ bundle exec rake test
-$ bundle exec rake spec
-$ bundle exec rake
+    $ bundle exec rake test
+    $ bundle exec rake spec
+    $ bundle exec rake
 
 
 
