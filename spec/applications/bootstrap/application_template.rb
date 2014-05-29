@@ -53,9 +53,7 @@ generate_test_application do
         <div class="navbar-inner">
           <div class="container">
             <a class="brand" href="#">Tabulous Bootstrap Test App</a>
-            <div class="nav-collapse collapse">
-              <%= tabs %>
-            </div>
+            <%= tabs %>
           </div>
         </div>
       </div>
