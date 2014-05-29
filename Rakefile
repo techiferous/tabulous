@@ -19,13 +19,13 @@ end
 task :test do
   puts
   puts "To run integration specs:"
-  puts "  $ script/for_all_test_apps rake"
+  puts "  $ script/for_all_test_apps bundle exec rake"
   puts
   puts "To run integration specs in a Ruby 2.0 environment:"
-  puts "  $ RUBY_COMPATIBILITY=2.0 script/for_all_test_apps rake"
+  puts "  $ RUBY_COMPATIBILITY=2.0 script/for_all_test_apps bundle exec rake"
   puts
   puts "To run unit specs:"
-  puts "  $ rake spec:units"
+  puts "  $ bundle exec rake spec:units"
   puts
   puts "You may need to run this first before the integration specs will pass:"
   puts "  $ script/for_all_test_apps bundle install"
