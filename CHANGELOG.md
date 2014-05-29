@@ -1,3 +1,6 @@
+### 2.1.1 (May 28, 2014)
+* Added support for Rails 4.1 and Ruby 2.1.
+
 ### 2.1.0 (Nov 9, 2013)
 * Added http_verb tab declaration to support non-GET actions, like sign out links.
 * Added renderer that generates HTML compatible with Bootstrap 3's navbar.
