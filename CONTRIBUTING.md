@@ -8,7 +8,7 @@ Pull requests are welcome.  If you want your pull request to be more than a disc
 
 * your code should be well-written and follow the style of the rest of the tabulous code
 * you should write new specs for your code if existing specs do not offer good coverage
-* you should make sure the specs pass in all versions of Rails 3.0 or later and Ruby 2.0 and 2.1
+* you should make sure the specs pass in all versions of Rails 3.0 or later and all versions of Ruby 1.9 and later
 
 ## Running Specs
 
