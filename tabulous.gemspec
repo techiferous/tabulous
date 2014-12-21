@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "tabulous"
 
   s.add_dependency "colored", "~> 1.2.0"
-  s.add_dependency "rails", ">= 3.0", "< 4.2.0"
+  s.add_dependency "rails", ">= 3.0", "< 5.0.0"
   s.add_development_dependency "bundler", "~> 1.3"
   s.add_development_dependency "capybara", "~> 2.0.2"
   s.add_development_dependency "rake"

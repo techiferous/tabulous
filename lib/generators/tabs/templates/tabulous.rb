@@ -12,6 +12,7 @@ Tabulous.setup do
 <% unique_routes.keys.each do |controller_name| -%>
 <% next if controller_name == 'rails/info' -%>
 <% next if controller_name == 'rails/welcome' -%>
+<% next if controller_name == 'rails/mailers' -%>
 <% next if unique_routes[controller_name].nil? -%>
 <% underscored_name = controller_name.gsub('/', '_')
    title = underscored_name.titleize

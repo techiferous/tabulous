@@ -6,7 +6,7 @@ Tabulous provides an easy way to add tabs to your Rails application.
 
 ## Requirements
 
-Tabulous works with Rails 3.0, 3.1, 3.2, 4.0 and 4.1.  It has been tested on MRI Ruby 2.2.0, 2.1.2, 2.0.0, and 1.9.3.  It does not work with Ruby 1.8.
+Tabulous works with Rails 4.2, 4.1, 4.0, 3.2, 3.1 and 3.0.  It has been tested on MRI Ruby 2.2.0, 2.1.2, 2.0.0, and 1.9.3.  It does not work with Ruby 1.8.
 
 ## Getting Started
 

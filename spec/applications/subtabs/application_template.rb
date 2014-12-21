@@ -82,4 +82,18 @@ generate_test_application do
     </html>
   CODE
 
+  #*****************************************************************************
+  #  APP CONFIG
+
+  if !rails_version?('3.0') &&
+     !rails_version?('3.1') &&
+     !rails_version?('3.2') &&
+     !rails_version?('4.0') &&
+     !rails_version?('4.1')
+    inject_into_file 'config/initializers/assets.rb', after: "# Rails.application.config.assets.precompile += %w( search.js )\n" do <<-RUBY
+        Rails.application.config.assets.precompile += %w( reset.css )
+      RUBY
+    end
+  end
+
 end

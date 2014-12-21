@@ -17,7 +17,7 @@ include FileUtils
 command = ARGV.join(' ')
 
 if ENV['RUBY_COMPATIBILITY'] == '2.2'
-  apps_to_test = Dir['spec/applications/*/rails_4-1*']
+  apps_to_test = Dir['spec/applications/*/rails_4-1*'] + Dir['spec/applications/*/rails_4-2*']
 elsif ENV['RUBY_COMPATIBILITY'] == '2.1'
   apps_to_test = Dir['spec/applications/*/rails_4*']
 elsif ENV['RUBY_COMPATIBILITY'] == '2.0'
