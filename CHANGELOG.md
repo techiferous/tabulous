@@ -1,3 +1,6 @@
+### 2.1.3 (Dec 22, 2014)
+* Tweaking .yardopts file to get documentation working on rubydoc.info.
+
 ### 2.1.2 (Dec 22, 2014)
 * Added support for Rails 4.2 and Ruby 2.2.
 
