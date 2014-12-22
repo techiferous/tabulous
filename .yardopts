@@ -1,5 +1,6 @@
+--exclude lib/generators/tabs/templates/tabulous.rb
 --readme README.md
-'lib/**/*.rb'
+lib/**/*.rb
 -
 CHANGELOG.md
 CHANGES_FROM_VERSION_ONE.md
