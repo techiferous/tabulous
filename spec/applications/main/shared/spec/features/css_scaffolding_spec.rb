@@ -83,10 +83,10 @@ describe 'css scaffolding' do
     it 'should not prevent the app from working' do
       active_tab.should == 'Explanation'
       click_link 'Galaxies'
-      page.should have_content('Listing galaxies')
+      page.should have_content('Listing Galaxies')
       active_tab.should == 'Galaxies'
       click_link 'Planets'
-      page.should have_content('Listing planets')
+      page.should have_content('Listing Planets')
       active_tab.should == 'Planets'
     end
   end

@@ -15,9 +15,9 @@ describe 'galaxies tab' do
     click_link 'Galaxies'
   end
   it 'should work' do
-    page.should have_content('Listing galaxies')
-    page.should_not have_content('Listing stars')
-    page.should_not have_content('Listing planets')
+    page.should have_content('Listing Galaxies')
+    page.should_not have_content('Listing Stars')
+    page.should_not have_content('Listing Planets')
   end
 end
 
@@ -27,9 +27,9 @@ describe 'stars tab' do
     click_link 'Stars'
   end
   it 'should work' do
-    page.should_not have_content('Listing galaxies')
-    page.should have_content('Listing stars')
-    page.should_not have_content('Listing planets')
+    page.should_not have_content('Listing Galaxies')
+    page.should have_content('Listing Stars')
+    page.should_not have_content('Listing Planets')
   end
 end
 
@@ -39,8 +39,8 @@ describe 'planets tab' do
     click_link 'Planets'
   end
   it 'should work' do
-    page.should_not have_content('Listing galaxies')
-    page.should_not have_content('Listing stars')
-    page.should have_content('Listing planets')
+    page.should_not have_content('Listing Galaxies')
+    page.should_not have_content('Listing Stars')
+    page.should have_content('Listing Planets')
   end
 end

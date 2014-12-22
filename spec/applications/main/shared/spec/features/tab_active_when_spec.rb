@@ -99,7 +99,7 @@ describe 'a tab' do
       context 'when visiting that action' do
         before(:each) { click_link 'Stars' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing stars')
+          page.should have_content('Listing Stars')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Stars'
@@ -111,7 +111,7 @@ describe 'a tab' do
       context 'when visiting an action' do
         before(:each) { click_link 'Galaxies' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing galaxies')
+          page.should have_content('Listing Galaxies')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Planets'
@@ -123,7 +123,7 @@ describe 'a tab' do
           click_link 'New Galaxy'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('New galaxy')
+          page.should have_content('New Galaxy')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Planets'
@@ -135,7 +135,7 @@ describe 'a tab' do
       context 'when visiting the first action' do
         before(:each) { click_link 'Planets' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing planets')
+          page.should have_content('Listing Planets')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Galaxies'
@@ -147,7 +147,7 @@ describe 'a tab' do
           click_link 'New Planet'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('New planet')
+          page.should have_content('New Planet')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Galaxies'

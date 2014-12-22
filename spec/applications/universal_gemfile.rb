@@ -15,7 +15,7 @@ def create_gemfile
       gem "rspec-rails"
     end
     group :test do
-      gem 'capybara', "~> 2.0.2"
+      gem 'capybara', "~> 2.2.0"
       gem 'launchy'
     end
   CODE

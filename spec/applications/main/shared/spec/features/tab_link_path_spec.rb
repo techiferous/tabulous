@@ -81,17 +81,17 @@ describe 'a tab' do
 
   it 'can be be assigned a link path' do
     click_link 'Galaxies'
-    page.should have_content('Listing galaxies')
+    page.should have_content('Listing Galaxies')
     click_link 'Planets'
-    page.should have_content('Listing planets')
+    page.should have_content('Listing Planets')
   end
 
   it 'can be assigned a link path dynamically' do
     click_link 'Stars'
-    page.should have_content('Listing planets')
+    page.should have_content('Listing Planets')
     click_link 'Galaxies'
     click_link 'Stars'
-    page.should have_content('Listing stars')
+    page.should have_content('Listing Stars')
   end
 
   context 'that is a subtab' do
