@@ -1,3 +1,6 @@
+### 2.1.2 (Dec 22, 2014)
+* Added support for Rails 4.2 and Ruby 2.2.
+
 ### 2.1.1 (May 28, 2014)
 * Added support for Rails 4.1 and Ruby 2.1.
 
