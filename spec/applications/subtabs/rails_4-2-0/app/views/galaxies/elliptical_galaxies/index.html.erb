@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Galaxies Elliptical Galaxies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @galaxies_elliptical_galaxies.each do |galaxies_elliptical_galaxy| %>
+      <tr>
+        <td><%= galaxies_elliptical_galaxy.name %></td>
+        <td><%= link_to 'Show', galaxies_elliptical_galaxy %></td>
+        <td><%= link_to 'Edit', edit_galaxies_elliptical_galaxy_path(galaxies_elliptical_galaxy) %></td>
+        <td><%= link_to 'Destroy', galaxies_elliptical_galaxy, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Elliptical galaxy', new_galaxies_elliptical_galaxy_path %>

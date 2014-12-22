@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap</title>
+  <%= csrf_meta_tag %>
+  <%= stylesheet_link_tag 'application' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body>
+
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="#">Tabulous Bootstrap Test App</a>
+        <%= tabs %>
+      </div>
+    </div>
+  </div>
+
+  <div id="main_content" class="container">
+    <%= yield %>
+  </div>
+
+</body>
+</html>
