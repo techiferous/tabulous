@@ -1,3 +1,7 @@
+### 2.1.4 (Aug 6, 2016)
+* Added support for Rails 5.0 and Ruby 2.3.
+* Dropped support for Rails 3 and Ruby 1.9.
+
 ### 2.1.3 (Dec 22, 2014)
 * Tweaking .yardopts file to get documentation working on rubydoc.info.
 
