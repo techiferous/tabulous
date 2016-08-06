@@ -76,12 +76,16 @@ def use_the_right_gemfile
 end
 
 def make_adjustments_per_rails_version
-  if rails_version? '3.1'
-    gsub_file 'config/environments/development.rb', 'config.active_record.mass_assignment_sanitizer', '# config.active_record.mass_assignment_sanitizer'
-    gsub_file 'config/environments/development.rb', 'config.active_record.auto_explain_threshold_in_seconds', '# config.active_record.auto_explain_threshold_in_seconds'
-    gsub_file 'config/environments/test.rb', 'config.active_record.mass_assignment_sanitizer', '# config.active_record.mass_assignment_sanitizer'
-    gsub_file 'config/environments/test.rb', 'config.active_record.auto_explain_threshold_in_seconds', '# config.active_record.auto_explain_threshold_in_seconds'
-  end
+  # We no longer maintain automated tests for Rails 3, so the following code is obsolete.
+  # However, we will keep it here as an example of how to deal with the differences between
+  # major versions of Rails that sometimes come up.
+  #
+  # if rails_version? '3.1'
+  #   gsub_file 'config/environments/development.rb', 'config.active_record.mass_assignment_sanitizer', '# config.active_record.mass_assignment_sanitizer'
+  #   gsub_file 'config/environments/development.rb', 'config.active_record.auto_explain_threshold_in_seconds', '# config.active_record.auto_explain_threshold_in_seconds'
+  #   gsub_file 'config/environments/test.rb', 'config.active_record.mass_assignment_sanitizer', '# config.active_record.mass_assignment_sanitizer'
+  #   gsub_file 'config/environments/test.rb', 'config.active_record.auto_explain_threshold_in_seconds', '# config.active_record.auto_explain_threshold_in_seconds'
+  # end
 end
 
 def install_gems
