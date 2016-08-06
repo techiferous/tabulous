@@ -1,0 +1,1 @@
+json.array! @exoplanets, partial: 'exoplanets/exoplanet', as: :exoplanet

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Rogue Planets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rogue_planets.each do |rogue_planet| %>
+      <tr>
+        <td><%= rogue_planet.name %></td>
+        <td><%= link_to 'Show', rogue_planet %></td>
+        <td><%= link_to 'Edit', edit_rogue_planet_path(rogue_planet) %></td>
+        <td><%= link_to 'Destroy', rogue_planet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rogue Planet', new_rogue_planet_path %>

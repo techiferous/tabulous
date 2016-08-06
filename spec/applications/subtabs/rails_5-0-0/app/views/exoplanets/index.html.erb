@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Exoplanets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @exoplanets.each do |exoplanet| %>
+      <tr>
+        <td><%= exoplanet.name %></td>
+        <td><%= link_to 'Show', exoplanet %></td>
+        <td><%= link_to 'Edit', edit_exoplanet_path(exoplanet) %></td>
+        <td><%= link_to 'Destroy', exoplanet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Exoplanet', new_exoplanet_path %>

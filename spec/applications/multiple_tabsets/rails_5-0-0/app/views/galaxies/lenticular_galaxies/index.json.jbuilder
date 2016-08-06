@@ -1,0 +1,1 @@
+json.array! @galaxies_lenticular_galaxies, partial: 'galaxies_lenticular_galaxies/galaxies_lenticular_galaxy', as: :galaxies_lenticular_galaxy

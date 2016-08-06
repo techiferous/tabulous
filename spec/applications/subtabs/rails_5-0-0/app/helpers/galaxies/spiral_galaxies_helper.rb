@@ -1,0 +1,2 @@
+module Galaxies::SpiralGalaxiesHelper
+end

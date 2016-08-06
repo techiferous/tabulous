@@ -1,0 +1,22 @@
+<%= form_for(galaxy) do |f| %>
+  <% if galaxy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(galaxy.errors.count, "error") %> prohibited this galaxy from being saved:</h2>
+
+      <ul>
+      <% galaxy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

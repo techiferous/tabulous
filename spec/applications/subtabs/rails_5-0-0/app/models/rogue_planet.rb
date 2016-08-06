@@ -1,0 +1,2 @@
+class RoguePlanet < ApplicationRecord
+end

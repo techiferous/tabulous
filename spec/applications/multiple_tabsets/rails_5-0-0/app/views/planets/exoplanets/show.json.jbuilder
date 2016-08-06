@@ -1,0 +1,1 @@
+json.partial! "planets_exoplanets/planets_exoplanet", planets_exoplanet: @planets_exoplanet

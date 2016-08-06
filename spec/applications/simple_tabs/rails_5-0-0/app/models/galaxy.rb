@@ -1,0 +1,2 @@
+class Galaxy < ApplicationRecord
+end

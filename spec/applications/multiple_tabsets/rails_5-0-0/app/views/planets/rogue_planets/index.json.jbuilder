@@ -1,0 +1,1 @@
+json.array! @planets_rogue_planets, partial: 'planets_rogue_planets/planets_rogue_planet', as: :planets_rogue_planet

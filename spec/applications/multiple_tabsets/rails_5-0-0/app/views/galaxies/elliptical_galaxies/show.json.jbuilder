@@ -1,0 +1,1 @@
+json.partial! "galaxies_elliptical_galaxies/galaxies_elliptical_galaxy", galaxies_elliptical_galaxy: @galaxies_elliptical_galaxy

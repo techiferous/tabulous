@@ -1,0 +1,1 @@
+json.partial! "planets_rogue_planets/planets_rogue_planet", planets_rogue_planet: @planets_rogue_planet

@@ -1,0 +1,2 @@
+class Exoplanet < ApplicationRecord
+end
