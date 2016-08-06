@@ -1,2 +1,0 @@
-module Galaxies::LenticularGalaxiesHelper
-end

@@ -1,2 +1,0 @@
-module Galaxies::EllipticalGalaxiesHelper
-end

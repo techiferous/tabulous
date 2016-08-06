@@ -1,2 +1,0 @@
-module Planets::RoguePlanetsHelper
-end
