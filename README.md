@@ -4,6 +4,11 @@
 
 Tabulous provides an easy way to add tabs to your Rails application.
 
+## Future
+
+Future support for tabulous is uncertain, so you may not want to start a new project with it.
+See [FUTURE](FUTURE.md) for details.
+
 ## Requirements
 
 Tabulous officially supports Rails 5.0, 4.2, 4.1, 4.0 and MRI Ruby 2.3, 2.2, 2.1 and 2.0.
