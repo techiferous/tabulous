@@ -24,11 +24,11 @@ describe 'subtabs' do
   it 'should be selectable' do
     visit '/'
     click_link 'Galaxies'
-    page.should have_content(/listing.+elliptical.+galaxies/i)
+    page.should have_content(/new.+galaxies.+elliptical.+galaxy/i)
     click_link 'Spiral Galaxies'
-    page.should have_content(/listing.+spiral.+galaxies/i)
+    page.should have_content(/new.+galaxies.+spiral.+galaxy/i)
     click_link 'Lenticular Galaxies'
-    page.should have_content(/listing.+lenticular.+galaxies/i)
+    page.should have_content(/new.+galaxies.+lenticular.+galaxy/i)
   end
 end
 

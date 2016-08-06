@@ -99,7 +99,7 @@ describe 'a tab' do
       context 'when visiting that action' do
         before(:each) { click_link 'Stars' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing Stars')
+          page.should have_content('New Star')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Stars'
@@ -111,7 +111,7 @@ describe 'a tab' do
       context 'when visiting an action' do
         before(:each) { click_link 'Galaxies' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing Galaxies')
+          page.should have_content('New Galaxy')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Planets'
@@ -135,7 +135,7 @@ describe 'a tab' do
       context 'when visiting the first action' do
         before(:each) { click_link 'Planets' }
         it 'should render the view associated with that action' do
-          page.should have_content('Listing Planets')
+          page.should have_content('New Planet')
         end
         it 'should activate the tab associated with that action' do
           active_tab.should == 'Galaxies'
