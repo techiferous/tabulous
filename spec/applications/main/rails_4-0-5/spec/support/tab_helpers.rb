@@ -41,11 +41,11 @@ module TabHelpers
   end
 
   def subtabs_should_be_present
-    page.all('.subtabs', :visible => false).should_not be_empty
+    expect(page.all('.subtabs', :visible => false)).to_not be_empty
   end
 
   def subtabs_should_not_be_present
-    page.all('.subtabs', :visible => false).should be_empty
+    expect(page.all('.subtabs', :visible => false)).to be_empty
   end
 
 end

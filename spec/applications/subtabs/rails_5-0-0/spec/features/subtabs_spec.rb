@@ -6,7 +6,7 @@ describe 'home tab' do
     visit '/'
   end
   it 'should work' do
-    page.should have_content('Explanation')
+    expect(page).to have_content('Explanation')
   end
 end
 
@@ -16,19 +16,19 @@ describe 'subtabs' do
   it 'should display' do
     visit '/'
     click_link 'Galaxies'
-    page.should have_content('Elliptical Galaxies')
-    page.should have_content('Spiral Galaxies')
-    page.should have_content('Lenticular Galaxies')
+    expect(page).to have_content('Elliptical Galaxies')
+    expect(page).to have_content('Spiral Galaxies')
+    expect(page).to have_content('Lenticular Galaxies')
   end
 
   it 'should be selectable' do
     visit '/'
     click_link 'Galaxies'
-    page.should have_content(/new.+galaxies.+elliptical.+galaxy/i)
+    expect(page).to have_content(/new.+galaxies.+elliptical.+galaxy/i)
     click_link 'Spiral Galaxies'
-    page.should have_content(/new.+galaxies.+spiral.+galaxy/i)
+    expect(page).to have_content(/new.+galaxies.+spiral.+galaxy/i)
     click_link 'Lenticular Galaxies'
-    page.should have_content(/new.+galaxies.+lenticular.+galaxy/i)
+    expect(page).to have_content(/new.+galaxies.+lenticular.+galaxy/i)
   end
 end
 
@@ -37,33 +37,33 @@ describe 'tabs and subtabs' do
 
   it 'can be hidden' do
     visit '/'
-    visible_tabs.should_not include('Hidden')
+    expect(visible_tabs).not_to include('Hidden')
     click_link 'Galaxies'
-    visible_tabs.should include('Hidden')
+    expect(visible_tabs).to include('Hidden')
     click_link 'Planets'
-    visible_tabs.should_not include('Hidden')
+    expect(visible_tabs).not_to include('Hidden')
     click_link 'Galaxies'
     click_link 'Hidden'
-    visible_subtabs.should include('Always Visible')
-    visible_subtabs.should_not include('Always Hidden')
+    expect(visible_subtabs).to include('Always Visible')
+    expect(visible_subtabs).not_to include('Always Hidden')
   end
 
   it 'can be disabled' do
     visit '/'
-    disabled_tabs.should include('Disabled')
+    expect(disabled_tabs).to include('Disabled')
     click_link 'Stars'
-    enabled_tabs.should include('Disabled')
+    expect(enabled_tabs).to include('Disabled')
     visit '/'
     click_link 'Stars'
     click_link 'Disabled'
-    enabled_subtabs.should include('Always Enabled')
-    disabled_subtabs.should include('Always Disabled')
+    expect(enabled_subtabs).to include('Always Enabled')
+    expect(disabled_subtabs).to include('Always Disabled')
   end
 
   it 'can change the display text dynamically' do
     visit '/'
     click_link 'Stars'
-    visible_tabs.should include('Stars!')
-    visible_tabs.should_not include('Stars')
+    expect(visible_tabs).to include('Stars!')
+    expect(visible_tabs).not_to include('Stars')
   end
 end

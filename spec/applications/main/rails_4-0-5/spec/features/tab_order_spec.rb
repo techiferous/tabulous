@@ -81,14 +81,14 @@ describe 'ordering' do
 
   context 'of tabs' do
     it 'should follow the order they were declared' do
-      page.find('.tabs').text.should == "ExplanationGalaxiesStarsPlanetsSubtabs"
+      expect(page.find('.tabs').text).to be == "ExplanationGalaxiesStarsPlanetsSubtabs"
     end
   end
 
   context 'of subtabs' do
     before(:each) { click_link 'Subtabs' }
     it 'should follow the order they were declared' do
-      page.find('.subtabs').text.should == "OneTwoThree"
+      expect(page.find('.subtabs').text).to be == "OneTwoThree"
     end
   end
 end

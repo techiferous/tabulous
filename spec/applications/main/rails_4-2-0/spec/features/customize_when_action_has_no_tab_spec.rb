@@ -96,8 +96,8 @@ describe 'when_action_has_no_tab' do
     context 'visiting a route that has no controller action listed in tabulous' do
       before(:each) { visit '/notabs' }
       it 'should add the tab navigation markup to the page' do
-        page.should have_css('.tabs')
-        visible_tabs.should match_array( %w( Explanation Galaxies Stars Planets Subtabs ) )
+        expect(page).to have_css('.tabs')
+        expect(visible_tabs).to match_array( %w( Explanation Galaxies Stars Planets Subtabs ) )
       end
     end
   end
@@ -107,8 +107,8 @@ describe 'when_action_has_no_tab' do
     context 'visiting a route that has no controller action listed in tabulous' do
       before(:each) { visit '/notabs' }
       it 'should not add the tab navigation markup to the page' do
-        page.should_not have_css('.tabs')
-        visible_tabs.should be_empty
+        expect(page).not_to have_css('.tabs')
+        expect(visible_tabs).to be_empty
       end
     end
   end

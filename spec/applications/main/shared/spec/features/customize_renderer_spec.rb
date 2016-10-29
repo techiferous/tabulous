@@ -86,22 +86,22 @@ describe 'renderer' do
   context 'when html5' do
     before(:each) { init(:html5) }
     it 'should have html5 markup' do
-      page.should_not have_css('div.tabs')
-      page.should have_css('nav.tabs')
+      expect(page).to_not have_css('div.tabs')
+      expect(page).to have_css('nav.tabs')
       click_link 'Subtabs'
-      page.should_not have_css('div.subtabs')
-      page.should have_css('nav.subtabs')
+      expect(page).to_not have_css('div.subtabs')
+      expect(page).to have_css('nav.subtabs')
     end
   end
 
   context 'when default' do
     before(:each) { init(:default) }
     it 'should not have html5 markup' do
-      page.should have_css('div.tabs')
-      page.should_not have_css('nav.tabs')
+      expect(page).to have_css('div.tabs')
+      expect(page).to_not have_css('nav.tabs')
       click_link 'Subtabs'
-      page.should have_css('div.subtabs')
-      page.should_not have_css('nav.subtabs')
+      expect(page).to have_css('div.subtabs')
+      expect(page).to_not have_css('nav.subtabs')
     end
   end
 end

@@ -5,7 +5,7 @@ describe 'home tab' do
     visit '/'
   end
   it 'should work' do
-    page.should have_content('This tests the most basic usage of tabulous.')
+    expect(page).to have_content('This tests the most basic usage of tabulous.')
   end
 end
 
@@ -15,9 +15,9 @@ describe 'galaxies tab' do
     click_link 'Galaxies'
   end
   it 'should work' do
-    page.should have_content('Listing Galaxies')
-    page.should_not have_content('Listing Stars')
-    page.should_not have_content('Listing Planets')
+    expect(page).to have_content('New Galaxy')
+    expect(page).not_to have_content('New Star')
+    expect(page).not_to have_content('New Planet')
   end
 end
 
@@ -27,9 +27,9 @@ describe 'stars tab' do
     click_link 'Stars'
   end
   it 'should work' do
-    page.should_not have_content('Listing Galaxies')
-    page.should have_content('Listing Stars')
-    page.should_not have_content('Listing Planets')
+    expect(page).not_to have_content('New Galaxy')
+    expect(page).to have_content('New Star')
+    expect(page).not_to have_content('New Planet')
   end
 end
 
@@ -39,8 +39,8 @@ describe 'planets tab' do
     click_link 'Planets'
   end
   it 'should work' do
-    page.should_not have_content('Listing Galaxies')
-    page.should_not have_content('Listing Stars')
-    page.should have_content('Listing Planets')
+    expect(page).not_to have_content('New Galaxy')
+    expect(page).not_to have_content('New Star')
+    expect(page).to have_content('New Planet')
   end
 end

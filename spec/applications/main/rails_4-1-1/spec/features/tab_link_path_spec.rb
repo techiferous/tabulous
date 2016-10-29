@@ -81,33 +81,33 @@ describe 'a tab' do
 
   it 'can be be assigned a link path' do
     click_link 'Galaxies'
-    page.should have_content('Listing galaxies')
+    expect(page).to have_content('Listing galaxies')
     click_link 'Planets'
-    page.should have_content('Listing planets')
+    expect(page).to have_content('Listing planets')
   end
 
   it 'can be assigned a link path dynamically' do
     click_link 'Stars'
-    page.should have_content('Listing planets')
+    expect(page).to have_content('Listing planets')
     click_link 'Galaxies'
     click_link 'Stars'
-    page.should have_content('Listing stars')
+    expect(page).to have_content('Listing stars')
   end
 
   context 'that is a subtab' do
     it 'can be be assigned a link path' do
       click_link 'Subtabs'
       click_link 'Two'
-      page.should have_content('Subtab #2')
+      expect(page).to have_content('Subtab #2')
       click_link 'One'
-      page.should have_content('Subtab #1')
+      expect(page).to have_content('Subtab #1')
     end
 
     it 'can be assigned a link path dynamically' do
       visit '/'
       click_link 'Subtabs'
       click_link 'Three'
-      page.should have_content('Subtab #3')
+      expect(page).to have_content('Subtab #3')
     end
   end
 

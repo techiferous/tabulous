@@ -81,13 +81,13 @@ describe 'css scaffolding' do
     end
 
     it 'should not prevent the app from working' do
-      active_tab.should == 'Explanation'
+      expect(active_tab).to be == 'Explanation'
       click_link 'Galaxies'
-      page.should have_content('Listing Galaxies')
-      active_tab.should == 'Galaxies'
+      expect(page).to have_content('Listing Galaxies')
+      expect(active_tab).to be == 'Galaxies'
       click_link 'Planets'
-      page.should have_content('Listing Planets')
-      active_tab.should == 'Planets'
+      expect(page).to have_content('Listing Planets')
+      expect(active_tab).to be == 'Planets'
     end
   end
 
@@ -181,12 +181,12 @@ describe 'css scaffolding' do
         # the scaffolding styles are not really a core part of the value of tabulous so we
         # only test that we can set the colors; we don't actually test that the colors
         # are used
-        Tabulous::Config.background_color.should == '#000'
-        Tabulous::Config.text_color.should == '#111'
-        Tabulous::Config.active_tab_color.should == '#222'
-        Tabulous::Config.hover_tab_color.should == '#333'
-        Tabulous::Config.inactive_tab_color.should == 'red'
-        Tabulous::Config.inactive_text_color.should == 'blue'
+        expect(Tabulous::Config.background_color).to be == '#000'
+        expect(Tabulous::Config.text_color).to be == '#111'
+        expect(Tabulous::Config.active_tab_color).to be == '#222'
+        expect(Tabulous::Config.hover_tab_color).to be == '#333'
+        expect(Tabulous::Config.inactive_tab_color).to be == 'red'
+        expect(Tabulous::Config.inactive_text_color).to be == 'blue'
       end
     end
   end

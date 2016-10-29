@@ -81,33 +81,33 @@ describe 'a tab' do
 
   it 'can be disabled' do
     # enabled
-    enabled_tabs.should include('Explanation')
-    enabled_tabs.should include('Galaxies')
-    enabled_tabs.should include('Subtabs')
+    expect(enabled_tabs).to include('Explanation')
+    expect(enabled_tabs).to include('Galaxies')
+    expect(enabled_tabs).to include('Subtabs')
     # disabled
-    disabled_tabs.should include('Planets')
+    expect(disabled_tabs).to include('Planets')
   end
 
   it 'can be disabled dynamically' do
-    disabled_tabs.should include('Stars')
+    expect(disabled_tabs).to include('Stars')
     click_link 'Galaxies'
-    disabled_tabs.should include('Stars')
+    expect(disabled_tabs).to include('Stars')
     click_link 'Subtabs'
-    enabled_tabs.should include('Stars')
+    expect(enabled_tabs).to include('Stars')
     click_link 'Stars'
-    enabled_tabs.should include('Stars')
+    expect(enabled_tabs).to include('Stars')
   end
 
   context 'that is a subtab' do
     it 'can be disabled' do
       click_link 'Subtabs'
-      enabled_subtabs.should include('One')
-      disabled_subtabs.should include('Two')
+      expect(enabled_subtabs).to include('One')
+      expect(disabled_subtabs).to include('Two')
     end
 
     it 'can be disabled dynamically' do
       click_link 'Subtabs'
-      enabled_subtabs.should include('Three')
+      expect(enabled_subtabs).to include('Three')
     end
   end
 
