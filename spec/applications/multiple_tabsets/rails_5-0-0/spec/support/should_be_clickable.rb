@@ -5,7 +5,7 @@ RSpec::Matchers.define :be_clickable do
     !clickable_tab.empty? || !clickable_subtab.empty?
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     "expected that a tab or subtab with the text '#{tab_text}' would be clickable"
   end
 
