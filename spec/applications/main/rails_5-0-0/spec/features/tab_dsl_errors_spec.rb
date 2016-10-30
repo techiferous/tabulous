@@ -141,7 +141,7 @@ describe 'tab DSL' do
       }
     end
     it "should raise an error" do
-      expect { visit '/' }.to raise_error
+      expect { visit '/' }.to raise_error(ActionView::Template::Error)
     end
   end
 
@@ -170,7 +170,7 @@ describe 'tab DSL' do
       }
     end
     it "should raise an error" do
-      expect { visit '/' }.to raise_error
+      expect { visit '/' }.to raise_error(ActionView::Template::Error)
     end
   end
 
