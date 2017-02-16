@@ -81,33 +81,33 @@ describe 'a tab' do
 
   it 'can be hidden' do
     # visible
-    visible_tabs.should include('Explanation')
-    visible_tabs.should include('Galaxies')
-    visible_tabs.should include('Subtabs')
+    expect(visible_tabs).to include('Explanation')
+    expect(visible_tabs).to include('Galaxies')
+    expect(visible_tabs).to include('Subtabs')
     # hidden
-    visible_tabs.should_not include('Planets')
+    expect(visible_tabs).not_to include('Planets')
   end
 
   it 'can be hidden dynamically' do
-    visible_tabs.should_not include('Stars')
+    expect(visible_tabs).not_to include('Stars')
     click_link 'Galaxies'
-    visible_tabs.should include('Stars')
+    expect(visible_tabs).to include('Stars')
     click_link 'Stars'
-    visible_tabs.should include('Stars')
+    expect(visible_tabs).to include('Stars')
     click_link 'Subtabs'
-    visible_tabs.should include('Stars')
+    expect(visible_tabs).to include('Stars')
   end
 
   context 'that is a subtab' do
     it 'can be hidden' do
       click_link 'Subtabs'
-      visible_subtabs.should include('One')
-      visible_subtabs.should_not include('Two')
+      expect(visible_subtabs).to include('One')
+      expect(visible_subtabs).not_to include('Two')
     end
 
     it 'can be hidden dynamically' do
       click_link 'Subtabs'
-      visible_subtabs.should_not include('Three')
+      expect(visible_subtabs).not_to include('Three')
     end
   end
 

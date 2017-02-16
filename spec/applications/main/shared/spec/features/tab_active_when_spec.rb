@@ -87,10 +87,10 @@ describe 'a tab' do
       context 'when visiting that implied action' do
         before(:each) { visit '/' }
         it 'should render the view associated with that action' do
-          page.should have_content('This tests tabulous in all sorts of configurations.')
+          expect(page).to have_content('This tests tabulous in all sorts of configurations.')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Explanation'
+          expect(active_tab).to be == 'Explanation'
         end
       end
     end
@@ -99,10 +99,10 @@ describe 'a tab' do
       context 'when visiting that action' do
         before(:each) { click_link 'Stars' }
         it 'should render the view associated with that action' do
-          page.should have_content('New Star')
+          expect(page).to have_content('New Star')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Stars'
+          expect(active_tab).to be == 'Stars'
         end
       end
     end
@@ -111,10 +111,10 @@ describe 'a tab' do
       context 'when visiting an action' do
         before(:each) { click_link 'Galaxies' }
         it 'should render the view associated with that action' do
-          page.should have_content('New Galaxy')
+          expect(page).to have_content('New Galaxy')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Planets'
+          expect(active_tab).to be == 'Planets'
         end
       end
       context 'when visiting another action' do
@@ -123,10 +123,10 @@ describe 'a tab' do
           click_link 'New Galaxy'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('New Galaxy')
+          expect(page).to have_content('New Galaxy')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Planets'
+          expect(active_tab).to be == 'Planets'
         end
       end
     end
@@ -135,10 +135,10 @@ describe 'a tab' do
       context 'when visiting the first action' do
         before(:each) { click_link 'Planets' }
         it 'should render the view associated with that action' do
-          page.should have_content('New Planet')
+          expect(page).to have_content('New Planet')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Galaxies'
+          expect(active_tab).to be == 'Galaxies'
         end
       end
       context 'when visiting the second action' do
@@ -147,10 +147,10 @@ describe 'a tab' do
           click_link 'New Planet'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('New Planet')
+          expect(page).to have_content('New Planet')
         end
         it 'should activate the tab associated with that action' do
-          active_tab.should == 'Galaxies'
+          expect(active_tab).to be == 'Galaxies'
         end
       end
     end
@@ -162,10 +162,10 @@ describe 'a tab' do
           click_link 'Two'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('Subtab #2')
+          expect(page).to have_content('Subtab #2')
         end
         it 'should activate the subtab associated with that action' do
-          active_subtab.should == 'Two'
+          expect(active_subtab).to be == 'Two'
         end
       end
       context 'when visiting the second action' do
@@ -174,10 +174,10 @@ describe 'a tab' do
           click_link 'Three'
         end
         it 'should render the view associated with that action' do
-          page.should have_content('Subtab #3')
+          expect(page).to have_content('Subtab #3')
         end
         it 'should activate the subtab associated with that action' do
-          active_subtab.should == 'Two'
+          expect(active_subtab).to be == 'Two'
         end
       end
     end

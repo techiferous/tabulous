@@ -80,12 +80,12 @@ describe 'a tab' do
   end
 
   it 'can be assigned text' do
-    visible_tabs.should include('Asteroids')
-    visible_tabs.should_not include('Planets')
+    expect(visible_tabs).to include('Asteroids')
+    expect(visible_tabs).not_to include('Planets')
   end
   it 'can be assigned text dynamically' do
-    visible_tabs.should include('foobar')
-    visible_tabs.should_not include('Galaxies')
+    expect(visible_tabs).to include('foobar')
+    expect(visible_tabs).not_to include('Galaxies')
   end
 
   context 'that is a subtab' do
@@ -93,11 +93,11 @@ describe 'a tab' do
       click_link 'Subtabs'
     end
     it 'can be assigned text' do
-      visible_subtabs.should include('One')
-      visible_subtabs.should include('Three')
+      expect(visible_subtabs).to include('One')
+      expect(visible_subtabs).to include('Three')
     end
     it 'can be assigned text dynamically' do
-      visible_subtabs.should include('subtabs42')
+      expect(visible_subtabs).to include('subtabs42')
     end
   end
 

@@ -87,11 +87,11 @@ describe 'active_tab_clickable' do
     before(:each) { init(true) }
     it 'should allow the active tab to be clickable' do
       click_link 'Galaxies'
-      active_tab.should == 'Galaxies'
-      'Galaxies'.should be_clickable
+      expect(active_tab).to be == 'Galaxies'
+      expect('Galaxies').to be_clickable
       click_link 'Subtabs'
-      active_tab.should == 'Subtabs'
-      'Subtabs'.should be_clickable
+      expect(active_tab).to be == 'Subtabs'
+      expect('Subtabs').to be_clickable
     end
   end
 
@@ -99,11 +99,11 @@ describe 'active_tab_clickable' do
     before(:each) { init(false) }
     it 'should not allow the active tab to be clickable' do
       click_link 'Galaxies'
-      active_tab.should == 'Galaxies'
-      'Galaxies'.should_not be_clickable
+      expect(active_tab).to be == 'Galaxies'
+      expect('Galaxies').not_to be_clickable
       click_link 'Subtabs'
-      active_tab.should == 'Subtabs'
-      'Subtabs'.should_not be_clickable
+      expect(active_tab).to be == 'Subtabs'
+      expect('Subtabs').not_to be_clickable
     end
   end
 
